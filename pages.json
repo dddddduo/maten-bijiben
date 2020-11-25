@@ -1,0 +1,855 @@
+{
+  "easycom": {
+    "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+  },
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontWeight": "bolder",
+        "fontSize":"17px",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue61d",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"16px"
+              }
+            ]
+          }
+        }
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom",
+        "app-plus": {
+          "titleNView": false
+        }
+			}
+		},
+    {
+    	"path": "pages/index/recruitList",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "招聘信息",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue69f",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+    	"path": "pages/index/recruit",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "招聘详情",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+    	"path": "pages/index/recruitInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "添加信息",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+		{
+			"path": "pages/capital/capital",
+			"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+				"navigationBarTitleText": "资金管理",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontWeight": "bolder",
+        "fontSize":"17px",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue69f",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+			}
+		},
+		{
+			"path": "pages/capital/fundApplication",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "资金申请",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+		},
+		{
+			"path": "pages/capital/capitalInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "资金详情",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+		},
+		{
+			"path": "pages/customer/customer",
+			"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+				"navigationBarTitleText": "浏览客户",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue69f",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+			}
+		},
+    {
+    	"path": "pages/customer/customerData",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "添加客户",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+    	"path": "pages/customer/customerInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "客户资料",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+		{
+			"path": "pages/channel/channel",
+			"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+				"navigationBarTitleText": "管理渠道",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue69f",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+			}
+		},
+		{
+			"path": "pages/channel/channelData",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "添加渠道",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+		},
+    {
+    	"path": "pages/channel/channelInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "渠道详情",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+		{
+			"path": "pages/price/price",
+			"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+				"navigationBarTitleText": "查看价格",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight": "bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+			}
+		},
+		{
+			"path": "pages/price/priceInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "价格明细",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+				"navigationBarTitleText": "出库单列表",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue69f",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight": "bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+			}
+		},
+    {
+    	"path": "pages/order/orderData",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "添加出库单",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+    	"path": "pages/order/orderInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "浏览出库单",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+    	"path": "pages/price/quotation",
+    	"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+    		"navigationBarTitleText": "报价单列表",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight": "bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+    	}
+    },
+    {
+    	"path": "pages/price/quotationData",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "制作报价单",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+    	"path": "pages/price/quotationInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "报价单详情",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"20px",
+                "fontWeight":"bold",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+      }
+    }
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF",
+    "fontSize": "32",
+    "fontFamily": "Source Han Sans CN",
+    "fontWeight": "bold",
+    "letterSpacing": "3"
+	},
+  "tabBar": {
+    "borderTop": "#cccccc",
+    "backgroundColor": "#ffffff",
+    "color": "#999999",
+    "selectedColor": "#000",
+    "iconWidth": "20px",
+    "height": "60px",
+    "fontSize": "12px",
+    "filter": "drop-shadow(0px -2upx 3upx rgba(178,178,178,0.46))",
+    "list": [
+      {
+        "pagePath": "pages/capital/capital",
+        "iconPath": "static/img/banner/capital.png",
+        "selectedIconPath": "static/img/banner/capital-check.png",
+        "text": "资金"
+      },
+      {
+        "pagePath": "pages/customer/customer",
+        "iconPath": "static/img/banner/customer.png",
+        "selectedIconPath": "static/img/banner/customer-check.png",
+        "text": "客户"
+      },
+      {
+        "pagePath": "pages/channel/channel",
+        "iconPath": "static/img/banner/channel.png",
+        "selectedIconPath": "static/img/banner/channel-check.png",
+        "text": "渠道"
+      },
+      {
+        "pagePath": "pages/price/price",
+        "iconPath": "static/img/banner/price.png",
+        "selectedIconPath": "static/img/banner/price-check.png",
+        "text": "价格"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "static/img/banner/order.png",
+        "selectedIconPath": "static/img/banner/order-check.png",
+        "text": "订单"
+      }
+    ]
+  }
+}
