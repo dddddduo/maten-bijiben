@@ -173,7 +173,7 @@
       const that = this
       that.current = -1
       that.Authorization = uni.getStorageSync('Authorization');
-      that.VersionData = '202011111';
+      that.VersionData = '202011251';
       console.log(that.Authorization)
       if(that.Authorization){
         that.init()

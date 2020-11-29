@@ -1750,13 +1750,19 @@
             })
             if (res.data.data.wenshu_public) {
               that.sendOutList = res.data.data.wenshu_public
-            }
+            } else {
+				that.sendOutList = null
+			}
             if (res.data.data.wenshu) {
               that.sendOutList1 = res.data.data.wenshu
-            }
+            } else {
+				that.sendOutList1 = null
+			}
             if (res.data.data.wenshu_private) {
               that.sendOutList2 = res.data.data.wenshu_private
-            }
+            } else {
+				that.sendOutList2 = null
+			}
             // res.data.data.sta ? that.formData.sta = res.data.data.sta : that.formData.sta = 0
             if (Number(res.data.data.isreport) === 1 && Number(res.data.data.isreport_status) === 0 ) {
               that.formData.sta = 1

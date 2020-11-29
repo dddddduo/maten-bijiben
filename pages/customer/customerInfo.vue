@@ -1751,13 +1751,19 @@
             }
             if (res.data.data.info.wenshu_public) {
               that.sendOutList = res.data.data.info.wenshu_public
-            }
+            } else {
+				that.sendOutList = null
+			}
             if (res.data.data.info.wenshu) {
               that.sendOutList1 = res.data.data.info.wenshu
-            }
+            } else {
+				that.sendOutList1 = null
+			}
             if (res.data.data.info.wenshu_private) {
               that.sendOutList2 = res.data.data.info.wenshu_private
-            }
+            } else {
+				that.sendOutList2 = null
+			}
             that.contents = res.data.data.contents
             that.contents.filter((wei, w) => {
               wei.intupShow = false
