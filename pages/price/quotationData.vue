@@ -159,7 +159,9 @@
     onNavigationBarButtonTap(options) {
       console.log(options)
       if (options.index === 0) {
-        this.back();
+        uni.navigateTo({
+          url: "./priceInfo"
+        })
       } else if (options.index === 1) {
         uni.navigateTo({
           url: "./quotation"
@@ -171,7 +173,9 @@
       if (options.from === 'navigateBack') {  
         return false;  
       }
-      this.back();  
+      uni.navigateTo({
+        url: "./priceInfo"
+      })  
       return true;  
     },
     onLoad() {

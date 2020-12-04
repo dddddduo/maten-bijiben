@@ -78,7 +78,9 @@
     onNavigationBarButtonTap(options) {
       console.log(options)
       if (options.index === 0) {
-        this.back();
+        uni.navigateTo({
+          url: "./quotationData"
+        })
       } else if (options.index === 1) {
         uni.navigateTo({
           url: "./price"
@@ -95,7 +97,9 @@
       if (options.from === 'navigateBack') {  
         return false;  
       }
-      this.back();  
+      uni.navigateTo({
+        url: "./quotationData"
+      }) 
       return true;  
     },
     methods: {

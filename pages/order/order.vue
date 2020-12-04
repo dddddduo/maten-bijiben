@@ -260,7 +260,7 @@
     }
     .table_list {
       box-sizing: border-box;
-      margin-bottom: 130upx;
+      margin-bottom: 100upx;
       .img-list {
         width: 100%;
         display: flex;

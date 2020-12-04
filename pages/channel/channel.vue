@@ -30,14 +30,19 @@
             <t-th widthStyle="15%" paddingLeft="0 0 0 5upx">业务人</t-th>
             <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
           </t-tr>
-          <t-tr v-for="(item, i) in list" :key="i">
+          <t-tr v-for="(item, i) in list" :key="i" :id="`anchor${item.id}`" :ref="`anchor${item.id}`">
             <t-td widthStyle="47%">
-              <view :class="item.vageClass === true ? 'vageClass' : ''"></view><text class="text-style"></text>{{ item.com_name }}
+              <view :class="item.vageClass === true ? 'vageClass' : ''"></view><text class="text-style"></text>
+              <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.com_name }}</view>
             </t-td>
-            <t-td widthStyle="27%">{{ item.con_time ? addTimeTsp(item.con_time) : '' }}</t-td>
-            <t-td widthStyle="15%">{{ item.con_username }}</t-td>
+            <t-td widthStyle="27%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.con_time ? addTimeTsp(item.con_time) : '' }}</view>
+            </t-td>
+            <t-td widthStyle="15%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.con_username }}</view>
+            </t-td>
             <t-td widthStyle="11%">
-              <view class="img-list" @tap="infoTap(item, i)">
+              <view class="img-list" @tap="infoTap($event, item, i)">
                 <i class="iconfont icon-sangedian" :class="Number(item.tixing) === 1 ? 'color' : ''"></i>
               </view>
             </t-td>
@@ -64,7 +69,49 @@
   } from 'vuex'
   export default {
     computed: {
-      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues'])
+      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues', 'channelId', 'channelDelList', 'channelTopScroll'])
+    },
+    watch: {
+      channelId: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          console.log(newValue)
+          that.list.filter((item, i) => {
+            item.vageClass = false
+            if (Number(item.id) === Number(newValue)) {
+              item.vageClass = true
+              item.vageClass1 = true
+            }
+          })
+          that.$forceUpdate()
+        }
+      },
+      channelDelList: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          if (newValue) {
+            console.log(newValue)
+            const that = this
+            let list = that.list
+            newValue.filter((val, j) => {
+              list.filter((item, i) => {
+                if (Number(item.id) === Number(val)) {
+                  console.log(item, i)
+                  list.splice(i, 1)
+                }
+              })
+            })
+            console.log(list)
+            that.list = list
+          }
+        }
+      },
+      channelTopScroll: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          that.infoIdTo = uni.getStorageSync('channelIdKey');
+          that.goToAnchor()
+        }
+      }
     },
     data() {
       return {
@@ -99,7 +146,9 @@
         key: '',
         sts: 0,
         current: 2,
-        vageClass: null
+        vageClass: null,
+        scrollTop: 0,
+        infoIdTo: null
       }
     },
     mixins: [listMixin],
@@ -144,7 +193,31 @@
       this.back();
       return true;
     },
+    mounted() {
+      // window.addEventListener('scroll', this.handleScroll)
+    },
+    onPageScroll (res) {
+      console.log(res)
+      // this.handleScroll()
+      this.scrollTop = res.scrollTop
+    },
     methods: {
+      // 监听滚动条位置
+      handleScroll () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        this.scrollTop = scrollTop
+        console.log(scrollTop)
+      },
+      //根据页面hash值，定位到指定列表项
+      goToAnchor() {
+        if (this.infoIdTo.id && this.list.length > 0) {
+          this.$nextTick(() => {
+            document.documentElement.scrollTop = this.infoIdTo.top
+            this.scrollTop = this.infoIdTo.top
+            this.$store.commit("channelTopScrollKey", 0);
+          })
+        }
+      },
       tabbarChange(e) {
         const that = this
         console.log(e, this.customerJurisdictionTrues)
@@ -165,13 +238,20 @@
         console.log(that.current)
       },
       // 跳转详情
-      infoTap(val, i) {
+      infoTap(e, val, i) {
         console.log(val, i)
         const that = this
-        uni.navigateTo({
-          url: "./channelInfo?id=" + val.id + '&page=' + val.pages
-		  + '&sta=' + this.sts + '&regionId=' + this.regionId + '&name=' + this.key
-        })
+        // location.href = `#${val.id}`;
+         that.list[i].vageClass1 = true
+         that.list.filter((item) => {
+           item.vageClass = false
+         })
+         that.list[i].vageClass = true
+         uni.navigateTo({
+           url: "./channelInfo?id=" + val.id + '&page=' + val.pages + '&key=' + this.key
+        + '&userArea=' + this.userArea + '&sts=' + this.sts + '&top=' + this.scrollTop
+         })
+         that.$forceUpdate()
       },
       // 时间戳转换为日期
       addTimeTsp(num) {
@@ -227,14 +307,6 @@
       },
       // 数据请求(没错就是这么少的代码)
       async _getList() {
-        let channelData = uni.getStorageSync('channelData')
-        console.log(channelData)
-        if (channelData) {
-          if (channelData.page) {
-            this.page = channelData.page
-          }
-          this.vageClass = channelData.infoId
-        }
         this.$api.ditchListApi({
           "page": this.page, //页码，整数大于0，必填
           "pageSize": 15, //每页显示条数，整数大于0必填
@@ -253,9 +325,8 @@
               if (!item.pages) {
                 item.pages = this.page
               }
-              if (item.id === self.vageClass) {
-                item.vageClass = true
-              }
+              // item.vageClass = false
+              // item.vageClass1 = false
             }))
             if (this.total === this.list.length) {
               this.finished = true
@@ -357,6 +428,10 @@
         position: absolute;
         top: 43upx;
         left: 5upx;
+      }
+      
+      .vageClass1 {
+        color: #999;
       }
 
       .img-list {

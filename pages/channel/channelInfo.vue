@@ -729,7 +729,8 @@
         weightList: [
           {id: 1, name: '高'},
           {id: 2, name: '中'},
-          {id: 3, name: '低'}
+          {id: 3, name: '低'},
+          {id: 4, name: '无'}
         ],
         infoId: '',
         wenshu_public: '',
@@ -769,9 +770,11 @@
         nextPage: '',
         nextPageReady: false,
         prePageReady: false,
-		sta: '',
-		regionId: '',
-		infoName: ''
+        sta: '',
+        regionId: '',
+        infoName: '',
+        delList: [],
+        infoTop: null
       }
     },
     onNavigationBarButtonTap(options) {
@@ -787,9 +790,10 @@
       const that = this
       if (option.id) {
         that.infoId = option.id
-		that.infoName = option.name
-		that.sta = option.sta
-		that.regionId = option.regionId
+        that.infoName = option.name
+        that.sta = option.sta
+        that.regionId = option.regionId
+        that.infoTop = option.top
         that.limitMethods()
         that.init()
         that.pages = Number(option.page)
@@ -814,9 +818,9 @@
         this.$api.ditchListApi({
           "page": that.pages,    //页码，整数大于0，必填
           pageSize: 10,
-		  'sta': this.sta,
-		  "cusArea": this.regionId,
-		  "key": this.infoName
+          'sta': this.sta,
+          "cusArea": this.regionId,
+          "key": this.infoName
         }).then(res => {
           if (res.data.status === 200) {
             if (res.data.data.list.length > 0) {
@@ -1706,6 +1710,7 @@
                 duration: 2000,
                 icon: 'none'
             });
+            that.delList.push(that.infoId)
             that.nextTap(2)
           }
         })
@@ -1809,9 +1814,19 @@
         data.page = this.pages
         data.infoId = this.infoId
         uni.setStorageSync('channelData', data);
-        uni.reLaunch({
+        this.$store.commit("channelIdKey", this.infoId);
+        let value = {}
+        value.id = this.infoId
+        value.top = this.infoTop
+        uni.setStorageSync('channelIdKey', value);
+        this.$store.commit("channelDelListKey", this.delList);
+        this.$store.commit("channelTopScrollKey", 1);
+        uni.switchTab({
           url: "./channel"
         })
+        // uni.reLaunch({
+        //   url: "./channel"
+        // })
       },
       // 提交
       add (i) {

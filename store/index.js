@@ -45,7 +45,13 @@ const store = new Vuex.Store({
       ],
       changeId: null,
       addId: null,
-      customerJurisdictionTrues: false
+      customerJurisdictionTrues: false,
+      customerId: null,
+      customerDelList: [],
+      customerTopScroll: 0,
+      channelId: null,
+      channelDelList: [],
+      channelTopScroll: 0,
     },
     mutations: {
       vuexTabbar(state,data){
@@ -66,6 +72,24 @@ const store = new Vuex.Store({
       },
       customerJurisdictionKey(state,data){
         state.customerJurisdictionTrues = data;
+      },
+      customerIdKey(state,data){
+        state.customerId = data;
+      },
+      customerDelListKey(state,data){
+        state.customerDelList = data;
+      },
+      customerTopScrollKey(state,data){
+        state.customerTopScroll = data;
+      },
+      channelIdKey(state,data){
+        state.channelId = data;
+      },
+      channelDelListKey(state,data){
+        state.channelDelList = data;
+      },
+      channelTopScrollKey(state,data){
+        state.channelTopScroll = data;
       }
     },
     actions: {}

@@ -123,7 +123,6 @@
     data () {
       return {
         purposeList: [
-          {id: 1, name: '贸易'},
           {id: 2, name: '推广'},
           {id: 3, name: '差旅'},
           {id: 4, name: '经营'},

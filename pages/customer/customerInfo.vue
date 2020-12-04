@@ -1,15 +1,17 @@
 <template>
   <view class="fundApplication pageUniapp">
-    <view class="top-btn">
-      <view class="btn" @tap="cusToDitchTap">转渠道</view>
-      <view class="btn" @tap="remind">设置提醒</view>
-      <view class="btn" @tap="confirm">删除</view>
-      <view class="btn" @tap="nextTap">下一条</view>
-    </view>
     <!-- <swiper :style="{height: windowHeight-60 + 'px'}" circular='true' :current='current'> -->
       <!-- <swiper-item> -->
         <view class="container" :style="{zIndex: 102, transform: `translate${prePage}`, transition: `transform ${showAnimation?turnPageTime:0}s`}">
           <view class="from">
+            <view class="from-content">
+              <view class="left">
+                客户名<text class="text"></text>
+              </view>
+              <view class="right">
+                <input type="text" class="input-style" v-model="formData.cus_name" />
+              </view>
+            </view>
             <view class="from-content">
               <view class="left">
                 区域<text class="text"></text>
@@ -40,25 +42,17 @@
             </view>
             <view class="from-content">
               <view class="left">
-                客户名<text class="text"></text>
-              </view>
-              <view class="right">
-                <input type="text" class="input-style" v-model="formData.cus_name" />
-              </view>
-            </view>
-            <view class="from-content">
-              <view class="left">
                 联系人<text class="text"></text>
               </view>
-              <view class="right1">
-                <input type="text" class="input-style" style="width: 180upx;" v-model="formData.cus_linkman" />
+              <view class="right">
+                <input type="text" class="input-style" v-model="formData.cus_linkman" />
               </view>
-              <view class="left left2">
+              <!-- <view class="left left2">
                 网址<text class="text"></text>
               </view>
               <view class="right">
                 <input type="text" class="input-style" v-model="formData.cus_weburl" />
-              </view>
+              </view> -->
             </view>
             <view class="from-content">
               <view class="left">
@@ -145,6 +139,12 @@
                   <view class="select-btn" @tap="CompleteTap" :class="colorComplete === 0 ? 'bg-color' : ''" style="box-sizing: border-box;padding: 0 10upx;">完整</view>
                 </view>
               </view>
+            </view>
+            <view class="top-btn">
+              <view class="btn" @tap="cusToDitchTap">转渠道</view>
+              <view class="btn" @tap="remind">设置提醒</view>
+              <view class="btn" @tap="confirm">删除</view>
+              <view class="btn" @tap="nextTap">下一条</view>
             </view>
             <view class="from-content" v-if="contents.length > 0">
               <view class="left left1">
@@ -227,6 +227,14 @@
           <view class="from">
             <view class="from-content">
               <view class="left">
+                客户名<text class="text"></text>
+              </view>
+              <view class="right">
+                <input type="text" class="input-style" v-model="formData.cus_name" />
+              </view>
+            </view>
+            <view class="from-content">
+              <view class="left">
                 区域<text class="text"></text>
               </view>
               <view class="right">
@@ -255,25 +263,17 @@
             </view>
             <view class="from-content">
               <view class="left">
-                客户名<text class="text"></text>
-              </view>
-              <view class="right">
-                <input type="text" class="input-style" v-model="formData.cus_name" />
-              </view>
-            </view>
-            <view class="from-content">
-              <view class="left">
                 联系人<text class="text"></text>
               </view>
-              <view class="right1">
-                <input type="text" class="input-style" style="width: 180upx;" v-model="formData.cus_linkman" />
+              <view class="right">
+                <input type="text" class="input-style" v-model="formData.cus_linkman" />
               </view>
-              <view class="left left2">
+              <!-- <view class="left left2">
                 网址<text class="text"></text>
               </view>
               <view class="right">
                 <input type="text" class="input-style" v-model="formData.cus_weburl" />
-              </view>
+              </view> -->
             </view>
             <view class="from-content">
               <view class="left">
@@ -360,6 +360,12 @@
                   <view class="select-btn" @tap="CompleteTap" :class="colorComplete === 0 ? 'bg-color' : ''" style="box-sizing: border-box;padding: 0 10upx;">完整</view>
                 </view>
               </view>
+            </view>
+            <view class="top-btn">
+              <view class="btn" @tap="cusToDitchTap">转渠道</view>
+              <view class="btn" @tap="remind">设置提醒</view>
+              <view class="btn" @tap="confirm">删除</view>
+              <view class="btn" @tap="nextTap">下一条</view>
             </view>
             <view class="from-content" v-if="contents.length > 0">
               <view class="left left1">
@@ -441,6 +447,14 @@
           <view class="from">
             <view class="from-content">
               <view class="left">
+                客户名<text class="text"></text>
+              </view>
+              <view class="right">
+                <input type="text" class="input-style" v-model="formData.cus_name" />
+              </view>
+            </view>
+            <view class="from-content">
+              <view class="left">
                 区域<text class="text"></text>
               </view>
               <view class="right">
@@ -469,25 +483,17 @@
             </view>
             <view class="from-content">
               <view class="left">
-                客户名<text class="text"></text>
-              </view>
-              <view class="right">
-                <input type="text" class="input-style" v-model="formData.cus_name" />
-              </view>
-            </view>
-            <view class="from-content">
-              <view class="left">
                 联系人<text class="text"></text>
               </view>
-              <view class="right1">
-                <input type="text" class="input-style" style="width: 180upx;" v-model="formData.cus_linkman" />
+              <view class="right">
+                <input type="text" class="input-style" v-model="formData.cus_linkman" />
               </view>
-              <view class="left left2">
+              <!-- <view class="left left2">
                 网址<text class="text"></text>
               </view>
               <view class="right">
                 <input type="text" class="input-style" v-model="formData.cus_weburl" />
-              </view>
+              </view> -->
             </view>
             <view class="from-content">
               <view class="left">
@@ -574,6 +580,12 @@
                   <view class="select-btn" @tap="CompleteTap" :class="colorComplete === 0 ? 'bg-color' : ''" style="box-sizing: border-box;padding: 0 10upx;">完整</view>
                 </view>
               </view>
+            </view>
+            <view class="top-btn">
+              <view class="btn" @tap="cusToDitchTap">转渠道</view>
+              <view class="btn" @tap="remind">设置提醒</view>
+              <view class="btn" @tap="confirm">删除</view>
+              <view class="btn" @tap="nextTap">下一条</view>
             </view>
             <view class="from-content" v-if="contents.length > 0">
               <view class="left left1">
@@ -773,8 +785,7 @@
           {name: '高', id: 1},
           {name: '中', id: 2},
           {name: '低', id: 3},
-          {name: '无', id: 4},
-          {name: '空', id: 0}
+          {name: '无', id: 4}
         ],
         weightIndex: -1,
         wenshu_public: '',
@@ -813,9 +824,11 @@
         windowWidth: 0,
         nextPageReady: false,
         prePageReady: false,
-		key: '',
-		userArea: '',
-		sts: ''
+        delList: [],
+        key: '',
+        userArea: '',
+        sts: '',
+        infoTop: ''
       }
     },
     onLoad(option) {
@@ -823,9 +836,10 @@
       const that = this
       if (option.id) {
         that.infoId = option.id
-		that.key = option.key
-		that.userArea = option.userArea
-		that.sts = option.sts
+        that.key = option.key
+        that.userArea = option.userArea
+        that.sts = option.sts
+        that.infoTop = option.top
         that.init()
         that.limitMethods()
         that.pages = Number(option.page)
@@ -1818,6 +1832,7 @@
                 duration: 2000,
                 icon: 'none'
             });
+            that.delList.push(that.infoId)
             that.nextTap(2)
           }
         })
@@ -1844,11 +1859,20 @@
       },
       back () {
         let data = {}
-        console.log(this.pages)
         data.page = this.pages
         data.infoId = this.infoId
         uni.setStorageSync('customerData', data);
-        uni.reLaunch({
+        // uni.reLaunch({
+        //   url: "./customer"
+        // })
+        this.$store.commit("customerIdKey", this.infoId);
+        let value = {}
+        value.id = this.infoId
+        value.top = this.infoTop
+        uni.setStorageSync('customerIdKey', value);
+        this.$store.commit("customerDelListKey", this.delList);
+        this.$store.commit("customerTopScrollKey", 1);
+        uni.switchTab({
           url: "./customer"
         })
       },
@@ -1978,15 +2002,18 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      height: 100upx;
-      line-height: 100upx;
-      background-color: #ffffff;
+      height: 80upx;
+      line-height: 80upx;
+      margin-top: 16upx;
       .btn {
+        background-color: #ffffff;
         flex: 1;
         font-size: 30upx;
         color: #d9233b;
         font-family: "Source Han Sans CN";
         text-align: center;
+        margin: 0 12upx;
+        border-radius: 8upx;
       }
     }
     .from {

@@ -92,14 +92,14 @@
           <input type="text" class="input-style" v-model="formData.cusTel" />
         </view>
       </view>
-      <view class="from-content">
+      <!-- <view class="from-content">
         <view class="left">
           公司网址<text class="text"></text>
         </view>
         <view class="right">
           <input type="text" class="input-style" v-model="formData.cusWeburl" />
         </view>
-      </view>
+      </view> -->
       <view class="from-content">
         <view class="left">
           通用资料<text class="text"></text>
