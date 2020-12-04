@@ -52,6 +52,8 @@ const store = new Vuex.Store({
       channelId: null,
       channelDelList: [],
       channelTopScroll: 0,
+      priceId: null,
+      priceTopScroll: 0,
     },
     mutations: {
       vuexTabbar(state,data){
@@ -90,6 +92,12 @@ const store = new Vuex.Store({
       },
       channelTopScrollKey(state,data){
         state.channelTopScroll = data;
+      },
+      priceIdKey(state,data){
+        state.priceId = data;
+      },
+      priceTopScrollKey(state,data){
+        state.priceTopScroll = data;
       }
     },
     actions: {}

@@ -99,7 +99,9 @@
       return {
         formData: {
         },
-        moneyShow: false
+        moneyShow: false,
+        infoId: '',
+        infoTop: null
       }
     },
     onNavigationBarButtonTap(options) {
@@ -125,6 +127,14 @@
       that.formData = uni.getStorageSync('priceInfo');
       console.log(that.formData)
       that.limitMethods()
+    },
+    onLoad(option) {
+      console.log(option)
+      const that = this
+      if (option.id) {
+        that.infoId = option.id
+        that.infoTop = option.top
+      }
     },
     methods: {
       limitMethods () {
@@ -157,6 +167,12 @@
         return val[a]
       },
       back () {
+        this.$store.commit("priceIdKey", this.infoId);
+        let value = {}
+        value.id = this.infoId
+        value.top = this.infoTop
+        uni.setStorageSync('priceIdKey', value);
+        this.$store.commit("priceTopScrollKey", 1);
         uni.switchTab({
           url: "./price"
         })

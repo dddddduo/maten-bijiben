@@ -17,12 +17,21 @@
           <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
         </t-tr>
         <t-tr v-for="(item, i) in list" :key="i">
-          <t-td widthStyle="30%">{{ item.twoname }}</t-td>
-          <t-td widthStyle="29%">{{ item.model }}</t-td>
-          <t-td widthStyle="15%">{{ item.market_price }}</t-td>
-          <t-td widthStyle="15%">{{ AgencyPrice(item) }}</t-td>
+          <t-td widthStyle="30%">
+            <view :class="item.vageClass === true ? 'vageClass' : ''"></view>
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.twoname }}</view>
+          </t-td>
+          <t-td widthStyle="29%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.model }}</view>
+          </t-td>
+          <t-td widthStyle="15%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.market_price }}</view>
+          </t-td>
+          <t-td widthStyle="15%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ AgencyPrice(item) }}</view>
+          </t-td>
           <t-td widthStyle="11%">
-            <view class="img-list" @tap="selectInfo(item)">
+            <view class="img-list" @tap="selectInfo(item, i)">
               <i class="iconfont icon-sangedian"></i>
             </view>
           </t-td>
@@ -47,7 +56,36 @@
   import {mapState} from 'vuex'
   export default {
     computed: {
-      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues'])
+      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues', 'priceId', 'priceTopScroll'])
+    },
+    watch: {
+      changeIdKey: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          if (newValue) {
+            this._searchData()
+          }
+        }
+      },
+      priceId: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          that.list.filter((item, i) => {
+            item.vageClass = false
+            if (Number(item.id) === Number(newValue)) {
+              item.vageClass = true
+              item.vageClass1 = true
+            }
+          })
+          that.$forceUpdate()
+        }
+      },
+      priceTopScroll: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          that.infoIdTo = uni.getStorageSync('priceIdKey');
+          that.goToAnchor()
+        }
+      }
     },
     data () {
       return {
@@ -55,7 +93,9 @@
         list: [],
         finished: false,
         keyword: '',
-        current: 3
+        current: 3,
+        scrollTop: 0,
+        infoIdTo: null
       }
     },
     mixins: [listMixin],
@@ -93,7 +133,28 @@
       console.log(e)
       this.clear()
     },
+    onPageScroll (res) {
+      console.log(res)
+      // this.handleScroll()
+      this.scrollTop = res.scrollTop
+    },
     methods: {
+      handleScroll () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        this.scrollTop = scrollTop
+        console.log(scrollTop)
+      },
+      //根据页面hash值，定位到指定列表项
+      goToAnchor() {
+        console.log(123)
+        if (this.infoIdTo.id && this.list.length > 0) {
+          this.$nextTick(() => {
+            document.documentElement.scrollTop = this.infoIdTo.top
+            this.scrollTop = this.infoIdTo.top
+            this.$store.commit("priceTopScrollKey", 0);
+          })
+        }
+      },
       tabbarChange (e) {
         const that = this
         console.log(e, this.customerJurisdictionTrues)
@@ -116,11 +177,21 @@
         return val[a]
       },
       // 查询详情
-      selectInfo (item) {
+      selectInfo (item, i) {
+        const that = this
         uni.setStorageSync('priceInfo', item);
-        uni.navigateTo({
-          url: "./priceInfo"
+        // uni.navigateTo({
+        //   url: "./priceInfo"
+        // })
+        that.list[i].vageClass1 = true
+        that.list.filter((item) => {
+          item.vageClass = false
         })
+         that.list[i].vageClass = true
+        uni.navigateTo({
+          url: "./priceInfo?id=" + item.id + '&top=' + this.scrollTop
+        })
+        that.$forceUpdate()
       },
       // 返回首页
       back () {
@@ -230,6 +301,18 @@
     .table_list {
       box-sizing: border-box;
       margin-bottom: 130upx;
+      .vageClass {
+        width: 10upx;
+        height: 10upx;
+        background: rgb(217, 35, 59);
+        border-radius: 50%;
+        position: absolute;
+        top: 43upx;
+        left: 5upx;
+      }
+      .vageClass1 {
+        color: #999;
+      }
       .img-list {
         width: 100%;
         display: flex;

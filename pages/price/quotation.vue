@@ -78,8 +78,8 @@
     onNavigationBarButtonTap(options) {
       console.log(options)
       if (options.index === 0) {
-        uni.navigateTo({
-          url: "./quotationData"
+        uni.switchTab({
+          url: "./price"
         })
       } else if (options.index === 1) {
         uni.navigateTo({
