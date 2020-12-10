@@ -1,15 +1,15 @@
 <template>
   <view class="fundApplication pageUniapp">
-    <view class="top-btn">
-      <!-- <view class="btn" @tap="Report(1)" v-if="Number(formData.sta) === 0 || Number(formData.sta) === 3">报备</view>
-      <view class="btn" @tap="Report(2)" v-if="Number(formData.sta) === 1">通过报备</view>
-      <view class="btn" @tap="Report(3)" v-if="Number(formData.sta) === 1 || Number(formData.sta) === 2">取消报备</view> -->
-      <view class="btn" @tap="remind">转终端</view>
-      <view class="btn" @tap="confirm">删除</view>
-      <view class="btn" @tap="nextTap()">下一条</view>
-    </view>
     <view class="container" :style="{zIndex: 102, transform: `translate${prePage}`, transition: `transform ${showAnimation?turnPageTime:0}s`}">
       <view class="from">
+        <view class="from-content">
+          <view class="left">
+            商家名称<text class="text"></text>
+          </view>
+          <view class="right">
+            <input type="text" class="input-style" v-model="formData.com_name" />
+          </view>
+        </view>
         <view class="from-content">
           <view class="left">
             区域<text class="text"></text>
@@ -36,14 +36,6 @@
                 <i class="iconfont icon-leftArrows"></i>
               </picker>
             </view>
-          </view>
-        </view>
-        <view class="from-content">
-          <view class="left">
-            商家名称<text class="text"></text>
-          </view>
-          <view class="right">
-            <input type="text" class="input-style" v-model="formData.com_name" />
           </view>
         </view>
         <view class="from-content">
@@ -142,6 +134,11 @@
               </view>
             </view>
           </view>
+        </view>
+        <view class="top-btn">
+          <view class="btn" @tap="remind">转终端</view>
+          <view class="btn" @tap="confirm">删除</view>
+          <view class="btn" @tap="nextTap()">下一条</view>
         </view>
         <view class="from-content">
           <view class="left left1">
@@ -212,6 +209,14 @@
       <view class="from">
         <view class="from-content">
           <view class="left">
+            商家名称<text class="text"></text>
+          </view>
+          <view class="right">
+            <input type="text" class="input-style" v-model="formData.com_name" />
+          </view>
+        </view>
+        <view class="from-content">
+          <view class="left">
             区域<text class="text"></text>
           </view>
           <view class="right">
@@ -236,14 +241,6 @@
                 <i class="iconfont icon-leftArrows"></i>
               </picker>
             </view>
-          </view>
-        </view>
-        <view class="from-content">
-          <view class="left">
-            商家名称<text class="text"></text>
-          </view>
-          <view class="right">
-            <input type="text" class="input-style" v-model="formData.com_name" />
           </view>
         </view>
         <view class="from-content">
@@ -342,6 +339,11 @@
               </view>
             </view>
           </view>
+        </view>
+        <view class="top-btn">
+          <view class="btn" @tap="remind">转终端</view>
+          <view class="btn" @tap="confirm">删除</view>
+          <view class="btn" @tap="nextTap()">下一条</view>
         </view>
         <view class="from-content">
           <view class="left left1">
@@ -412,6 +414,14 @@
       <view class="from">
         <view class="from-content">
           <view class="left">
+            商家名称<text class="text"></text>
+          </view>
+          <view class="right">
+            <input type="text" class="input-style" v-model="formData.com_name" />
+          </view>
+        </view>
+        <view class="from-content">
+          <view class="left">
             区域<text class="text"></text>
           </view>
           <view class="right">
@@ -436,14 +446,6 @@
                 <i class="iconfont icon-leftArrows"></i>
               </picker>
             </view>
-          </view>
-        </view>
-        <view class="from-content">
-          <view class="left">
-            商家名称<text class="text"></text>
-          </view>
-          <view class="right">
-            <input type="text" class="input-style" v-model="formData.com_name" />
           </view>
         </view>
         <view class="from-content">
@@ -542,6 +544,11 @@
               </view>
             </view>
           </view>
+        </view>
+        <view class="top-btn">
+          <view class="btn" @tap="remind">转终端</view>
+          <view class="btn" @tap="confirm">删除</view>
+          <view class="btn" @tap="nextTap()">下一条</view>
         </view>
         <view class="from-content">
           <view class="left left1">
@@ -1927,25 +1934,28 @@
       justify-content: space-between;
       height: 100upx;
       line-height: 100upx;
-      background-color: #ffffff;
+      margin-top: 16upx;
       .btn {
         flex: 1;
         font-size: 30upx;
         color: #d9233b;
         font-family: "Source Han Sans CN";
+        margin: 0 6upx;
+        background-color: #ffffff;
         text-align: center;
       }
     }
     .from {
       width: 100%;
       box-sizing: border-box;
-      padding: 20upx 28upx 0 10upx;
+      padding: 20upx 10upx 0 10upx;
       .from-content {
         width: 100%;
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
         margin-top: 10upx;
+        padding-right: 18upx;
         .left {
           height: 80upx;
           width: 130upx;

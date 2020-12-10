@@ -188,16 +188,16 @@
       },
       init () {
         const that = this
-        that.$api.fundManagementApi({
-          "page": 1,    //页码，整数大于0，必填
-          "pageSize":10 //每页显示条数，整数大于0必填
-        }).then(res => {
-          if (res.data.status === 200) {
-            that.tableList = res.data.data.list
-            this.list = res.data.data.list
-            this.total = res.data.data.count
-          }
-        })
+        // that.$api.fundManagementApi({
+        //   "page": 1,    //页码，整数大于0，必填
+        //   "pageSize":10 //每页显示条数，整数大于0必填
+        // }).then(res => {
+        //   if (res.data.status === 200) {
+        //     that.tableList = res.data.data.list
+        //     this.list = res.data.data.list
+        //     this.total = res.data.data.count
+        //   }
+        // })
       }
     }
   }
@@ -205,6 +205,7 @@
 
 <style lang="less" scoped>
   .capital {
+    padding-bottom: 100upx;
     .search {
       height: auto;
       width: 100%;

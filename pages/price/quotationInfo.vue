@@ -46,16 +46,22 @@
           <view class="left">
             商品名称<text class="text"></text>
           </view>
-          <view class="right">
-            <input type="text" class="input-style" v-model="item.goodsName" />
+          <view class="right name-right">
+            <input type="text" class="input-style" v-model="item.goodsName" @input="inputWatch($event, i, 0, 1)" />
+            <view class="ul shangpin" v-if="item.nameShow === 1">
+              <view class="li" v-for="(val, j) in item.nameList" :key='j' @tap='selectName(val, i)'>{{val.pro_names}}</view>
+            </view>
           </view>
         </view>
         <view class="from-content">
           <view class="left">
             商品型号<text class="text"></text>
           </view>
-          <view class="right">
-            <input type="text" class="input-style" v-model="item.goodsModel" @input="inputWatch($event, i)" />
+          <view class="right name-right">
+            <input type="text" class="input-style" v-model="item.goodsModel" @input="inputWatch($event, i, 1, 1)" />
+            <view class="ul xinghao" v-if="item.nameShow1 === 1">
+              <view class="li" v-for="(val, j) in item.nameList1" :key='j' @tap='selectName1(val, i)'>{{val.pro_models}}</view>
+            </view>
           </view>
         </view>
         <view class="from-content">
@@ -98,6 +104,14 @@
       </view>
     </view>
     <view class="from">
+      <view class="from-content">
+        <view class="left left-add-bottom">
+          报价时间<text class="text"></text>
+        </view>
+        <view class="right">
+          <input type="text" class="input-style" v-model="formData.quotedTime" />
+        </view>
+      </view>
       <view class="from-content">
         <view class="left left-add-bottom">
           结算方式及税金<text class="text"></text>
@@ -155,11 +169,16 @@
           explain1: '此报价包含13%增值税发票，款到发货。',
           explain2: '快递至需方指定交付地，保险费用由供方承担，交付前的风险由供方承担。',
           explain3: '现货。',
-          explain4: ''
+          explain4: '',
+          quotedTime: ''
         },
         infoId: '',
         intype: '',
-        type: 0
+        type: 0,
+        nameList: [],
+        nameShow: 0,
+        nameShow1: 0,
+        nameList1: []
       }
     },
     onNavigationBarButtonTap(options) {
@@ -191,26 +210,90 @@
       }
     },
     methods: {
+      // 选中名称
+      selectName (val, i) {
+        const that = this
+        console.log(val)
+        that.formData.goods[i].nameShow = 0
+        that.formData.goods[i].goodsName = val.pro_names
+        let data = {
+          detail: {
+            value: val.pro_names
+          }
+        }
+        that.inputWatch(data, i, 0, 0)
+        that.$forceUpdate()
+      },
+      // 选中型号
+      selectName1 (val, i) {
+        const that = this
+        console.log(val)
+        that.formData.goods[i].nameShow1 = 0
+        that.formData.goods[i].goodsModel = val.pro_models
+        let data = {
+          detail: {
+            value: val.pro_models
+          }
+        }
+        that.inputWatch(data, i, 1, 1)
+        that.$forceUpdate()
+      },
+      // 数组去重
+      unique(arr) {
+        if (!Array.isArray(arr)) {
+          console.log('type error!')
+          return;
+        }
+        arr = arr.sort()
+        var arrry= [];
+        for (var i = 1; i < arr.length; i++) {
+            if (arr[i].pro_names !== arr[i-1].pro_names) {
+                arrry.push(arr[i]);
+            }
+        }
+        return arrry;
+      },
       // 通过型号查商品
-      inputWatch (e, i) {
+      inputWatch (e, i, j, q) {
         console.log(e, i)
         const that = this
         if (Number(that.type) !== 1) {
-          that.$api.getGoodsByModelApi({model: e.detail.value}).then(res => {
-            if (res.data.status === 200) {
-              if (res.data.data) {
-                that.formData.goods[i].goodsName = res.data.data.pro_names
-                that.formData.goods[i].marketPrice = res.data.data.market_price ? res.data.data.market_price : 0
-                that.formData.goods[i].publicPrice = res.data.data.public_price ? res.data.data.public_price : 0
-                that.formData.goods[i].goodsNum = ''
-              } else {
-                that.formData.goods[i].goodsName = ''
-                that.formData.goods[i].marketPrice = 0
-                that.formData.goods[i].publicPrice = 0
-                that.formData.goods[i].goodsNum = ''
+          if (j === 0) {
+            that.$api.getGoodsByNameApi({name: e.detail.value}).then(res => {
+              if (res.data.status === 200) {
+                console.log(res.data.data, 1111111)
+                if (res.data.data.length > 0) {
+                  that.formData.goods[i].nameShow = q
+                  if (q === 0) {
+                    that.formData.goods[i].nameList1 = res.data.data
+                    that.formData.goods[i].nameShow1 = 1
+                  } else {
+                    var arr = res.data.data;
+                    that.formData.goods[i].nameList = that.unique(arr)
+                  }
+                  that.$forceUpdate()
+                }
               }
-            }
-          })
+            })
+          } else if (j === 1){
+            that.$api.getGoodsByModelApi({model: e.detail.value}).then(res => {
+              if (res.data.status === 200) {
+                if (q === 1) {
+                  if (res.data.data) {
+                    that.formData.goods[i].goodsName = res.data.data.pro_names
+                    that.formData.goods[i].marketPrice = res.data.data.market_price ? res.data.data.market_price : 0
+                    that.formData.goods[i].publicPrice = res.data.data.public_price ? res.data.data.public_price : 0
+                    that.formData.goods[i].goodsNum = ''
+                  } else {
+                    that.formData.goods[i].goodsName = ''
+                    that.formData.goods[i].marketPrice = 0
+                    that.formData.goods[i].publicPrice = 0
+                    that.formData.goods[i].goodsNum = ''
+                  }
+                }
+              }
+            })
+          }
         }
       },
       init () {
@@ -265,6 +348,7 @@
             clientContacts: that.formData.clientContacts,
             clientTel: that.formData.clientTel,
             clientOther: that.formData.clientOther,
+            quotedTime: that.formData.quotedTime,
             intypeid: that.infoId,
             ...goods_data,
             explain1: that.formData.explain1,
@@ -311,6 +395,30 @@
     width: 100%;
     padding-bottom: 50upx;
     box-sizing: border-box;
+    .name-right {
+      position: relative;
+      .shangpin {
+        z-index: 999;
+      }
+      .xinghao {
+        z-index: 888;
+      }
+      .ul {
+        position: absolute;
+        top: 80upx;
+        left: 10upx;
+        right: 0;
+        background: #fff;
+        filter: drop-shadow(0px -2upx 3upx rgba(178,178,178,0.46));
+        border: 1px solid #EEEEEE;
+        .li {
+          font-size: 30upx;
+          color: #333333;
+          font-family: "Source Han Sans CN";
+          padding: 10upx 20upx;
+        }
+      }
+    }
     .from {
       width: 100%;
       box-sizing: border-box;

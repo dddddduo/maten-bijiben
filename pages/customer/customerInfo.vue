@@ -2012,20 +2012,21 @@
         color: #d9233b;
         font-family: "Source Han Sans CN";
         text-align: center;
-        margin: 0 12upx;
+        margin: 0 6upx;
         border-radius: 8upx;
       }
     }
     .from {
       width: 100%;
       box-sizing: border-box;
-      padding: 20upx 28upx 0 10upx;
+      padding: 20upx 10upx 0 10upx;
       .from-content {
         width: 100%;
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
         margin-top: 10upx;
+        padding-right: 18upx;
         .left {
           height: 80upx;
           width: 120upx;

@@ -12,19 +12,24 @@
       <view class="table_list">
         <t-table>
           <t-tr color="#000" fontSize="15">
-            <t-th widthStyle="57%" textAlign="center">公司名称</t-th>
+            <t-th widthStyle="53%" textAlign="center">公司名称</t-th>
             <t-th widthStyle="27%" paddingLeft="0 0 0 20upx">审批日期</t-th>
-            <t-th widthStyle="16%" textAlign="center">操作</t-th>
+            <t-th widthStyle="20%" textAlign="center">操作</t-th>
           </t-tr>
           <t-tr v-for="(item, i) in list" :key="i">
-            <t-td widthStyle="57%">{{ item.name }}</t-td>
-            <t-td widthStyle="27%">{{ item.ctime }}</t-td>
-            <t-td widthStyle="16%">
+            <t-td widthStyle="53%">
+              <view :class="item.vageClass === true ? 'vageClass' : ''"></view>
+              <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.name }}</view>
+            </t-td>
+            <t-td widthStyle="27%">
+              <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.ctime }}</view>
+            </t-td>
+            <t-td widthStyle="20%">
               <view class="img-list">
                 <image @tap="edit(item)" v-if="Number(item.checkp) === 0" src="../../static/img/update.png" style="width: 38upx;height: 37upx;" mode=""></image>
                 <!-- <image v-if="Number(item.checkp) === 1" src="../../static/img/no-update.png" style="width: 38upx;height: 37upx;" mode=""></image> -->
-                <i @tap="selectInfo(item)" v-if="Number(item.checkp) === 1" class="iconfont icon-sangedian"></i>
-                <image @tap="examineTap(item)" v-if="Number(item.checkp) === 0" src="../../static/img/examine.png" style="margin-left: 10upx;width: 36upx;height: 36upx;" mode=""></image>
+                <image @tap="examineTap(item)" v-if="Number(item.checkp) === 0" src="../../static/img/examine.png" style="margin:0 10upx;width: 36upx;height: 36upx;" mode=""></image>
+                <i @tap="selectInfo(item, i)" class="iconfont icon-sangedian"></i>
               </view>
             </t-td>
           </t-tr>
@@ -51,7 +56,31 @@
   import {mapState} from 'vuex'
   export default {
     computed: {
-      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues'])
+      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues', 'orderTopScroll', 'orderId'])
+    },
+    watch: {
+      orderId: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          that.list.filter((item, i) => {
+            item.vageClass = false
+            if (Number(item.id) === Number(newValue)) {
+              item.vageClass = true
+              item.vageClass1 = true
+            }
+          })
+          that.$forceUpdate()
+        }
+      },
+      orderTopScroll: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          that.infoIdTo = uni.getStorageSync('orderIdKey');
+          if (newValue === 1) {
+            that.goToAnchor()
+          }
+        }
+      }
     },
     data () {
       return {
@@ -62,7 +91,9 @@
         current: 4,
         fileName: '',
         currencyExamine: false,
-        fileUrl: ''
+        fileUrl: '',
+        scrollTop: 0,
+        infoIdTo: null
       }
     },
     mixins: [listMixin],
@@ -74,6 +105,11 @@
       mLoading,
       uniPopup,
       uniPopupDialog
+    },
+    onPageScroll (res) {
+      console.log(res)
+      // this.handleScroll()
+      this.scrollTop = res.scrollTop
     },
     onNavigationBarButtonTap(options) {
       console.log(options)
@@ -89,7 +125,6 @@
     },
     onShow() {
       const that = this
-      that._searchData()
       that.limitMethods()
     },
     // 原生导航栏返回按钮监听
@@ -103,6 +138,17 @@
       return true;  
     },
     methods: {
+      //根据页面hash值，定位到指定列表项
+      goToAnchor() {
+        console.log(123)
+        if (this.infoIdTo.id && this.list.length > 0) {
+          this.$nextTick(() => {
+            document.documentElement.scrollTop = this.infoIdTo.top
+            this.scrollTop = this.infoIdTo.top
+            this.$store.commit("orderTopScrollKey", 0);
+          })
+        }
+      },
       tabbarChange (e) {
         const that = this
         console.log(e, this.customerJurisdictionTrues)
@@ -171,12 +217,12 @@
         })
       },
       // 查询详情
-      selectInfo (val) {
-        // uni.navigateTo({
-        //   url: "./quotationInfo?id=" + val.id + '&intype=' + val.intype + '&type=1'
-        // })
-        console.log(val)
+      selectInfo (val, i) {
+        const that = this
         let config = "http://mkmngsys.mitech-ndt.com/"
+        uni.showLoading({
+          title: '加载中'
+        });
         uni.downloadFile({
           // 下面一行时拼接预览PDF的地址！！！
           url: config + val.url,
@@ -188,6 +234,18 @@
               success: function(res) {
                 console.log(res);
                 console.log('打开文档成功');
+                uni.hideLoading();
+                that.list[i].vageClass1 = true
+                  that.list.filter((item) => {
+                    item.vageClass = false
+                  })
+                that.list[i].vageClass = true
+                this.$store.commit("orderIdKey", val.id);
+                let value = {}
+                value.id = val.id
+                value.top = this.scrollTop
+                uni.setStorageSync('orderIdKey', value);
+                this.$store.commit("orderTopScrollKey", 1);
               }
             });
           }
@@ -347,6 +405,18 @@
     .table_list {
       box-sizing: border-box;
       margin-bottom: 130upx;
+      .vageClass {
+        width: 10upx;
+        height: 10upx;
+        background: rgb(217, 35, 59);
+        border-radius: 50%;
+        position: absolute;
+        top: 43upx;
+        left: 5upx;
+      }
+      .vageClass1 {
+        color: #999;
+      }
       .img-list {
         width: 100%;
         display: flex;
@@ -355,7 +425,7 @@
         align-items: center;
         .iconfont {
           color: #b0b0b0;
-          font-size: 38upx;
+          font-size: 36upx;
         }
       }
       image.select {
@@ -365,7 +435,7 @@
       image.copy {
         width: 36upx;
         height: 40upx;
-        margin-left: 40upx;
+        margin:0 20upx;
       }
     }
     .search-select {

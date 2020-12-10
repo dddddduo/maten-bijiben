@@ -13,8 +13,8 @@ fly.config.baseURL = baseurl;		// http请求地址
 fly.interceptors.request.use((request) => {
   // request.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 	// 在发送请求之前做些什么
-	let token = uni.getStorageSync('Authorization')
-  // let token = 'eyJ1Ijoie1widWlkXCI6XCIxXCIsXCJ1c2VybmFtZVwiOlwiXFx1OTFkMVxcdTUzNTNcIixcImRwX2xpbWl0XCI6XCIyMiwyNCwzMiwzMywyOTYsOCw5LDI2LDMwLDI0MCwxMCwyNjcsMTcsMjYwLDEyLDI3MSwyNzMsMjc0LDEzLDE0LDI1MSwyNTIsMjUzLDI2NCwyNjUsMjAzLDIxMCwyNTAsMjU2LDI5OCwxOCwxOSw5MSw1Miw1NSwxMTAsNTgsNTksNjAsMTA0LDY3LDY4LDgwLDY5LDExMiwxMTQsNzAsNzEsNzQsMTA3LDc1LDc2XCIsXCJwb3NfaWRcIjpcIjlcIixcImRlcGFfaWRcIjpcIjEwXCJ9IiwidCI6MTYwNjcwMTAwNywia2V5IjoiNzBmZTcxMmU3MDI1ZWVkNzNhNmUzMGIxMzNjNWE4MDYifQ=='
+	// let token = uni.getStorageSync('Authorization')
+  let token = 'eyJ1Ijoie1widWlkXCI6XCIxXCIsXCJ1c2VybmFtZVwiOlwiXFx1OTFkMVxcdTUzNTNcIixcImRwX2xpbWl0XCI6XCIyMiwyNCwzMiwzMywyOTYsOCw5LDI2LDMwLDI0MCwxMCwyNjcsMTcsMjYwLDEyLDI3MSwyNzMsMjc0LDEzLDE0LDI1MSwyNTIsMjUzLDI2NCwyNjUsMjAzLDIxMCwyNTAsMjU2LDI5OCwxOCwxOSw5MSw1Miw1NSwxMTAsNTgsNTksNjAsMTA0LDY3LDY4LDgwLDY5LDExMiwxMTQsNzAsNzEsNzQsMTA3LDc1LDc2XCIsXCJwb3NfaWRcIjpcIjlcIixcImRlcGFfaWRcIjpcIjEwXCJ9IiwidCI6MTYwNjcwMTAwNywia2V5IjoiNzBmZTcxMmU3MDI1ZWVkNzNhNmUzMGIxMzNjNWE4MDYifQ=='
   // console.log(token)
 	if (token) {
 		request.headers['Authorization'] = 'Bearer ' + token

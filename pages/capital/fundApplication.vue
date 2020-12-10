@@ -118,6 +118,7 @@
 </template>
 
 <script>
+  import currentDate from '../../common/currentDate.js'
   // {id: 1, name: '贸易'},
   export default {
     data () {
@@ -165,6 +166,10 @@
       }
       this.back();  
       return true;  
+    },
+    onShow() {
+      let date = currentDate.getDate(1)
+      this.formData.order_num = date
     },
     methods: {
       // 付款方式

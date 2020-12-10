@@ -244,6 +244,10 @@ export function quotationInfoApi(params){
 export function getGoodsByModelApi(params){
 	return fly.post('/admin.php?m=app&c=product&a=getGoodsByModel', params).then(res => res)
 }
+// 根据商品名称查询商品详情
+export function getGoodsByNameApi(params){
+	return fly.post('/admin.php?m=app&c=Product&a=getGoodsByName', params).then(res => res)
+}
 
 // 审核PDF文件, 报价单, 销售合同等
 export function pdfCheckApi(params){
