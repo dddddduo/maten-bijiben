@@ -240,18 +240,25 @@
       },
       // 数组去重
       unique(arr) {
-        if (!Array.isArray(arr)) {
-          console.log('type error!')
-          return;
-        }
-        arr = arr.sort()
-        var arrry= [];
-        for (var i = 1; i < arr.length; i++) {
-            if (arr[i].pro_names !== arr[i-1].pro_names) {
-                arrry.push(arr[i]);
-            }
-        }
-        return arrry;
+        // if (!Array.isArray(arr)) {
+        //   console.log('type error!')
+        //   return;
+        // }
+        // arr = arr.sort()
+        // var arrry= [];
+        // for (var i = 1; i < arr.length; i++) {
+        //     if (arr[i].pro_names !== arr[i-1].pro_names) {
+        //         arrry.push(arr[i]);
+        //     }
+        // }
+        // return arrry;
+        let hash = {}
+        let d = []
+        d = arr.reduce((item, next) => {
+          hash[next.pro_names] ? '' : hash[next.pro_names] = true && item.push(next)
+          return item
+        }, [])
+        return d
       },
       // 通过型号查商品
       inputWatch (e, i, j, q) {
@@ -271,9 +278,12 @@
                     var arr = res.data.data;
                     that.formData.goods[i].nameList = that.unique(arr)
                   }
-                  that.$forceUpdate()
                 }
+              } else {
+                that.formData.goods[i].nameShow = 0
+                that.formData.goods[i].nameShow1 = 0
               }
+              that.$forceUpdate()
             })
           } else if (j === 1){
             that.$api.getGoodsByModelApi({model: e.detail.value}).then(res => {
@@ -289,6 +299,8 @@
                     that.formData.goods[i].marketPrice = 0
                     that.formData.goods[i].publicPrice = 0
                     that.formData.goods[i].goodsNum = ''
+                    that.formData.goods[i].nameShow = 0
+                    that.formData.goods[i].nameShow1 = 0
                   }
                 }
               }
@@ -405,6 +417,10 @@
       }
       .ul {
         position: absolute;
+        height: auto;
+        max-height: 500upx;
+        overflow:hidden;
+        overflow-y: auto;
         top: 80upx;
         left: 10upx;
         right: 0;
