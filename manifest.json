@@ -21,8 +21,8 @@
         },
         /* 模块配置 */
         "modules" : {
-            "Share" : {},
-            "Push" : {}
+            "Push" : {},
+            "Share" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -57,7 +57,9 @@
                 "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "idfa" : false
+            },
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {},
@@ -101,7 +103,7 @@
                     "platforms" : "Android,iOS",
                     "url" : "https://ext.dcloud.net.cn/plugin?id=2307",
                     "android_package_name" : "io.meitai",
-                    "ios_bundle_id" : "",
+                    "ios_bundle_id" : "io.meitai",
                     "isCloud" : true,
                     "bought" : 1,
                     "pid" : "2307",
@@ -147,7 +149,7 @@
             "https" : false
         },
         "title" : "美泰科仪",
-        "domain" : "http://mkmngsys.mitech-ndt.com/",
+        "domain" : "https://mkmngsys.mitech-ndt.com/",
         "publicPath" : "./",
         "router" : {
             "mode" : "hash"
