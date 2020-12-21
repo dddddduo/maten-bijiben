@@ -49,7 +49,7 @@
         username: '',
         password: '',
         pwdRemember: true,
-        imgUrl: 'http://mkmngsys.mitech-ndt.com/admin.php?m=app&c=Login&a=verify',
+        imgUrl: 'https://mkmngsys.mitech-ndt.com/admin.php?m=app&c=Login&a=verify',
         code: ''
       }
     },
@@ -59,6 +59,7 @@
       },
       login(){
         const that = this
+		console.log(123456)
         if (that.password) {
           that.$api.getLoginApi({
             name: that.username,
