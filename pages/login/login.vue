@@ -49,22 +49,37 @@
         username: '',
         password: '',
         pwdRemember: true,
-        imgUrl: 'https://mkmngsys.mitech-ndt.com/admin.php?m=app&c=Login&a=verify',
-        code: ''
+        imgUrl: '',
+        code: '',
+        verify: '',
+        t_data: ''
       }
+    },
+    mounted() {
+      this.init()
     },
     methods:{
       init(){
-        this.imgUrl = this.imgUrl + '&' + Math.random()
+        // this.imgUrl = this.imgUrl + '&' + Math.random()
+        const that = this
+        that.$api.getVerifyApi().then(res => {
+          if (res.data.status === 200) {
+            that.imgUrl = res.data.data.image
+            that.verify = res.data.data.verify
+            that.t_data = res.data.data.t
+          }
+        })
       },
       login(){
         const that = this
-		console.log(123456)
+        console.log(123456)
         if (that.password) {
           that.$api.getLoginApi({
             name: that.username,
             pwd: that.password,
-            code: that.code
+            code: that.code,
+            verify: that.verify,
+            t: that.t_data
           }).then(res => {
             console.log(res)
             if (res.data.status === 200) {

@@ -4,7 +4,10 @@ import fly from './http'
 export function getVersionApi(params){
 	return fly.get('/app.php?getVersion', params).then(res => res)
 }
-
+// https://mkmngsys.mitech-ndt.com/admin.php?m=app&c=Login&a=verify
+export function getVerifyApi(params){
+	return fly.get('/admin.php?m=app&c=Login&a=verify', params).then(res => res)
+}
 // 查询用户状态(是否有待审核)
 export function indexStatusApi(params){
 	return fly.post('/admin.php?m=app&c=index&a=status', params).then(res => res)
