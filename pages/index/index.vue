@@ -183,7 +183,7 @@
       // 版本号检测
       uni.getSystemInfo({
         success:(res) => {
-          console.log(res)
+          console.log(res);
           //检测当前平台，如果是安卓则启动安卓更新  
           if(res.platform=="android"){  
             this.Version();  
@@ -247,13 +247,90 @@
         if(server_version > curr_version){
           //TODO 此处判断是否为 WIFI连接状态
           if(plus.networkinfo.getCurrentType()!==3){
-              uni.showToast({  
-                title: '有新的版本发布，检测到您目前非Wifi连接，为节约您的流量，程序已停止自动更新，将在您连接WIFI之后重新检测更新',  
-                mask: true,  
-                duration: 6000,
-                icon:"none"
-              });  
-              return;  
+            // 有新的版本发布，检测到您目前非Wifi连接，为节约您的流量，程序已停止自动更新，将在您连接WIFI之后重新检测更新
+            uni.showModal({
+                title: "版本更新",
+                content: '有新的版本发布，检测到您目前非Wifi连接，是否继续更新新版本？',
+                confirmText:'立即更新',
+                cancelText:'稍后进行',
+                confirmColor: '',
+                success: function (res) {
+                  if (res.confirm) {
+                    // uni.showToast({
+                    //   icon:"none",
+                    //   mask: true,
+                    //     title: '有新的版本发布，检测到您目前为Wifi连接，程序已启动自动更新。新版本下载完成后将自动弹出安装程序',  
+                    //     duration: 5000,  
+                    // }); 
+                    //设置 最新版本apk的下载链接
+                    console.log(url)
+                    var downloadApkUrl = "http://mkmngsys.mitech-ndt.com/" + url;
+                    var dtask = plus.downloader.createDownload( downloadApkUrl, {}, function ( d, status ) {
+                    console.log(d, status)
+                    // 下载完成  
+                    if ( status == 200 ) {
+                      plus.runtime.install(plus.io.convertLocalFileSystemURL(d.filename), {}, e => e, function(error) {
+                        uni.showToast({
+                          title: '安装失败-01',
+                          mask: false,
+                          duration: 1500
+                        });
+                      })
+                    } else {  
+                      uni.showToast({  
+                        title: '更新失败',
+                        duration: 1500
+                      });
+                    }    
+                  });
+                  try {
+                    dtask.start(); // 开启下载的任务
+                    var prg = 0;
+                    var showLoading = plus.nativeUI.showWaiting("正在下载");  //创建一个showWaiting对象 
+                    dtask.addEventListener('statechanged', function(
+                      task,
+                      status
+                    ) {
+                      // 给下载任务设置一个监听 并根据状态  做操作
+                      switch (task.state) {
+                      case 1:
+                        showLoading.setTitle("正在下载");
+                        break;
+                      case 2:
+                        showLoading.setTitle("已连接到服务器");
+                        break;
+                      case 3:
+                        prg = parseInt(
+                        (parseFloat(task.downloadedSize) /
+                          parseFloat(task.totalSize)) *
+                          100
+                        );
+                        showLoading.setTitle("  正在下载" + prg + "%  ");
+                        // console.log(prg)
+                        break;
+                      case 4:
+                        plus.nativeUI.closeWaiting();
+                        console.log(111)
+                        console.log(server_version)
+                        uni.setStorageSync('Version', server_version);
+                        //下载完成
+                        break;
+                      }
+                    });
+                  } catch (err) {
+                    plus.nativeUI.closeWaiting();
+                    uni.showToast({
+                      title: '更新失败-03',
+                      mask: false,
+                      duration: 1500
+                    });
+                  }
+                } else if (res.cancel) {
+                  console.log('稍后更新')
+                }
+              }
+            });
+              return;
             }else{
               uni.showModal({
                 title: "版本更新",
@@ -333,7 +410,7 @@
                     });
                   }
                 } else if (res.cancel) {
-                  console.log('稍后更新');
+                  console.log('稍后更新')
                 }
               }
             });
