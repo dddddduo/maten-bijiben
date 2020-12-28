@@ -22,10 +22,18 @@
         /* 模块配置 */
         "modules" : {
             "Push" : {},
-            "Share" : {}
+            "Share" : {},
+            "Speech" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
+            "apple" : {
+                "capabilities" : {
+                    "entitlements" : {
+                        "com.apple.developer.associated-domains" : [ "applinks:https://mkmngsys.mitech-ndt.com" ]
+                    }
+                }
+            },
             /* android打包配置 */
             "android" : {
                 "permissions" : [
@@ -66,11 +74,14 @@
                 "share" : {
                     "weixin" : {
                         "appid" : "wx54e96fc14a500c97",
-                        "UniversalLinks" : ""
+                        "UniversalLinks" : "https://demo.dcloud.net.cn/ulink/"
                     }
                 },
                 "push" : {
                     "unipush" : {}
+                },
+                "speech" : {
+                    "ifly" : {}
                 }
             },
             "splashscreen" : {
