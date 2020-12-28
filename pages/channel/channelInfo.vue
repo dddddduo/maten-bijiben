@@ -1165,7 +1165,7 @@
       // 打开文件
       openFile (val) {
         console.log(val)
-        let config = "http://mkmngsys.mitech-ndt.com/"
+        let config = "https://mkmngsys.mitech-ndt.com/"
         uni.downloadFile({
           // 下面一行时拼接预览PDF的地址！！！
           url: config + val,
@@ -1326,7 +1326,7 @@
 	    }
 	    const FileShare= uni.requireNativePlugin('life-FileShare');
 	    
-	    that.fileUrl = "http://mkmngsys.mitech-ndt.com/" + val.file_path
+	    that.fileUrl = "https://mkmngsys.mitech-ndt.com/" + val.file_path
 	    if (that.fileName) {
 	      plus.io.resolveLocalFileSystemURL(("_doc/pdf/"+ that.fileName), function(entry) {
 	        console.log(entry)

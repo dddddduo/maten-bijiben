@@ -219,7 +219,7 @@
       // 查询详情
       selectInfo (val, i) {
         const that = this
-        let config = "http://mkmngsys.mitech-ndt.com/"
+        let config = "https://mkmngsys.mitech-ndt.com/"
         uni.showLoading({
           title: '加载中'
         });
@@ -260,7 +260,7 @@
         });
         let fileName = val.url.substring(val.url.lastIndexOf(".")+1);
         that.fileName = val.name + '.' + fileName;
-        that.fileUrl = "http://mkmngsys.mitech-ndt.com" + val.url;
+        that.fileUrl = "https://mkmngsys.mitech-ndt.com" + val.url;
         const FileShare= uni.requireNativePlugin('life-FileShare');
         if (that.fileName) {
           plus.io.resolveLocalFileSystemURL(("_doc/pdf/"+ that.fileName), function(entry) {

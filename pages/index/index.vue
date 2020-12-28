@@ -264,7 +264,7 @@
                     // }); 
                     //设置 最新版本apk的下载链接
                     console.log(url)
-                    var downloadApkUrl = "http://mkmngsys.mitech-ndt.com/" + url;
+                    var downloadApkUrl = "https://mkmngsys.mitech-ndt.com/" + url;
                     var dtask = plus.downloader.createDownload( downloadApkUrl, {}, function ( d, status ) {
                     console.log(d, status)
                     // 下载完成  
@@ -348,7 +348,7 @@
                     // }); 
                     //设置 最新版本apk的下载链接
                     console.log(url)
-                    var downloadApkUrl = "http://mkmngsys.mitech-ndt.com/" + url;
+                    var downloadApkUrl = "https://mkmngsys.mitech-ndt.com/" + url;
                     var dtask = plus.downloader.createDownload( downloadApkUrl, {}, function ( d, status ) {
                     console.log(d, status)
                     // 下载完成  

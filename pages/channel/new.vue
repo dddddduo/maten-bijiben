@@ -1108,7 +1108,7 @@
       // 打开文件
       openFile (val) {
         console.log(val)
-        let config = "http://mkmngsys.mitech-ndt.com/"
+        let config = "https://mkmngsys.mitech-ndt.com/"
         uni.downloadFile({
           // 下面一行时拼接预览PDF的地址！！！
           url: config + val,
@@ -1264,10 +1264,10 @@
         const FileShare= uni.requireNativePlugin('life-FileShare');
         // if (i === 0) {
         //   that.fileName = val.file_name
-        //   that.fileUrl = "http://mkmngsys.mitech-ndt.com/" + val.file_path
+        //   that.fileUrl = "https://mkmngsys.mitech-ndt.com/" + val.file_path
         // } else if (i === 1) {
         //   that.fileName = val.pdfname
-        //   that.fileUrl = "http://mkmngsys.mitech-ndt.com/" + val.url
+        //   that.fileUrl = "https://mkmngsys.mitech-ndt.com/" + val.url
         // }
         if (i === 1) {
           let fileName = val.file_path.substring(val.file_path.lastIndexOf(".")+1);

@@ -266,7 +266,7 @@
           title: '加载中'
         });
         that.fileName = val.file_name;
-        that.fileUrl = "http://mkmngsys.mitech-ndt.com/" + val.file_path;
+        that.fileUrl = "https://mkmngsys.mitech-ndt.com/" + val.file_path;
         if (val.file_name) {
           const FileShare= uni.requireNativePlugin('life-FileShare');
           plus.io.resolveLocalFileSystemURL(("_doc/pdf/"+ that.fileName), function(entry) {
