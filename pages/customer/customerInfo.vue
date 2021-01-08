@@ -56,6 +56,54 @@
             </view>
             <view class="from-content">
               <view class="left">
+                来源<text class="text"></text>
+              </view>
+              <view class="right">
+                <view class="radio-list">
+                  <view class="radios">
+                    <view class="circle" @tap="formData.cus_source === 1">
+                      <text class="i" v-if="Number(formData.cus_source) === 1"></text>
+                    </view>
+                    意向咨询
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="from-content">
+              <view class="left">
+                业务状态<text class="text"></text>
+              </view>
+              <view class="right">
+                <view class="radio-list1">
+                  <view class="radios">
+                    <view class="circle" @tap="formData.cus_business_status === 1">
+                      <text class="i" v-if="Number(formData.cus_business_status) === 1"></text>
+                    </view>
+                    已成交
+                  </view>
+                  <view class="radios">
+                    <view class="circle" @tap="formData.cus_business_status === 2">
+                      <text class="i" v-if="Number(formData.cus_business_status) === 2"></text>
+                    </view>
+                    跟进中
+                  </view>
+                  <view class="radios">
+                    <view class="circle" @tap="formData.cus_business_status === 3">
+                      <text class="i" v-if="Number(formData.cus_business_status) === 3"></text>
+                    </view>
+                    暂缓
+                  </view>
+                  <view class="radios">
+                    <view class="circle" @tap="formData.cus_business_status === 4">
+                      <text class="i" v-if="Number(formData.cus_business_status) === 4"></text>
+                    </view>
+                    丢单
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="from-content">
+              <view class="left">
                 业务资料<text class="text"></text>
               </view>
               <view class="right right-choice">
@@ -774,7 +822,9 @@
           content: '',
           btype: 1,
           wenshu: '',
-          wenshu_public: ''
+          wenshu_public: '',
+          cus_business_status: 0,
+          cus_source: 0
         },
         contents: [],
         businessContent: '',
@@ -1898,7 +1948,6 @@
         if (that.wenshuPrivateList.length > 0) {
           wenshu_private = that.wenshuPrivateList.join(',');
         }
-        console.log(wenshu, wenshu_public)
         that.$api.cusEditApi({
           id: that.infoId,
           cusArea: that.formData.cus_area,
@@ -1914,6 +1963,8 @@
           wenshu_public: wenshu_public,
           wenshu: wenshu,
           wenshu_private: wenshu_private,
+          cusBusinessStatus: that.formData.cus_business_status,
+          cusSource: that.formData.cus_source,
           ...data
         }).then(res => {
           if (res.data.status === 200) {
@@ -2156,6 +2207,43 @@
             justify-content: center;
             align-items: center;
             .radios {
+              font-size: 30upx;
+              letter-spacing: 1upx;
+              line-height: 80upx;
+              color: #333333;
+              font-family: "Ping Fang";
+              flex: 1;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              .circle {
+                width: 24upx;
+                height: 24upx;
+                border-radius: 50%;
+                background-color: #fff;
+                border: 2upx solid #363636;
+                text-align: center;
+                margin-left: 20upx;
+                margin-right: 12upx;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text.i {
+                  width: 12upx;
+                  height: 12upx;
+                  border-radius: 50%;
+                  background-color: #d9233b;
+                  display: inline-block;
+                }
+              }
+            }
+          }
+          .radio-list1 {
+            width: 100%;
+            display: inline-block;
+            .radios {
+              float: left;
+              width: auto;
               font-size: 30upx;
               letter-spacing: 1upx;
               line-height: 80upx;

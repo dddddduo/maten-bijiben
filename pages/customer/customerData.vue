@@ -30,7 +30,7 @@
           </view>
         </view>
       </view>
-      <view class="from-content">
+      <!-- <view class="from-content">
         <view class="left">
           来源<text class="text"></text>
         </view>
@@ -47,6 +47,21 @@
                 <text class="i" v-if="formData.cusSource === 2"></text>
               </view>
               主动拓展
+            </view>
+          </view>
+        </view>
+      </view> -->
+      <view class="from-content">
+        <view class="left">
+          来源<text class="text"></text>
+        </view>
+        <view class="right">
+          <view class="radio-list">
+            <view class="radios">
+              <view class="circle" @tap="formData.cusSource = 1">
+                <text class="i" v-if="formData.cusSource === 1"></text>
+              </view>
+              意向咨询
             </view>
           </view>
         </view>
@@ -211,7 +226,7 @@
         ],
         formData: {
           cusStatus: 1,
-          cusSource: 2,
+          cusSource: 0,
           cusAdmin: '',
           cusName: '',
           cusArea: '',
@@ -256,6 +271,15 @@
     },
     onShow() {
       const that = this
+      let dpLimit = uni.getStorageSync('dpLimit');
+      console.log(dpLimit)
+      if (dpLimit.length > 0) {
+        dpLimit.filter(item => {
+          if (Number(item) === 286) {
+            that.formData.cusSource = 1
+          }
+        })
+      }
       that.init()
     },
     methods: {
