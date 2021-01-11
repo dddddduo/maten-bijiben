@@ -92,7 +92,8 @@
                     "hdpi" : "static/img/logo-Startup/480-762.9.png",
                     "xhdpi" : "static/img/logo-Startup/720-1242.9.png",
                     "xxhdpi" : "static/img/logo-Startup/1080-1882.9.png"
-                }
+                },
+                "iosStyle" : "common"
             },
             "icons" : {
                 "android" : {
@@ -102,7 +103,28 @@
                     "xxxhdpi" : "static/img/logo-Startup/192X192.png"
                 },
                 "ios" : {
-                    "appstore" : "static/img/logo-Startup/1024X1024.png"
+                    "appstore" : "static/img/logo-Startup/1024X1024.png",
+                    "iphone" : {
+                        "app@2x" : "static/img/logo-Startup/iOS/120X120.png",
+                        "app@3x" : "static/img/logo-Startup/iOS/180X180.png",
+                        "spotlight@2x" : "static/img/logo-Startup/iOS/80X80.png",
+                        "spotlight@3x" : "static/img/logo-Startup/iOS/120X120.png",
+                        "settings@2x" : "static/img/logo-Startup/iOS/58X58.png",
+                        "settings@3x" : "static/img/logo-Startup/iOS/87X87.png",
+                        "notification@2x" : "static/img/logo-Startup/iOS/40X40.png",
+                        "notification@3x" : "static/img/logo-Startup/iOS/60X60.png"
+                    },
+                    "ipad" : {
+                        "spotlight" : "static/img/logo-Startup/iOS/40X40.png",
+                        "spotlight@2x" : "static/img/logo-Startup/iOS/80X80.png",
+                        "settings@2x" : "static/img/logo-Startup/iOS/58X58.png",
+                        "notification@2x" : "static/img/logo-Startup/iOS/40X40.png",
+                        "notification" : "static/img/logo-Startup/iOS/iPad/20X20.png",
+                        "settings" : "static/img/logo-Startup/iOS/iPad/29X29.png",
+                        "proapp@2x" : "static/img/logo-Startup/iOS/iPad/167X167.png",
+                        "app" : "static/img/logo-Startup/iOS/iPad/76X76.png",
+                        "app@2x" : "static/img/logo-Startup/iOS/iPad/152X152.png"
+                    }
                 }
             }
         },
