@@ -150,6 +150,7 @@
         }
       },
       plusPush() {
+		  console.log(123456)
         plus.push.createMessage("您有一条审核消息，请前往APP查看", this.LocalMSG(), {
           cover: false
         });
@@ -173,12 +174,19 @@
                 this.$store.commit("changeIdKey", res.data.data.changeId);
                 // plus.runtime.setBadgeNumber(res.data.data.trialCount);
               }
-              if (this.addId !== Number(res.data.data.addId)) {
-                this.$store.commit("addIdKey", res.data.data.addId);
-                // plus.runtime.setBadgeNumber(res.data.data.trialCount);
-                
-                this.plusPush()
-              }
+			  if (this.addId === null) {
+				this.$store.commit("addIdKey", res.data.data.addId);
+				if (this.addId !== Number(res.data.data.addId)) {
+					console.log(this.addId, res.data.data.addId)
+					// plus.runtime.setBadgeNumber(res.data.data.trialCount);
+					this.plusPush()
+				}
+              } else {
+				  if (this.addId !== Number(res.data.data.addId)) {
+					this.$store.commit("addIdKey", res.data.data.addId);
+				  	this.plusPush()
+				  }
+			  }
               let trial = uni.getStorageSync('trial');
               if (Number(trial) !== 1 || !trial) {
                 uni.setStorageSync('trial', res.data.data.trial);

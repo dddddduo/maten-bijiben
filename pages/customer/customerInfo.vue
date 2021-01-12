@@ -1535,7 +1535,7 @@
       },
       // 分享到微信
       shareWeixin (val, i) {
-        console.log(val)
+        console.log(val, 123456)
         const that = this
         uni.showLoading({
           title: '加载中'
@@ -1554,9 +1554,13 @@
             console.log(entry)
             uni.getSystemInfo({
               success:(res) => {
-                console.log(res);
                 //检测当前平台，如果是安卓则启动安卓更新  
                 console.log(res)
+				if (res.platform === 'ios') {
+					setTimeout(() => {
+						uni.hideLoading();
+					}, 100)
+				}
               }
             })
             FileShare.render({
@@ -1605,6 +1609,17 @@
               uni.hideLoading();
               that.close()
             });
+			uni.getSystemInfo({
+			  success:(res) => {
+			    //检测当前平台，如果是安卓则启动安卓更新  
+			    console.log(res)
+				if (res.platform === 'ios') {
+					setTimeout(() => {
+						uni.hideLoading();
+					}, 100)
+				}
+			  }
+			})
           } else {
             console.log("Download failed: " + status); 
           }  
