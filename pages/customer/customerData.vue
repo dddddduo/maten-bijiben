@@ -295,6 +295,17 @@
           const FileShare= uni.requireNativePlugin('life-FileShare');
           plus.io.resolveLocalFileSystemURL(("_doc/pdf/"+ that.fileName), function(entry) {
             console.log(entry)
+            uni.getSystemInfo({
+              success: (res) => {
+                //检测当前平台，如果是安卓则启动安卓更新
+                console.log(res);
+                if (res.platform === "ios") {
+                  setTimeout(() => {
+                    uni.hideLoading();
+                  }, 100);
+                }
+              },
+            });
             FileShare.render({
               type:"SYSTEM",//QQ为QQ，微信为WX，系统默认是SYSTEM，不填写默认SYSTEM
               filePath: plus.io.convertLocalFileSystemURL("_doc/pdf/"+ that.fileName)
@@ -340,6 +351,17 @@
             }, result => {
               uni.hideLoading();
               that.close()
+            });
+            uni.getSystemInfo({
+              success: (res) => {
+                //检测当前平台，如果是安卓则启动安卓更新
+                console.log(res);
+                if (res.platform === "ios") {
+                  setTimeout(() => {
+                    uni.hideLoading();
+                  }, 100);
+                }
+              },
             });
           } else {
             console.log("Download failed: " + status); 
