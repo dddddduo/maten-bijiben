@@ -1552,6 +1552,13 @@
         if (that.fileName) {
           plus.io.resolveLocalFileSystemURL(("_doc/pdf/"+ that.fileName), function(entry) {
             console.log(entry)
+            uni.getSystemInfo({
+              success:(res) => {
+                console.log(res);
+                //检测当前平台，如果是安卓则启动安卓更新  
+                console.log(res)
+              }
+            })
             FileShare.render({
               type:"SYSTEM",//QQ为QQ，微信为WX，系统默认是SYSTEM，不填写默认SYSTEM
               filePath: plus.io.convertLocalFileSystemURL("_doc/pdf/"+ that.fileName)
