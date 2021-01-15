@@ -23,7 +23,7 @@
             </view>
             <view class="two">
               <view class="list" v-for="(val, j) in relationList" :key="j">
-                <view class="content" @tap="relationInfo(val)">
+                <view class="content" @tap="relationInfo(val)" style="color: #007AFF;">
                   {{ val.com_name }}
                 </view>
               </view>
@@ -3158,7 +3158,7 @@ export default {
               font-size: 30upx;
               letter-spacing: 1upx;
               line-height: 40upx;
-              color: #010101;
+              color: #007AFF;
               font-family: "Ping Fang";
               padding-right: 10upx;
               box-sizing: border-box;

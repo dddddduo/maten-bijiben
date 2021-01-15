@@ -109,23 +109,6 @@
             </view>
             <view class="one-left one-left1">
               <view class="left">
-                型号<text class="text"></text>
-              </view>
-              <view class="right">
-                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id !== -1">
-                  <picker class="picker" mode="selector" @change="modelPickerChange($event, i)" :value="item.modelIndex" :range="item.modelList" range-key="title">
-                    <view class="uni-input" v-if="item.modelIndex < 0" style="color: #adadad;">请选择</view>
-                    <view class="uni-input" v-if="item.modelList.length > 0">{{item.modelList[item.modelIndex] ? item.modelList[item.modelIndex].title : ''}}</view>
-                    <i class="iconfont icon-leftArrows"></i>
-                  </picker>
-                </view>
-                <input type="text" v-else class="input-style" v-model="item.goodsmodel" />
-              </view>
-            </view>
-          </view>
-          <view class="one">
-            <view class="one-left">
-              <view class="left">
                 名称<text class="text"></text>
               </view>
               <view class="right">
@@ -140,19 +123,38 @@
               </view>
             </view>
           </view>
-          <view class="one">
-            <view class="one-left">
+          <view class="two">
+            <view class="one-left one-left2">
+              <view class="left">
+                型号<text class="text"></text>
+              </view>
+              <view class="right">
+                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id !== -1">
+                  <picker class="picker" mode="selector" @change="modelPickerChange($event, i)" :value="item.modelIndex" :range="item.modelList" range-key="title">
+                    <view class="uni-input" v-if="item.modelIndex < 0" style="color: #adadad;">请选择</view>
+                    <view class="uni-input" v-if="item.modelList.length > 0">{{item.modelList[item.modelIndex] ? item.modelList[item.modelIndex].title : ''}}</view>
+                    <i class="iconfont icon-leftArrows"></i>
+                  </picker>
+                </view>
+                <input type="text" v-else class="input-style" v-model="item.goodsmodel" />
+              </view>
+            </view>
+            <view class="one-left one-left1">
               <view class="left">
                 数量<text class="number"></text>
               </view>
               <view class="right">
                 <input type="text" class="input-style input-style1" v-model="item.goodsnum" />
               </view>
-              <view class="left" style="text-align: right;width: 80upx;">
+            </view>
+          </view>
+          <view class="one">
+            <view class="one-left">
+              <view class="left">
                 单价<text class="number"></text>
               </view>
               <view class="right">
-                <input type="text" class="input-style input-style2" v-model="item.goodsprice" />
+                <input type="text" class="input-style" v-model="item.goodsprice" />
               </view>
             </view>
           </view>
@@ -179,18 +181,20 @@
         <view class="title">
           快速填单选择
         </view>
-        <view class="table_list">
-          <t-table borderColor="#d9233b">
-            <t-tr bgColor="#d9233b" color="#fff" fontSize="14">
-              <t-th bgColor="#d9233b" widthStyle="75%">客户名称</t-th>
-              <t-th bgColor="#d9233b" widthStyle="25%">操作</t-th>
-            </t-tr>
-            <t-tr v-for="(item, i) in orderFasList" :key="i">
-              <t-td widthStyle="75%">{{ item.cli_name }}</t-td>
-              <t-td widthStyle="25%"><view @tap="selectTap(item)">选择</view></t-td>
-            </t-tr>
-          </t-table>
-        </view>
+        <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y">
+          <view class="table_list">
+            <t-table borderColor="#d9233b">
+              <t-tr bgColor="#d9233b" color="#fff" fontSize="14">
+                <t-th bgColor="#d9233b" widthStyle="75%">客户名称</t-th>
+                <t-th bgColor="#d9233b" widthStyle="25%">操作</t-th>
+              </t-tr>
+              <t-tr v-for="(item, i) in orderFasList" :key="i">
+                <t-td widthStyle="75%">{{ item.cli_name }}</t-td>
+                <t-td widthStyle="25%"><view @tap="selectTap(item)">选择</view></t-td>
+              </t-tr>
+            </t-table>
+          </view>
+        </scroll-view>
       </view>
     </uni-popup>
   </view>
@@ -212,6 +216,7 @@
     },
     data () {
       return {
+        scrollTop: 0,
         purposeList: [
           {id: 2, name: '推广'},
           {id: 3, name: '差旅'},
@@ -379,7 +384,9 @@
       // 打开弹出窗
       open(){
         const that = this
-        that.$api.orderFastApi({cli_name: that.cli_name}).then(res => {
+        that.$api.orderFastApi({
+          cli_name: that.cli_name
+        }).then(res => {
           if (res.data.status === 200) {
             this.$refs.popupMessage.open()
             that.orderFasList = res.data.data
@@ -723,6 +730,15 @@
                 }
               }
             }
+            .one-left2 {
+              flex: 1;
+              .input-style {
+                width: 200upx;
+              }
+            }
+            .one-left3 {
+              width: 130upx;
+            }
             .one-left1 {
               .left {
                 width: 60upx;
@@ -733,12 +749,37 @@
                   width: 100%;
                 }
                 .input-style1 {
-                  width: 80upx;
+                  width: 100upx;
                 }
                 .input-style2 {
                   width: 100%;
                 }
               }
+            }
+          }
+        }
+        .two {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 10upx;
+          .one-left {
+            display: flex;
+            flex-direction: row;
+            box-sizing: border-box;
+            .right {
+              .select-content {
+                width: 185upx;
+              }
+            }
+          }
+          .one-left2 {
+            flex: 1;
+          }
+          .one-left1 {
+            width: 210upx;
+            text-align: right;
+            .input-style1 {
+              width: 120upx;
             }
           }
         }
@@ -843,10 +884,10 @@
       text-align: center;
       padding: 30upx 0;
     }
-    .table_list {
+    .scroll-Y {
       height: 600upx;
-      overflow: hidden;
-      overflow-y: auto;
+      // overflow: hidden;
+      // overflow-y: auto;
     }
     .btn-list {
       width: 100%;
