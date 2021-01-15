@@ -109,6 +109,23 @@
             </view>
             <view class="one-left one-left1">
               <view class="left">
+                型号<text class="text"></text>
+              </view>
+              <view class="right">
+                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id !== -1">
+                  <picker class="picker" mode="selector" @change="modelPickerChange($event, i)" :value="item.modelIndex" :range="item.modelList" range-key="title">
+                    <view class="uni-input" v-if="item.modelIndex < 0" style="color: #adadad;">请选择</view>
+                    <view class="uni-input" v-if="item.modelList.length > 0">{{item.modelList[item.modelIndex] ? item.modelList[item.modelIndex].title : ''}}</view>
+                    <i class="iconfont icon-leftArrows"></i>
+                  </picker>
+                </view>
+                <input type="text" v-else class="input-style" v-model="item.goodsmodel" />
+              </view>
+            </view>
+          </view>
+          <view class="one">
+            <view class="one-left">
+              <view class="left">
                 名称<text class="text"></text>
               </view>
               <view class="right">
@@ -126,27 +143,12 @@
           <view class="one">
             <view class="one-left">
               <view class="left">
-                型号<text class="text"></text>
-              </view>
-              <view class="right">
-                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id !== -1">
-                  <picker class="picker" mode="selector" @change="modelPickerChange($event, i)" :value="item.modelIndex" :range="item.modelList" range-key="title">
-                    <view class="uni-input" v-if="item.modelIndex < 0" style="color: #adadad;">请选择</view>
-                    <view class="uni-input" v-if="item.modelList.length > 0">{{item.modelList[item.modelIndex] ? item.modelList[item.modelIndex].title : ''}}</view>
-                    <i class="iconfont icon-leftArrows"></i>
-                  </picker>
-                </view>
-                <input type="text" v-else class="input-style" v-model="item.goodsmodel" />
-              </view>
-            </view>
-            <view class="one-left one-left1">
-              <view class="left">
                 数量<text class="number"></text>
               </view>
               <view class="right">
                 <input type="text" class="input-style input-style1" v-model="item.goodsnum" />
               </view>
-              <view class="left">
+              <view class="left" style="text-align: right;width: 80upx;">
                 单价<text class="number"></text>
               </view>
               <view class="right">
@@ -319,14 +321,14 @@
       selectTap (val) {
         const that = this
         that.formData.cli_name = val.cli_name
-        that.formData.area = val.area
+        // that.formData.area = val.area
         that.formData.cli_address = val.cli_address
         that.formData.cli_linkname = val.cli_linkname
         that.formData.cli_tel = val.cli_tel
-        that.formData.cli_moneydesc = val.cli_moneydesc
-        that.formData.cli_wldesc = val.cli_wldesc
-        that.formData.suinote = val.suinote
-        that.formData.huonote = val.huonote
+        // that.formData.cli_moneydesc = val.cli_moneydesc
+        // that.formData.cli_wldesc = val.cli_wldesc
+        // that.formData.suinote = val.suinote
+        // that.formData.huonote = val.huonote
         that.close()
       },
       close () {

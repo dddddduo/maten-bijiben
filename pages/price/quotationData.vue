@@ -43,7 +43,7 @@
       </view>
       <view class="" v-for="(item, i) in tableList" :key="i">
         <view class="from-content">
-          <view class="left">
+          <view class="left" @tap="cancelDiadig(item, i, 0)">
             商品名称<text class="text"></text>
           </view>
           <view class="right name-right">
@@ -54,7 +54,7 @@
           </view>
         </view>
         <view class="from-content">
-          <view class="left">
+          <view class="left" @tap="cancelDiadig(item, i, 1)">
             商品型号<text class="text"></text>
           </view>
           <view class="right name-right">
@@ -229,6 +229,16 @@
         that.inputWatch(data, i, 0, 0)
         that.$forceUpdate()
       },
+      // 取消选中
+      cancelDiadig (val, i, j) {
+        const that = this
+        if (j === 0) {
+          that.tableList[i].nameShow = 0
+        } else if (j === 1) {
+          that.tableList[i].nameShow1 = 0
+        }
+        that.$forceUpdate()
+      },
       // 选中型号
       selectName1 (val, i) {
         const that = this
@@ -302,7 +312,7 @@
                     that.tableList[i].publicPrice = res.data.data.public_price ? res.data.data.public_price : 0
                     that.tableList[i].goodsNum = ''
                   } else {
-                    that.tableList[i].goodsName = ''
+                    // that.tableList[i].goodsName = ''
                     that.tableList[i].marketPrice = 0
                     that.tableList[i].publicPrice = 0
                     that.tableList[i].goodsNum = ''

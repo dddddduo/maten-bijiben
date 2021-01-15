@@ -381,6 +381,36 @@
         }
       }
     },
+    {
+    	"path": "pages/customer/customerChannelInfo",
+      "style": {
+        "enablePullDownRefresh": false,
+        "backgroundTextStyle": "dark",
+      	"navigationBarTitleText": "客户详情",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              }
+            ]
+          }
+        }
+      }
+    },
+    
 		{
 			"path": "pages/channel/channel",
 			"style": {

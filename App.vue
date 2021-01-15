@@ -150,11 +150,13 @@
         }
       },
       plusPush() {
-		  console.log(123456)
+        console.log(123456)
+        //#ifdef APP-PLUS  
         plus.push.createMessage("您有一条审核消息，请前往APP查看", this.LocalMSG(), {
           cover: false
         });
         plus.push.setAutoNotification(true);
+        //#endif
       },
       LocalMSG(meg) {
         this.startPlay()
@@ -230,11 +232,15 @@
       },
       // 设置数字
       setBadge(data) {
+        //#ifdef APP-PLUS 
         plus.runtime.setBadgeNumber(data);
+        //#endif
       },
       // 清除数字
       clearBadge() {
+        //#ifdef APP-PLUS 
         plus.runtime.setBadgeNumber(0);
+        //#endif
       },
       //这里是通过点击的方式触发的
       clicks() {

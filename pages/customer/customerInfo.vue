@@ -13,12 +13,21 @@
       <view class="from">
         <view class="from-content">
           <view class="left"> 客户名<text class="text"></text> </view>
-          <view class="right">
-            <input
-              type="text"
-              class="input-style"
-              v-model="formData.cus_name"
-            />
+          <view class="right right-choice1">
+            <view class="one">
+              <input
+                type="text"
+                class="input-style"
+                v-model="formData.cus_name"
+              />
+            </view>
+            <view class="two">
+              <view class="list" v-for="(val, j) in relationList" :key="j">
+                <view class="content" @tap="relationInfo(val)">
+                  {{ val.com_name }}
+                </view>
+              </view>
+            </view>
           </view>
         </view>
         <view class="from-content">
@@ -93,8 +102,8 @@
           <view class="left"> 来源<text class="text"></text> </view>
           <view class="right">
             <view class="radio-list">
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_source = 1">
+              <view class="radios" @tap="radioCheck">
+                <view class="circle">
                   <text
                     class="i"
                     v-if="Number(formData.cus_source) === 1"
@@ -109,8 +118,8 @@
           <view class="left"> 业务状态<text class="text"></text> </view>
           <view class="right">
             <view class="radio-list1">
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 1">
+              <view class="radios" @tap="cusBusinessCheck(1)">
+                <view class="circle">
                   <text
                     class="i"
                     v-if="Number(formData.cus_business_status) === 1"
@@ -118,8 +127,8 @@
                 </view>
                 已成交
               </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 2">
+              <view class="radios" @tap="cusBusinessCheck(2)">
+                <view class="circle">
                   <text
                     class="i"
                     v-if="Number(formData.cus_business_status) === 2"
@@ -127,8 +136,8 @@
                 </view>
                 跟进中
               </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 3">
+              <view class="radios" @tap="cusBusinessCheck(3)">
+                <view class="circle">
                   <text
                     class="i"
                     v-if="Number(formData.cus_business_status) === 3"
@@ -136,8 +145,8 @@
                 </view>
                 暂缓
               </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 4">
+              <view class="radios" @tap="cusBusinessCheck(4)">
+                <view class="circle">
                   <text
                     class="i"
                     v-if="Number(formData.cus_business_status) === 4"
@@ -428,12 +437,21 @@
       <view class="from">
         <view class="from-content">
           <view class="left"> 客户名<text class="text"></text> </view>
-          <view class="right">
-            <input
-              type="text"
-              class="input-style"
-              v-model="formData.cus_name"
-            />
+          <view class="right right-choice1">
+            <view class="one">
+              <input
+                type="text"
+                class="input-style"
+                v-model="formData.cus_name"
+              />
+            </view>
+            <view class="two">
+              <view class="list" v-for="(val, j) in relationList" :key="j">
+                <view class="content" @tap="relationInfo(val)">
+                  {{ val.com_name }}
+                </view>
+              </view>
+            </view>
           </view>
         </view>
         <view class="from-content">
@@ -507,7 +525,7 @@
         <view class="from-content">
           <view class="left"> 来源<text class="text"></text> </view>
           <view class="right">
-            <view class="radio-list">
+            <view class="radio-list" @tap="radioCheck">
               <view class="radios">
                 <view class="circle" @tap="formData.cus_source = 1">
                   <text
@@ -524,41 +542,43 @@
           <view class="left"> 业务状态<text class="text"></text> </view>
           <view class="right">
             <view class="radio-list1">
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 1">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 1"
-                  ></text>
+              <view class="radio-list1">
+                <view class="radios" @tap="cusBusinessCheck(1)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 1"
+                    ></text>
+                  </view>
+                  已成交
                 </view>
-                已成交
-              </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 2">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 2"
-                  ></text>
+                <view class="radios" @tap="cusBusinessCheck(2)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 2"
+                    ></text>
+                  </view>
+                  跟进中
                 </view>
-                跟进中
-              </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 3">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 3"
-                  ></text>
+                <view class="radios" @tap="cusBusinessCheck(3)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 3"
+                    ></text>
+                  </view>
+                  暂缓
                 </view>
-                暂缓
-              </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 4">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 4"
-                  ></text>
+                <view class="radios" @tap="cusBusinessCheck(4)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 4"
+                    ></text>
+                  </view>
+                  丢单
                 </view>
-                丢单
               </view>
             </view>
           </view>
@@ -839,12 +859,21 @@
       <view class="from">
         <view class="from-content">
           <view class="left"> 客户名<text class="text"></text> </view>
-          <view class="right">
-            <input
-              type="text"
-              class="input-style"
-              v-model="formData.cus_name"
-            />
+          <view class="right right-choice1">
+            <view class="one">
+              <input
+                type="text"
+                class="input-style"
+                v-model="formData.cus_name"
+              />
+            </view>
+            <view class="two">
+              <view class="list" v-for="(val, j) in relationList" :key="j">
+                <view class="content" @tap="relationInfo(val)">
+                  {{ val.com_name }}
+                </view>
+              </view>
+            </view>
           </view>
         </view>
         <view class="from-content">
@@ -918,7 +947,7 @@
         <view class="from-content">
           <view class="left"> 来源<text class="text"></text> </view>
           <view class="right">
-            <view class="radio-list">
+            <view class="radio-list" @tap="radioCheck">
               <view class="radios">
                 <view class="circle" @tap="formData.cus_source = 1">
                   <text
@@ -935,41 +964,43 @@
           <view class="left"> 业务状态<text class="text"></text> </view>
           <view class="right">
             <view class="radio-list1">
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 1">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 1"
-                  ></text>
+              <view class="radio-list1">
+                <view class="radios" @tap="cusBusinessCheck(1)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 1"
+                    ></text>
+                  </view>
+                  已成交
                 </view>
-                已成交
-              </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 2">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 2"
-                  ></text>
+                <view class="radios" @tap="cusBusinessCheck(2)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 2"
+                    ></text>
+                  </view>
+                  跟进中
                 </view>
-                跟进中
-              </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 3">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 3"
-                  ></text>
+                <view class="radios" @tap="cusBusinessCheck(3)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 3"
+                    ></text>
+                  </view>
+                  暂缓
                 </view>
-                暂缓
-              </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cus_business_status = 4">
-                  <text
-                    class="i"
-                    v-if="Number(formData.cus_business_status) === 4"
-                  ></text>
+                <view class="radios" @tap="cusBusinessCheck(4)">
+                  <view class="circle">
+                    <text
+                      class="i"
+                      v-if="Number(formData.cus_business_status) === 4"
+                    ></text>
+                  </view>
+                  丢单
                 </view>
-                丢单
               </view>
             </view>
           </view>
@@ -1349,8 +1380,8 @@
                 color="#333333"
                 fontSize="14"
               >
-                <t-th bgColor="#fff" widthStyle="15%">选择</t-th>
-                <t-th bgColor="#fff" widthStyle="85%">名称</t-th>
+                <t-th bgColor="#fff" widthStyle="18%">选择</t-th>
+                <t-th bgColor="#fff" widthStyle="82%">名称</t-th>
               </t-tr>
               <checkbox-group @change="checkboxChange">
                 <t-tr
@@ -1358,7 +1389,7 @@
                   v-for="(item, i) in Businesslist"
                   :key="i"
                 >
-                  <t-td widthStyle="15%" :teshu="true">
+                  <t-td widthStyle="19%" :teshu="true">
                     <view>
                       <checkbox
                         color="#d9233b"
@@ -1368,7 +1399,7 @@
                       />
                     </view>
                   </t-td>
-                  <t-td widthStyle="85%" :teshu="true">{{
+                  <t-td widthStyle="81%" :teshu="true">{{
                     item.file_name
                   }}</t-td>
                 </t-tr>
@@ -1487,6 +1518,7 @@ export default {
       userArea: "",
       sts: "",
       infoTop: "",
+      relationList: []
     };
   },
   onLoad(option) {
@@ -1525,6 +1557,27 @@ export default {
     return true;
   },
   methods: {
+    radioCheck () {
+      Number(this.formData.cus_source) === 1 ? this.formData.cus_source = 0 : this.formData.cus_source = 1
+      console.log(this.formData.cus_source)
+      this.$forceUpdate()
+    },
+    // 业务状态取消
+    cusBusinessCheck (i) {
+      const that = this
+      if (Number(that.formData.cus_business_status) === i) {
+        that.formData.cus_business_status = 0
+      } else {
+        that.formData.cus_business_status = i
+      }
+    },
+    // 渠道详情
+    relationInfo (val) {
+      uni.navigateTo({
+        url: "./customerChannelInfo?id=" + val.ditch_id + '&customerId=' + this.infoId + '&key=' + this.key
+           + '&userArea=' + this.userArea + '&sts=' + this.sts + '&infoTop=' + this.infoTop + '&pages=' + this.pages
+      })
+    },
     // 转渠道
     cusToDitchTap() {
       const that = this;
@@ -2496,23 +2549,24 @@ export default {
       that.$api.CusDetailInfoApi({ id: that.infoId }).then((res) => {
         if (res.data.status === 200) {
           that.formData = res.data.data.info;
+          that.relationList = res.data.data.relation
           if (!that.formData.btype) {
             that.formData.btype = 1;
           }
           if (res.data.data.info.wenshu_public) {
             that.sendOutList = res.data.data.info.wenshu_public;
           } else {
-            that.sendOutList = null;
+            that.sendOutList = [];
           }
           if (res.data.data.info.wenshu) {
             that.sendOutList1 = res.data.data.info.wenshu;
           } else {
-            that.sendOutList1 = null;
+            that.sendOutList1 = [];
           }
           if (res.data.data.info.wenshu_private) {
             that.sendOutList2 = res.data.data.info.wenshu_private;
           } else {
-            that.sendOutList2 = null;
+            that.sendOutList2 = [];
           }
           that.contents = res.data.data.contents;
           that.contents.filter((wei, w) => {
@@ -2563,11 +2617,11 @@ export default {
       const that = this;
       that.$api.CusDelApi({ id: that.infoId }).then((res) => {
         if (res.data.status === 200) {
-          uni.showToast({
-            title: "删除成功",
-            duration: 2000,
-            icon: "none",
-          });
+          // uni.showToast({
+          //   title: "删除成功",
+          //   duration: 2000,
+          //   icon: "none",
+          // });
           that.delList.push(that.infoId);
           that.nextTap(2);
         }
@@ -3084,6 +3138,31 @@ export default {
           .styleAdd {
             background: #fdeef1;
             color: #d9233b;
+          }
+        }
+      }
+      .right-choice1 {
+        display: flex;
+        flex-direction: column;
+        .two {
+          box-sizing: border-box;
+          .list {
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            box-sizing: border-box;
+            padding-top: 15upx;
+            .content {
+              width: auto;
+              font-size: 30upx;
+              letter-spacing: 1upx;
+              line-height: 40upx;
+              color: #010101;
+              font-family: "Ping Fang";
+              padding-right: 10upx;
+              box-sizing: border-box;
+            }
           }
         }
       }
