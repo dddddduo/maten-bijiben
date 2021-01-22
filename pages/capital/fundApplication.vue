@@ -59,17 +59,17 @@
         </view>
         <view class="right">
           <view class="radio-list">
-            <view class="radios">
-              <view class="circle" @tap="payTypeTap(1)"><text class="i" v-if="formData.pay_type === 1"></text></view>中行对公
+            <view class="radios" @tap="payTypeTap(1)">
+              <view class="circle"><text class="i" v-if="formData.pay_type === 1"></text></view>中行对公
             </view>
-            <view class="radios">
-              <view class="circle" @tap="payTypeTap(3)"><text class="i" v-if="formData.pay_type === 3"></text></view>工行对公
+            <view class="radios" @tap="payTypeTap(4)">
+              <view class="circle"><text class="i" v-if="formData.pay_type === 4"></text></view>工行对公
             </view>
-            <view class="radios">
-              <view class="circle" @tap="payTypeTap(2)"><text class="i" v-if="formData.pay_type === 2"></text></view>对私
+            <view class="radios" @tap="payTypeTap(2)">
+              <view class="circle"><text class="i" v-if="formData.pay_type === 2"></text></view>对私
             </view>
-            <view class="radios">
-              <view class="circle" @tap="payTypeTap(4)"><text class="i" v-if="formData.pay_type === 4"></text></view>现金
+            <view class="radios" @tap="payTypeTap(3)">
+              <view class="circle"><text class="i" v-if="formData.pay_type === 3"></text></view>现金
             </view>
           </view>
           <input type="text" v-if="formData.pay_type === 1" style="margin-top: 14upx;" class="input-style" v-model="formData.pay_type_remark" />
