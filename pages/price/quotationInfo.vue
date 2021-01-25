@@ -278,6 +278,9 @@
                     var arr = res.data.data;
                     that.formData.goods[i].nameList = that.unique(arr)
                   }
+                } else {
+                  that.formData.goods[i].nameShow = 0
+                  that.formData.goods[i].nameShow1 = 0
                 }
               } else {
                 that.formData.goods[i].nameShow = 0

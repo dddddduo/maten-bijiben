@@ -294,6 +294,9 @@
                     console.log(that.unique(res.data.data), 1223)
                     that.tableList[i].nameList = that.unique(res.data.data)
                   }
+                } else {
+                  that.tableList[i].nameShow = 0
+                  that.tableList[i].nameShow1 = 0
                 }
               } else {
                 console.log(666)
