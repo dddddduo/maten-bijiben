@@ -72,7 +72,7 @@
               <view class="circle"><text class="i" v-if="formData.pay_type === 3"></text></view>现金
             </view>
           </view>
-          <input type="text" v-if="formData.pay_type === 1" style="margin-top: 14upx;" class="input-style" v-model="formData.pay_type_remark" />
+          <!-- <input type="text" v-if="formData.pay_type === 1" style="margin-top: 14upx;" class="input-style" v-model="formData.pay_type_remark" /> -->
         </view>
       </view>
       <view class="from-content">

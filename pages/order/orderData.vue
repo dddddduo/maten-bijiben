@@ -28,6 +28,18 @@
       </view>
       <view class="from-content">
         <view class="left">
+          商务来源<text class="text"></text>
+        </view>
+        <view class="right">
+          <view class="radio-list">
+            <view class="radios" v-for="(item, i) in businessSourceList" :key="i" @tap="businessSourceTap(item.id)">
+              <view class="circle"><text class="i" v-if="Number(formData.business_source) === item.id"></text></view>{{item.name}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="from-content">
+        <view class="left">
           客户名称<text class="text"></text>
         </view>
         <view class="right">
@@ -231,9 +243,17 @@
           cli_moneydesc: '',
           cli_wldesc: '',
           suinote: '',
-          huonote: ''
+          huonote: '',
+          business_source: ''
         },
         wenshu: '',
+        businessSourceList: [
+          {id: 1, name: '贴牌'},
+          {id: 2, name: '渠道'},
+          {id: 3, name: '万网'},
+          {id: 4, name: '网店'},
+          {id: 5, name: '其他'}
+        ],
         index: -1,
         regionList: [],
         AssignPersonnel: [],
@@ -310,6 +330,11 @@
       that.init()
     },
     methods: {
+      // 单选框
+      businessSourceTap (id) {
+        const that = this
+        that.formData.business_source = id
+      },
       // 总计
       inpuTap () {
         const that = this
@@ -536,7 +561,7 @@
     .from {
       width: 100%;
       box-sizing: border-box;
-      padding: 30upx 26upx 0 10upx;
+      padding: 30upx 16upx 0 10upx;
       .from-content {
         width: 100%;
         display: flex;
@@ -552,6 +577,19 @@
           color: #000000;
           font-family: "Ping Fang";
           line-height: 80upx;
+          box-sizing: border-box;
+          text.text {
+            display: inline-block;
+            width: 100%;
+          }
+        }
+        .left1 {
+          height: 80upx;
+          width: 130upx;
+          // text-align: justify;
+          font-size: 30upx;
+          color: #000000;
+          font-family: "Ping Fang";
           box-sizing: border-box;
           text.text {
             display: inline-block;
@@ -588,17 +626,19 @@
           }
           .radio-list {
             width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
+            display: inline-block;
+            // display: flex;
+            // flex-direction: row;
+            // justify-content: center;
+            // align-items: center;
             .radios {
               font-size: 30upx;
               letter-spacing: 1upx;
-              line-height: 80upx;
+              // line-height: 80upx;
+              padding-top: 10upx;
               color: #333333;
               font-family: "Ping Fang";
-              flex: 1;
+              float: left;
               display: flex;
               flex-direction: row;
               align-items: center;

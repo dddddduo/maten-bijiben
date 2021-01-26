@@ -3,16 +3,16 @@
     <view class="from">
       <view class="from-content">
         <view class="left">
-          报备<text class="text"></text>
+          来源<text class="text"></text>
         </view>
         <view class="right">
           <view class="right-style-1">
             <view class="radio-list">
               <view class="radios">
-                <view class="circle" @tap="formData.cusStatus = 1"><text class="i" v-if="formData.cusStatus === 1"></text></view>是
-              </view>
-              <view class="radios">
-                <view class="circle" @tap="formData.cusStatus = 0"><text class="i" v-if="formData.cusStatus === 0"></text></view>否
+                <view class="circle" @tap="formData.cusSource = 1">
+                  <text class="i" v-if="formData.cusSource === 1"></text>
+                </view>
+                意向咨询
               </view>
             </view>
             <view class="right-one-style">
@@ -53,21 +53,6 @@
       </view> -->
       <view class="from-content">
         <view class="left">
-          来源<text class="text"></text>
-        </view>
-        <view class="right">
-          <view class="radio-list">
-            <view class="radios">
-              <view class="circle" @tap="formData.cusSource = 1">
-                <text class="i" v-if="formData.cusSource === 1"></text>
-              </view>
-              意向咨询
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class="from-content">
-        <view class="left">
           分配至<text class="text"></text>
         </view>
         <view class="right">
@@ -87,9 +72,9 @@
         <view class="right">
           <input type="text" class="input-style" v-model="formData.cusName" />
         </view>
-        <view class="select-btn" @tap="selectName">
+        <!-- <view class="select-btn" @tap="selectName">
           查重复
-        </view>
+        </view> -->
       </view>
       <view class="from-content">
         <view class="left">
@@ -117,7 +102,7 @@
       </view> -->
       <view class="from-content">
         <view class="left">
-          通用资料<text class="text"></text>
+          相关文书<text class="text"></text>
         </view>
         <view class="right right-choice">
           <view class="one">
@@ -159,31 +144,31 @@
           业务资料
         </view>
         <view class="one">
-          <input type="text" class="input-style" v-model="keyFile" />
-          <view class="select-btn1" @tap="fileTap">
+          <input type="text" class="input-style" style="padding: 0 15upx;" v-model="keyFile" />
+          <view class="select-btn1" @tap="fileTap(1)">
             <image class="sear" src="../../static/img/search1.png" mode=""></image>
           </view>
         </view>
-        <view class="table_list" style="border: 1px solid #e3e3e3;">
-          <t-table>
-            <t-tr bgColor="#fff" color="#333" fontSize="14">
-              <t-th bgColor="#fff" widthStyle="15%">选择</t-th>
-              <t-th bgColor="#fff" widthStyle="16%">分类</t-th>
-              <t-th bgColor="#fff" widthStyle="69%">名称</t-th>
-            </t-tr>
-            <checkbox-group @change="checkboxChange">
-              <t-tr v-for="(item, i) in Businesslist" :key="i">
-                <t-td widthStyle="15%" :teshu="true">
-                  <view>
-                    <checkbox color="#d9233b" :value="item.id" :checked="item.checked" style="transform:scale(0.7)" />
-                  </view>
-                </t-td>
-                <t-td widthStyle="16%" :teshu="true">{{ item.dir_name }}</t-td>
-                <t-td widthStyle="69%" :teshu="true">{{ item.file_name }}</t-td>
+        <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" style="border: 1px solid #e3e3e3;height: 600upx;margin-top: 30upx;">
+          <view class="table_list">
+            <t-table>
+              <t-tr bgColor="#fff" color="#333" fontSize="14">
+                <t-th bgColor="#fff" widthStyle="15%">选择</t-th>
+                <t-th bgColor="#fff" widthStyle="69%">名称</t-th>
               </t-tr>
-            </checkbox-group>
-          </t-table>
-        </view>
+              <checkbox-group @change="checkboxChange">
+                <t-tr v-for="(item, i) in Businesslist" :key="i">
+                  <t-td widthStyle="15%" :teshu="true">
+                    <view>
+                      <checkbox color="#d9233b" :value="item.id" :checked="item.checked" style="transform:scale(0.7)" />
+                    </view>
+                  </t-td>
+                  <t-td widthStyle="69%" :teshu="true">{{ item.file_name }}</t-td>
+                </t-tr>
+              </checkbox-group>
+            </t-table>
+          </view>
+        </scroll-view>
         <view class="page">
           <uni-pagination :total="count" :current="page" :pageSize="15" @change="paginationChange"></uni-pagination>
         </view>
@@ -219,6 +204,7 @@
     },
     data () {
       return {
+        scrollTop: 0,
         purposeList: [
           {id: 2, name: '推广'},
           {id: 3, name: '差旅'},
@@ -233,7 +219,7 @@
           cusLinkman: '',
           cusTel: '',
           cusWeburl: '',
-          wenshu_public: '',
+          wenshu: '',
           content: ''
         },
         wenshu: '',
@@ -392,18 +378,44 @@
           }
         })
       },
-      fileTap () {
+      fileTap (e) {
         const that = this
         // 文书列表
-        that.$api.fileListApi({
+        // that.$api.fileListApi({
+        //   page: that.page,
+        //   key: that.keyFile
+        // }).then(res => {
+        //   if (res.data.status === 200) {
+        //     that.Businesslist = res.data.data.list
+        //     that.count = Number(res.data.data.count)
+        //   }
+        // })
+        that.page = e
+        that.$api.wenshuListApi({
           page: that.page,
-          key: that.keyFile
-        }).then(res => {
-          if (res.data.status === 200) {
-            that.Businesslist = res.data.data.list
-            that.count = Number(res.data.data.count)
-          }
+          key: that.keyFile,
+          pageSize: 5,
         })
+        .then((res) => {
+          if (res.data.status === 200) {
+            let list = res.data.data.list;
+            let Businesslist = [];
+            if (list.length > 0) {
+              list.filter((item, i) => {
+                Businesslist.push({
+                  id: item.id,
+                  file_name: item.name,
+                  file_path: item.file_path,
+                  type: item.type,
+                  username: item.username,
+                });
+              });
+            }
+            that.Businesslist = Businesslist;
+            that.count = Number(res.data.data.count);
+            that.$refs.popupMessage.open();
+          }
+        });
       },
       // 分页
       paginationChange (e) {
@@ -411,7 +423,7 @@
         const that = this
         that.page = e.current
         // 文书列表
-        that.fileTap()
+        that.fileTap(e.current)
       },
       // 多选
       checkboxChange: function (e) {
@@ -435,19 +447,22 @@
       // 添加发送项
       addSendOut () {
         const that = this
-        that.$api.gePublictFileByIdApi({
-          id: that.wenshu
-        }).then(res => {
-          if (res.data.status === 200) {
-            that.sendOutList.push(res.data.data)
-          } else {
-            uni.showToast({
-              title: '未搜索到',
-              duration: 2000,
-              icon: 'none'
-            });
-          }
-        })
+        that.keyFile = that.wenshu
+        // 文书列表
+        that.fileTap(1)
+        // that.$api.gePublictFileByIdApi({
+        //   id: that.wenshu
+        // }).then(res => {
+        //   if (res.data.status === 200) {
+        //     that.sendOutList.push(res.data.data)
+        //   } else {
+        //     uni.showToast({
+        //       title: '未搜索到',
+        //       duration: 2000,
+        //       icon: 'none'
+        //     });
+        //   }
+        // })
       },
       // 移除发送项
       delSendOut (val, i) {
@@ -478,15 +493,39 @@
       // 打开弹出窗
       open(){
         const that = this
-        that.keyFile = ''
         // 文书列表
-        that.$api.fileListApi().then(res => {
-          if (res.data.status === 200) {
-            that.Businesslist = res.data.data.list
-            that.count = Number(res.data.data.count)
-          }
+        // that.$api.fileListApi().then(res => {
+        //   if (res.data.status === 200) {
+        //     that.Businesslist = res.data.data.list
+        //     that.count = Number(res.data.data.count)
+        //   }
+        // })
+        // 文书列表
+        that.$api.wenshuListApi({
+          page: that.page,
+          key: that.keyFile,
+          pageSize: 5,
         })
-        this.$refs.popupMessage.open()
+        .then((res) => {
+          if (res.data.status === 200) {
+            let list = res.data.data.list;
+            let Businesslist = [];
+            if (list.length > 0) {
+              list.filter((item, i) => {
+                Businesslist.push({
+                  id: item.id,
+                  file_name: item.name,
+                  file_path: item.file_path,
+                  type: item.type,
+                  username: item.username,
+                });
+              });
+            }
+            that.Businesslist = Businesslist;
+            that.count = Number(res.data.data.count);
+            that.$refs.popupMessage.open();
+          }
+        });
       },
       close(){
         this.$refs.popupMessage.close()
@@ -508,12 +547,12 @@
           }
         })
         // 文书列表
-        that.$api.fileListApi().then(res => {
-          if (res.data.status === 200) {
-            that.Businesslist = res.data.data.list
-            that.count = Number(res.data.data.count)
-          }
-        })
+        // that.$api.fileListApi().then(res => {
+        //   if (res.data.status === 200) {
+        //     that.Businesslist = res.data.data.list
+        //     that.count = Number(res.data.data.count)
+        //   }
+        // })
       },
       // 下拉菜单发生改变时
       bindPickerChange ($event) {
@@ -543,9 +582,9 @@
           that.sendOutList.filter(item => {
             arr.push(item.id)
           })
-          that.formData.wenshu_public = arr.join(',');
+          that.formData.wenshu = arr.join(',');
         }
-        console.log(that.formData.wenshu_public)
+        console.log(that.formData.wenshu)
         that.$api.userCustomerAddApi({
           ...that.formData
         }).then(res => {
@@ -657,8 +696,8 @@
                 background-color: #fff;
                 border: 2upx solid #363636;
                 text-align: center;
-                margin-left: 20upx;
-                margin-right: 12upx;
+                // margin-left: 20upx;
+                margin-right: 20upx;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -760,7 +799,7 @@
             flex: 1;
             line-height: 83upx;
             box-sizing: border-box;
-            padding-left: 30upx;
+            padding-left: 50upx;
           }
         }
         .select-btn {
@@ -828,10 +867,9 @@
       padding: 30upx 0;
     }
     .table_list {
-      height: 600upx;
+      height: auto;
       overflow: hidden;
       overflow-y: auto;
-      margin-top: 30upx;
     }
     .btn-list {
       width: 100%;

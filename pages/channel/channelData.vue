@@ -3,15 +3,30 @@
     <view class="from">
       <view class="from-content">
         <view class="left">
-          所在区域<text class="text"></text>
+          区域<text class="text"></text>
         </view>
         <view class="right">
-          <view class="select-content">
-            <picker class="picker" mode="selector" @change="bindPickerChange" :value="index" :range="regionList" range-key="areaname">
-              <view class="uni-input" v-if="index < 0" style="color: #adadad;">所在区域</view>
-              <view class="uni-input" v-if="regionList.length > 0">{{regionList[index] ? regionList[index].areaname : ''}}</view>
-              <i class="iconfont icon-leftArrows"></i>
-            </picker>
+          <view class="right-style-1">
+            <view class="select-content">
+              <picker class="picker" mode="selector" @change="bindPickerChange" :value="index" :range="regionList" range-key="areaname">
+                <view class="uni-input" v-if="index < 0" style="color: #adadad;">所在区域</view>
+                <view class="uni-input" v-if="regionList.length > 0">{{regionList[index] ? regionList[index].areaname : ''}}</view>
+                <i class="iconfont icon-leftArrows"></i>
+              </picker>
+            </view>
+            <view class="right-one-style">
+              <view class="right-title">
+                来源
+              </view>
+              <view class="radio-list">
+                <view class="radios">
+                  <view class="circle" @tap="radioCheck">
+                    <text class="i" v-if="formData.ditch_source === 1"></text>
+                  </view>
+                  意向咨询
+                </view>
+              </view>
+            </view>
           </view>
         </view>
       </view>
@@ -55,7 +70,7 @@
           <input type="text" class="input-style" v-model="formData.store_address" />
         </view>
       </view>
-      <view class="from-content">
+      <!-- <view class="from-content">
         <view class="left">
           QQ/邮箱<text class="text"></text>
         </view>
@@ -70,7 +85,7 @@
         <view class="right">
           <input type="text" class="input-style" v-model="formData.wechat" />
         </view>
-      </view>
+      </view> -->
       <view class="from-content">
         <view class="left">
           权重<text class="text"></text>
@@ -87,7 +102,7 @@
       </view>
       <view class="from-content">
         <view class="left">
-          通用资料<text class="text"></text>
+          相关文书<text class="text"></text>
         </view>
         <view class="right right-choice">
           <view class="one">
@@ -134,26 +149,26 @@
             <image class="sear" src="../../static/img/search1.png" mode=""></image>
           </view>
         </view>
-        <view class="table_list" style="border: 1px solid #e3e3e3;">
-          <t-table>
-            <t-tr bgColor="#fff" color="#333" fontSize="14">
-              <t-th bgColor="#fff" widthStyle="15%">选择</t-th>
-              <t-th bgColor="#fff" widthStyle="16%">分类</t-th>
-              <t-th bgColor="#fff" widthStyle="69%">名称</t-th>
-            </t-tr>
-            <checkbox-group @change="checkboxChange">
-              <t-tr v-for="(item, i) in Businesslist" :key="i">
-                <t-td widthStyle="15%" :teshu="true">
-                  <view>
-                    <checkbox color="#d9233b" :value="item.id" :checked="item.checked" style="transform:scale(0.7)" />
-                  </view>
-                </t-td>
-                <t-td widthStyle="16%" :teshu="true">{{ item.dir_name }}</t-td>
-                <t-td widthStyle="69%" :teshu="true">{{ item.file_name }}</t-td>
+        <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" style="border: 1px solid #e3e3e3;height: 600upx;margin-top: 30upx;">
+          <view class="table_list">
+            <t-table>
+              <t-tr bgColor="#fff" color="#333" fontSize="14">
+                <t-th bgColor="#fff" widthStyle="18%">选择</t-th>
+                <t-th bgColor="#fff" widthStyle="82%">名称</t-th>
               </t-tr>
-            </checkbox-group>
-          </t-table>
-        </view>
+                <checkbox-group @change="checkboxChange">
+                  <t-tr v-for="(item, i) in Businesslist" :key="i">
+                    <t-td widthStyle="18%" :teshu="true">
+                      <view>
+                        <checkbox color="#d9233b" :value="item.id" :checked="item.checked" style="transform:scale(0.7)" />
+                      </view>
+                    </t-td>
+                    <t-td widthStyle="82%" :teshu="true">{{ item.file_name }}</t-td>
+                  </t-tr>
+                </checkbox-group>
+            </t-table>
+          </view>
+        </scroll-view>
         <view class="page">
           <uni-pagination :total="count" :current="page" :pageSize="15" @change="paginationChange"></uni-pagination>
         </view>
@@ -189,6 +204,7 @@
     },
     data () {
       return {
+        scrollTop: 0,
         purposeList: [
           {id: 2, name: '推广'},
           {id: 3, name: '差旅'},
@@ -205,7 +221,8 @@
           com_linkqq: '',
           wechat: '',
           weight: '',
-          wenshu_public: ''
+          wenshu: '',
+          ditch_source: 0
         },
         index: -1,
         regionList: [],
@@ -213,11 +230,12 @@
         weightList: [
           {id: 1, name: '高'},
           {id: 2, name: '中'},
-          {id: 3, name: '低'}
+          {id: 3, name: '低'},
+          {id: 4, name: "无"}
         ],
         infoId: '',
         sendOutList: [],
-        page: '',
+        page:1,
         keyFile: '',
         Businesslist: [],
         count: 0,
@@ -249,6 +267,11 @@
       that.init()
     },
     methods: {
+      radioCheck () {
+        Number(this.formData.ditch_source) === 1 ? this.formData.ditch_source = 0 : this.formData.ditch_source = 1
+        console.log(this.formData.ditch_source)
+        this.$forceUpdate()
+      },
       okGo () {
         const that = this
         uni.showLoading({
@@ -338,15 +361,32 @@
       fileTap () {
         const that = this
         // 文书列表
-        that.$api.fileListApi({
+        // 文书列表
+        that.$api.wenshuListApi({
           page: that.page,
-          key: that.keyFile
-        }).then(res => {
-          if (res.data.status === 200) {
-            that.Businesslist = res.data.data.list
-            that.count = Number(res.data.data.count)
-          }
+          key: that.keyFile,
+          pageSize: 5,
         })
+        .then((res) => {
+          if (res.data.status === 200) {
+            let list = res.data.data.list;
+            let Businesslist = [];
+            if (list.length > 0) {
+              list.filter((item, i) => {
+                Businesslist.push({
+                  id: item.id,
+                  file_name: item.name,
+                  file_path: item.file_path,
+                  type: item.type,
+                  username: item.username,
+                });
+              });
+            }
+            that.Businesslist = Businesslist;
+            that.count = Number(res.data.data.count);
+            that.$refs.popupMessage.open();
+          }
+        });
       },
       // 分页
       paginationChange (e) {
@@ -378,32 +418,53 @@
       // 添加发送项
       addSendOut () {
         const that = this
-        that.$api.gePublictFileByIdApi({
-          id: that.wenshu
-        }).then(res => {
-          if (res.data.status === 200) {
-            that.sendOutList.push(res.data.data)
-          } else {
-            uni.showToast({
-              title: '未搜索到',
-              duration: 2000,
-              icon: 'none'
-            });
-          }
-        })
+        that.keyFile = that.wenshu
+        that.$refs.popupMessage.open();
+        that.fileTap()
+        // that.$api.gePublictFileByIdApi({
+        //   id: that.wenshu
+        // }).then(res => {
+        //   if (res.data.status === 200) {
+        //     that.sendOutList.push(res.data.data)
+        //   } else {
+        //     uni.showToast({
+        //       title: '未搜索到',
+        //       duration: 2000,
+        //       icon: 'none'
+        //     });
+        //   }
+        // })
       },
       // 打开弹出窗
       open(){
         const that = this
         that.keyFile = ''
         // 文书列表
-        that.$api.fileListApi().then(res => {
-          if (res.data.status === 200) {
-            that.Businesslist = res.data.data.list
-            that.count = Number(res.data.data.count)
-          }
+        that.$api.wenshuListApi({
+          page: that.page,
+          key: that.keyFile,
+          pageSize: 5,
         })
-        this.$refs.popupMessage.open()
+        .then((res) => {
+          if (res.data.status === 200) {
+            let list = res.data.data.list;
+            let Businesslist = [];
+            if (list.length > 0) {
+              list.filter((item, i) => {
+                Businesslist.push({
+                  id: item.id,
+                  file_name: item.name,
+                  file_path: item.file_path,
+                  type: item.type,
+                  username: item.username,
+                });
+              });
+            }
+            that.Businesslist = Businesslist;
+            that.count = Number(res.data.data.count);
+            that.$refs.popupMessage.open();
+          }
+        });
       },
       close(){
         this.$refs.popupMessage.close()
@@ -482,7 +543,7 @@
           that.sendOutList.filter(item => {
             arr.push(item.id)
           })
-          that.formData.wenshu_public = arr.join(',');
+          that.formData.wenshu = arr.join(',');
         }
         that.$api.ditchAddApi({
           ...that.formData
@@ -515,8 +576,7 @@
           cusTel: '',
           cusWeburl: '',
           wenshu: '',
-          content: '',
-          wenshu_public: ''
+          content: ''
         }
         that.index = -1
       }
@@ -797,10 +857,9 @@
       padding: 30upx 0;
     }
     .table_list {
-      height: 600upx;
+      height: auto;
       overflow: hidden;
       overflow-y: auto;
-      margin-top: 30upx;
     }
     .btn-list {
       width: 100%;

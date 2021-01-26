@@ -113,6 +113,16 @@
               </view>
             </view>
           </view>
+          <view class="left left3"> 分配至<text class="text"></text> </view>
+          <view class="right">
+            <view class="select-content">
+              <picker class="picker" mode="selector" @change="bindPickerChangePersonnel" :value="indexAssign" :range="AssignPersonnel" range-key="username">
+                <view class="uni-input" v-if="indexAssign < 0" style="color: #adadad;">请选择</view>
+                <view class="uni-input" v-if="AssignPersonnel.length > 0">{{AssignPersonnel[indexAssign] ? AssignPersonnel[indexAssign].username : ''}}</view>
+                <i class="iconfont icon-leftArrows"></i>
+              </picker>
+            </view>
+          </view>
         </view>
         <view class="from-content">
           <view class="left"> 业务状态<text class="text"></text> </view>
@@ -537,6 +547,16 @@
               </view>
             </view>
           </view>
+          <view class="left left3"> 分配至<text class="text"></text> </view>
+          <view class="right">
+            <view class="select-content">
+              <picker class="picker" mode="selector" @change="bindPickerChangePersonnel" :value="indexAssign" :range="AssignPersonnel" range-key="username">
+                <view class="uni-input" v-if="indexAssign < 0" style="color: #adadad;">请选择</view>
+                <view class="uni-input" v-if="AssignPersonnel.length > 0">{{AssignPersonnel[indexAssign] ? AssignPersonnel[indexAssign].username : ''}}</view>
+                <i class="iconfont icon-leftArrows"></i>
+              </picker>
+            </view>
+          </view>
         </view>
         <view class="from-content">
           <view class="left"> 业务状态<text class="text"></text> </view>
@@ -959,6 +979,16 @@
               </view>
             </view>
           </view>
+          <view class="left left3"> 分配至<text class="text"></text> </view>
+          <view class="right">
+            <view class="select-content">
+              <picker class="picker" mode="selector" @change="bindPickerChangePersonnel" :value="indexAssign" :range="AssignPersonnel" range-key="username">
+                <view class="uni-input" v-if="indexAssign < 0" style="color: #adadad;">请选择</view>
+                <view class="uni-input" v-if="AssignPersonnel.length > 0">{{AssignPersonnel[indexAssign] ? AssignPersonnel[indexAssign].username : ''}}</view>
+                <i class="iconfont icon-leftArrows"></i>
+              </picker>
+            </view>
+          </view>
         </view>
         <view class="from-content">
           <view class="left"> 业务状态<text class="text"></text> </view>
@@ -1327,7 +1357,7 @@
           :scroll-top="0"
           v-if="wenshuIndex === 0"
         >
-          <view class="table_list" style="border: 1px solid #e3e3e3">
+          <view class="table_list">
             <t-table>
               <t-tr
                 trBg="diagio-trBg"
@@ -1372,7 +1402,7 @@
           :scroll-top="0"
           v-if="wenshuIndex === 1 || wenshuIndex === 2"
         >
-          <view class="table_list" style="border: 1px solid #e3e3e3">
+          <view class="table_list">
             <t-table>
               <t-tr
                 trBg="diagio-trBg"
@@ -1464,6 +1494,7 @@ export default {
         wenshu_public: "",
         cus_business_status: 0,
         cus_source: 0,
+        cus_admin: ''
       },
       contents: [],
       businessContent: "",
@@ -1474,7 +1505,7 @@ export default {
         { name: "高", id: 1 },
         { name: "中", id: 2 },
         { name: "低", id: 3 },
-        { name: "无", id: 4 },
+        { name: "空", id: 4 },
       ],
       weightIndex: -1,
       wenshu_public: "",
@@ -1518,7 +1549,9 @@ export default {
       userArea: "",
       sts: "",
       infoTop: "",
-      relationList: []
+      relationList: [],
+      AssignPersonnel: [],
+      indexAssign: -1
     };
   },
   onLoad(option) {
@@ -2540,6 +2573,12 @@ export default {
     },
     init() {
       const that = this;
+      // 分配人员列表
+      that.$api.adminUserListApi().then(res => {
+        if (res.data.status === 200) {
+          that.AssignPersonnel = res.data.data
+        }
+      })
       // 区域列表
       that.$api.areaListApi().then((res) => {
         if (res.data.status === 200) {
@@ -2588,6 +2627,14 @@ export default {
             that.regionList.filter((item, i) => {
               if (Number(item.id) === Number(that.formData.cus_area)) {
                 that.regionIndex = i;
+              }
+            });
+          }
+          // 分配至
+          if (that.AssignPersonnel.length > 0) {
+            that.AssignPersonnel.filter((item, i) => {
+              if (Number(item.id) === Number(that.formData.cus_admin)) {
+                that.indexAssign = i;
               }
             });
           }
@@ -2640,6 +2687,13 @@ export default {
       that.weightIndex = $event.detail.value;
       that.formData.weight = that.weightList[that.weightIndex].id;
     },
+    // 分配至
+    bindPickerChangePersonnel ($event) {
+        console.log($event)
+        const that = this
+        that.indexAssign = $event.detail.value
+        that.formData.cus_admin = that.AssignPersonnel[that.indexAssign].id
+      },
     // 下拉菜单发生改变时---区域
     bindPickerChange($event) {
       console.log($event);
@@ -2706,6 +2760,7 @@ export default {
           wenshu_private: wenshu_private,
           cusBusinessStatus: that.formData.cus_business_status,
           cusSource: that.formData.cus_source,
+          cusAdmin: that.formData.cus_admin,
           ...data,
         })
         .then((res) => {
@@ -2841,6 +2896,11 @@ export default {
         box-sizing: border-box;
         padding-left: 28upx;
       }
+      .left3{
+        width: 110upx;
+        box-sizing: border-box;
+        padding-left: 10upx;
+      }
       .left1 {
         height: 130upx;
         line-height: 130upx;
@@ -2965,7 +3025,7 @@ export default {
               background-color: #fff;
               border: 2upx solid #363636;
               text-align: center;
-              margin-left: 20upx;
+              // margin-left: 20upx;
               margin-right: 12upx;
               display: flex;
               justify-content: center;
@@ -3216,11 +3276,15 @@ export default {
     text-align: center;
     padding: 30upx 0;
   }
-  .table_list {
+  .scroll-view {
     height: 600upx;
+    margin-top: 30upx;
+    border: 1px solid #e3e3e3;
+  }
+  .table_list {
+    height: auto;
     overflow: hidden;
     overflow-y: scroll;
-    margin-top: 30upx;
     padding-bottom: 20upx;
     box-sizing: border-box;
     // border: 1px solid #e3e3e3;

@@ -16,6 +16,18 @@
         </view>
       </view>
       <view class="from-content">
+        <view class="left1">
+          商务来源<text class="text"></text>
+        </view>
+        <view class="right">
+          <view class="radio-list">
+            <view class="radios" v-for="(item, i) in businessSourceList" :key="i">
+              <view class="circle"><text class="i" v-if="Number(formData.business_source) === item.id"></text></view>{{item.name}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="from-content">
         <view class="left">
           客户名称<text class="text"></text>
         </view>
@@ -152,8 +164,16 @@
           cli_moneydesc: '',
           cli_wldesc: '',
           suinote: '',
-          huonote: ''
+          huonote: '',
+          business_source: ''
         },
+        businessSourceList: [
+          {id: 1, name: '贴牌'},
+          {id: 2, name: '渠道'},
+          {id: 3, name: '万网'},
+          {id: 4, name: '网店'},
+          {id: 5, name: '其他'}
+        ],
         index: -1,
         regionList: [],
         tableList: [],

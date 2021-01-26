@@ -72,9 +72,21 @@
             <input
               type="text"
               class="input-style"
-              style="width: 180upx"
               v-model="formData.com_linkman"
             />
+          </view>
+        </view>
+        <view class="from-content">
+          <view class="left"> 来源<text class="text"></text> </view>
+          <view class="right">
+            <view class="radio-list">
+              <view class="radios">
+                <view class="circle" @tap="radioCheck">
+                  <text class="i" v-if="Number(formData.ditch_source) === 1"></text>
+                </view>
+                意向咨询
+              </view>
+            </view>
           </view>
           <view class="left left2"> 网址<text class="text"></text> </view>
           <view class="right">
@@ -397,13 +409,25 @@
         </view>
         <view class="from-content">
           <view class="left"> 联系人<text class="text"></text> </view>
-          <view class="right1">
+          <view class="right">
             <input
               type="text"
               class="input-style"
-              style="width: 180upx"
               v-model="formData.com_linkman"
             />
+          </view>
+        </view>
+        <view class="from-content">
+          <view class="left"> 来源<text class="text"></text> </view>
+          <view class="right">
+            <view class="radio-list">
+              <view class="radios">
+                <view class="circle" @tap="radioCheck">
+                  <text class="i" v-if="Number(formData.ditch_source) === 1"></text>
+                </view>
+                意向咨询
+              </view>
+            </view>
           </view>
           <view class="left left2"> 网址<text class="text"></text> </view>
           <view class="right">
@@ -726,9 +750,21 @@
             <input
               type="text"
               class="input-style"
-              style="width: 180upx"
               v-model="formData.com_linkman"
             />
+          </view>
+        </view>
+        <view class="from-content">
+          <view class="left"> 来源<text class="text"></text> </view>
+          <view class="right">
+            <view class="radio-list">
+              <view class="radios">
+                <view class="circle" @tap="radioCheck">
+                  <text class="i" v-if="Number(formData.ditch_source) === 1"></text>
+                </view>
+                意向咨询
+              </view>
+            </view>
           </view>
           <view class="left left2"> 网址<text class="text"></text> </view>
           <view class="right">
@@ -1025,7 +1061,7 @@
           :scroll-top="0"
           v-if="wenshuIndex === 0"
         >
-          <view class="table_list" style="border: 1px solid #e3e3e3">
+          <view class="table_list">
             <t-table>
               <t-tr
                 trBg="diagio-trBg"
@@ -1070,7 +1106,7 @@
           :scroll-top="0"
           v-if="wenshuIndex === 1 || wenshuIndex === 2"
         >
-          <view class="table_list" style="border: 1px solid #e3e3e3">
+          <view class="table_list">
             <t-table>
               <t-tr
                 trBg="diagio-trBg"
@@ -1169,6 +1205,7 @@ export default {
         tixing: "",
         content: "",
         btype: 1,
+        ditch_source: 0
       },
       current: 0,
       windowHeight: 0,
@@ -1264,6 +1301,11 @@ export default {
     const that = this;
   },
   methods: {
+    radioCheck () {
+      Number(this.formData.ditch_source) === 1 ? this.formData.ditch_source = 0 : this.formData.ditch_source = 1
+      console.log(this.formData.ditch_source)
+      this.$forceUpdate()
+    },
     chanelTap2(i) {
       const that = this;
       this.$api
@@ -2274,6 +2316,7 @@ export default {
             that.formData.com_name = res.data.data.com_name;
             that.formData.com_linkman = res.data.data.com_linkman;
             that.formData.com_linktel = res.data.data.com_linktel;
+            that.formData.ditch_source = res.data.data.ditch_source
             that.formData.com_weburl = res.data.data.com_weburl;
             that.formData.weight = res.data.data.weight;
             that.formData.sta = res.data.data.sta;
@@ -2865,11 +2908,15 @@ export default {
     text-align: center;
     padding: 30upx 0;
   }
-  .table_list {
+  .scroll-view {
     height: 600upx;
+    margin-top: 30upx;
+    border: 1px solid #e3e3e3;
+  }
+  .table_list {
+    height: auto;
     overflow: hidden;
     overflow-y: auto;
-    margin-top: 30upx;
     padding-bottom: 20upx;
     box-sizing: border-box;
     // border: 1px solid #e3e3e3;
