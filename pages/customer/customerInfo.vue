@@ -1487,7 +1487,6 @@ export default {
         cus_weburl: "",
         weight: "",
         cus_status: "",
-        tixing: "",
         content: "",
         btype: 1,
         wenshu: "",
@@ -2540,12 +2539,20 @@ export default {
     },
     // 提醒
     remind() {
-      this.formData.tixing = 1;
-      uni.showToast({
-        title: "设置成功",
-        duration: 2000,
-        icon: "none",
-      });
+      // this.formData.tixing = 1;
+      const that = this
+      that.$api.cusSetRemindApi({
+        id: that.infoId
+      }).then(res => {
+        if (res.data.status === 200) {
+          uni.showToast({
+            title: "设置成功",
+            duration: 2000,
+            icon: "none",
+          });
+        }
+      })
+      
     },
     // 时间戳转换为日期
     addTimeTsp(num) {
@@ -2751,7 +2758,6 @@ export default {
           cusTel: that.formData.cus_tel,
           cusWeburl: that.formData.cus_weburl,
           cusStatus: that.formData.cus_status,
-          tixing: that.formData.tixing,
           weight: that.formData.weight,
           btype: that.formData.btype,
           content: that.formData.content,

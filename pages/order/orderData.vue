@@ -333,7 +333,15 @@
       // 单选框
       businessSourceTap (id) {
         const that = this
-        that.formData.business_source = id
+        if (that.formData.business_source === '') {
+          that.formData.business_source = id
+        } else {
+          if (that.formData.business_source === id) {
+            that.formData.business_source = ''
+          } else {
+            that.formData.business_source = id
+          }
+        }
       },
       // 总计
       inpuTap () {

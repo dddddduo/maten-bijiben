@@ -80,6 +80,10 @@ export function adminUserListApi(params){
 export function areaListApi(params){
 	return fly.post('/admin.php?m=app&c=Cus&a=areaList', params).then(res => res)
 }
+// 设置提醒
+export function cusSetRemindApi(params){
+	return fly.post('/admin.php?m=app&c=Cus&a=cusSetRemind', params).then(res => res)
+}
 
 // 添加客户
 export function userCustomerAddApi(params){
@@ -210,6 +214,10 @@ export function orderFastApi(params){
 // 添加出库单
 export function orderAddApi(params){
 	return fly.post('/admin.php?m=app&c=Order&a=orderAdd', params).then(res => res)
+}
+// 修改出库单
+export function orderEditApi(params){
+	return fly.post('/admin.php?m=app&c=Order&a=orderEdit', params).then(res => res)
 }
 
 // 添加订单-获取产品名称,型号列表
