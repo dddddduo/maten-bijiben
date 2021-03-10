@@ -93,7 +93,7 @@
                     "xhdpi" : "static/img/logo-Startup/720-1242.9.png",
                     "xxhdpi" : "static/img/logo-Startup/1080-1882.9.png"
                 },
-                "iosStyle" : "common"
+                "iosStyle" : "default"
             },
             "icons" : {
                 "android" : {
