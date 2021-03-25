@@ -130,7 +130,7 @@
           业务记录<text class="text"></text>
         </view>
         <view class="right">
-          <textarea  class="textarea-style" v-model="formData.content" />
+          <textarea  class="textarea-style" maxlength="5000" v-model="formData.content" />
         </view>
       </view>
     </view>

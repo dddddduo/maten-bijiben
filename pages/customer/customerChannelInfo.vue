@@ -267,6 +267,7 @@
                     class="textarea-style"
                     style="border: 1px solid #e3e3e3"
                     v-model="item.content1"
+                    maxlength="5000"
                   />
                   <view class="btn-content" @tap="contentEdit(item)">
                     提交
@@ -308,7 +309,7 @@
         <view class="from-content">
           <view class="left left1"> 业务记录<text class="text"></text> </view>
           <view class="right">
-            <textarea class="textarea-style" v-model="formData.content" />
+            <textarea class="textarea-style" maxlength="5000" v-model="formData.content" />
           </view>
         </view>
       </view>

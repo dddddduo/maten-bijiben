@@ -10,14 +10,14 @@
     <view class="table_list">
       <t-table>
         <t-tr color="#000" fontSize="15">
-          <t-th widthStyle="47%" textAlign="center">客户名称</t-th>
-          <t-th widthStyle="27%" paddingLeft="0 0 0 20upx">业务时间</t-th>
+          <t-th widthStyle="50%" textAlign="center">客户名称</t-th>
+          <t-th widthStyle="24%" paddingLeft="0 0 0 10upx">业务时间</t-th>
           <t-th widthStyle="15%" paddingLeft="0 0 0 5upx">业务人</t-th>
           <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
         </t-tr>
         <t-tr v-for="(item, i) in list" :key="i">
-          <t-td widthStyle="47%">{{ item.cli_name }}</t-td>
-          <t-td widthStyle="27%">{{ addTimeTsp(item.cli_strtime) }}</t-td>
+          <t-td widthStyle="50%">{{ item.cli_name }}</t-td>
+          <t-td widthStyle="24%">{{ addTimeTsp(item.cli_strtime) }}</t-td>
           <t-td widthStyle="15%">{{ item.username }}</t-td>
           <t-td widthStyle="11%">
             <view class="img-list" @tap="infoSelect(item)">
@@ -134,7 +134,7 @@
         var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
         var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
         var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
-        return YY + MM + DD;
+        return MM + DD;
       },
       // 批复
       replySet (id) {

@@ -81,7 +81,8 @@
           随机附带<text class="text"></text>
         </view>
         <view class="right">
-          <input type="text" class="input-style" v-model="formData.suinote" />
+          <!-- <input type="text" class="input-style" v-model="formData.suinote" /> -->
+          <textarea class="textarea-style" maxlength="5000" auto-height="true" v-model="formData.suinote" />
         </view>
       </view>
       <view class="from-content">
@@ -536,6 +537,7 @@
       // 提交
       add() {
         const that = this
+        // console.log(this.formData.suinote)
         that.$api.orderEditApi({
           ...that.formData
         }).then(res => {
@@ -629,16 +631,20 @@
           }
 
           .textarea-style {
+            min-height: 40px;
+            line-height: 60upx;
+            height: auto;
             width: 100%;
-            min-height: 300upx;
+            // min-height: 300upx;
             border-radius: 3upx;
             background-color: #ffffff;
             border: 2.7777777777777777upx solid #fff;
-            padding: 10upx;
+            padding: 10upx 10upx 0;
             box-sizing: border-box;
             font-size: 30upx;
             color: #000000;
             font-family: "Ping Fang";
+            outline: none;
           }
 
           .radio-list {

@@ -12,16 +12,16 @@
       <view class="table_list">
         <t-table>
           <t-tr color="#000" fontSize="15">
-            <t-th widthStyle="53%" textAlign="center">公司名称</t-th>
-            <t-th widthStyle="27%" paddingLeft="0 0 0 20upx">审批日期</t-th>
+            <t-th widthStyle="51%" textAlign="center">公司名称</t-th>
+            <t-th widthStyle="29%" paddingLeft="0 0 0 10upx">审批日期</t-th>
             <t-th widthStyle="20%" textAlign="center">操作</t-th>
           </t-tr>
           <t-tr v-for="(item, i) in list" :key="i">
-            <t-td widthStyle="53%">
+            <t-td widthStyle="51%">
               <view :class="item.vageClass === true ? 'vageClass' : ''"></view>
               <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.name }}</view>
             </t-td>
-            <t-td widthStyle="27%">
+            <t-td widthStyle="29%">
               <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.ctime }}</view>
             </t-td>
             <t-td widthStyle="20%">
