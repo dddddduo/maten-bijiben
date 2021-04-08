@@ -11,7 +11,7 @@
       <t-table>
         <t-tr color="#000" fontSize="15">
           <t-th widthStyle="30%" textAlign="center">产品名称</t-th>
-          <t-th widthStyle="29%">产品型号</t-th>
+          <t-th widthStyle="28%">产品型号</t-th>
           <t-th widthStyle="15%" paddingLeft="0 0 0 20upx">市价</t-th>
           <t-th widthStyle="15%" paddingLeft="0 0 0 5upx">代理价</t-th>
           <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
@@ -21,8 +21,8 @@
             <view :class="item.vageClass === true ? 'vageClass' : ''"></view>
             <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.twoname }}</view>
           </t-td>
-          <t-td widthStyle="29%">
-            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.model }}</view>
+          <t-td widthStyle="28%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''" class="fonts">{{ item.model }}</view>
           </t-td>
           <t-td widthStyle="15%">
             <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.market_price }}</view>
@@ -312,6 +312,12 @@
       }
       .vageClass1 {
         color: #999;
+      }
+      .fonts {
+        width: 100%;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
       }
       .img-list {
         width: 100%;
