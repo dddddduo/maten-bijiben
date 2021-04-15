@@ -25,7 +25,7 @@
       </view>
       <view class="table_list">
         <t-table>
-          <t-tr color="#000" fontSize="15">
+          <t-tr color="#000" fontSize="14">
             <t-th widthStyle="13%">权重</t-th>
             <t-th widthStyle="76%" textAlign="center">客户名称</t-th>
             <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>

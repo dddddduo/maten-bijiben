@@ -15,7 +15,7 @@
       </view>
       <view class="table_list">
         <t-table>
-          <t-tr color="#000" fontSize="15">
+          <t-tr color="#000" fontSize="14">
             <t-th widthStyle="55%" textAlign="center">用途</t-th>
             <t-th widthStyle="18%" paddingLeft="0 0 0 20upx">金额</t-th>
             <t-th widthStyle="16%" paddingLeft="0 0 0 5upx">业务人</t-th>

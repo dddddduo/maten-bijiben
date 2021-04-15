@@ -9,11 +9,11 @@
     </view>
     <view class="table_list">
       <t-table>
-        <t-tr color="#000" fontSize="15">
+        <t-tr color="#000" fontSize="14">
           <t-th widthStyle="30%" textAlign="center">产品名称</t-th>
           <t-th widthStyle="28%">产品型号</t-th>
           <t-th widthStyle="15%" paddingLeft="0 0 0 20upx">市价</t-th>
-          <t-th widthStyle="15%" paddingLeft="0 0 0 5upx">代理价</t-th>
+          <t-th widthStyle="16%" paddingLeft="0 0 0 5upx">代理价</t-th>
           <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
         </t-tr>
         <t-tr v-for="(item, i) in list" :key="i">
@@ -27,7 +27,7 @@
           <t-td widthStyle="15%">
             <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.market_price }}</view>
           </t-td>
-          <t-td widthStyle="15%">
+          <t-td widthStyle="16%">
             <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ AgencyPrice(item) }}</view>
           </t-td>
           <t-td widthStyle="11%">

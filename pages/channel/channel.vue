@@ -24,10 +24,10 @@
       </view>
       <view class="table_list">
         <t-table>
-          <t-tr color="#000" fontSize="15">
+          <t-tr color="#000" fontSize="14">
             <t-th widthStyle="50%" textAlign="center">客户名称</t-th>
-            <t-th widthStyle="24%" paddingLeft="0 0 0 10upx">业务时间</t-th>
-            <t-th widthStyle="15%" paddingLeft="0 0 0 5upx">业务人</t-th>
+            <t-th widthStyle="20%" paddingLeft="0 0 0 10upx">时间</t-th>
+            <t-th widthStyle="19%" paddingLeft="0 0 0 5upx">业务人</t-th>
             <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
           </t-tr>
           <t-tr v-for="(item, i) in list" :key="i" :id="`anchor${item.id}`" :ref="`anchor${item.id}`">
@@ -35,10 +35,10 @@
               <view :class="item.vageClass === true ? 'vageClass' : ''"></view><text class="text-style"></text>
               <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.com_name }}</view>
             </t-td>
-            <t-td widthStyle="24%">
+            <t-td widthStyle="20%">
             <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.con_time ? addTimeTsp(item.con_time) : '' }}</view>
             </t-td>
-            <t-td widthStyle="15%">
+            <t-td widthStyle="19%">
             <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.con_username }}</view>
             </t-td>
             <t-td widthStyle="11%">

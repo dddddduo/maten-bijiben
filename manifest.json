@@ -103,27 +103,27 @@
                     "xxxhdpi" : "static/img/logo-Startup/192X192.png"
                 },
                 "ios" : {
-                    "appstore" : "static/img/logo-Startup/1024X1024.png",
+                    "appstore" : "static/img/logo-Startup/iOS/img/1024X1024-ios.png",
                     "iphone" : {
-                        "app@2x" : "static/img/logo-Startup/iOS/120X120.png",
-                        "app@3x" : "static/img/logo-Startup/iOS/180X180.png",
-                        "spotlight@2x" : "static/img/logo-Startup/iOS/80X80.png",
-                        "spotlight@3x" : "static/img/logo-Startup/iOS/120X120.png",
-                        "settings@2x" : "static/img/logo-Startup/iOS/58X58.png",
-                        "settings@3x" : "static/img/logo-Startup/iOS/87X87.png",
-                        "notification@2x" : "static/img/logo-Startup/iOS/40X40.png",
-                        "notification@3x" : "static/img/logo-Startup/iOS/60X60.png"
+                        "app@2x" : "static/img/logo-Startup/iOS/img/120X120.png",
+                        "app@3x" : "static/img/logo-Startup/iOS/img/180X180.png",
+                        "spotlight@2x" : "static/img/logo-Startup/iOS/img/80X80.png",
+                        "spotlight@3x" : "static/img/logo-Startup/iOS/img/120X120.png",
+                        "settings@2x" : "static/img/logo-Startup/iOS/img/58X58.png",
+                        "settings@3x" : "static/img/logo-Startup/iOS/img/87X87.png",
+                        "notification@2x" : "static/img/logo-Startup/iOS/img/40X40.png",
+                        "notification@3x" : "static/img/logo-Startup/iOS/img/60X60.png"
                     },
                     "ipad" : {
-                        "spotlight" : "static/img/logo-Startup/iOS/40X40.png",
-                        "spotlight@2x" : "static/img/logo-Startup/iOS/80X80.png",
-                        "settings@2x" : "static/img/logo-Startup/iOS/58X58.png",
-                        "notification@2x" : "static/img/logo-Startup/iOS/40X40.png",
-                        "notification" : "static/img/logo-Startup/iOS/iPad/20X20.png",
-                        "settings" : "static/img/logo-Startup/iOS/iPad/29X29.png",
-                        "proapp@2x" : "static/img/logo-Startup/iOS/iPad/167X167.png",
-                        "app" : "static/img/logo-Startup/iOS/iPad/76X76.png",
-                        "app@2x" : "static/img/logo-Startup/iOS/iPad/152X152.png"
+                        "spotlight" : "static/img/logo-Startup/iOS/img/40X40.png",
+                        "spotlight@2x" : "static/img/logo-Startup/iOS/img/80X80.png",
+                        "settings@2x" : "static/img/logo-Startup/iOS/img/58X58.png",
+                        "notification@2x" : "static/img/logo-Startup/iOS/img/40X40.png",
+                        "notification" : "static/img/logo-Startup/iOS/img/20X20.png",
+                        "settings" : "static/img/logo-Startup/iOS/img/29X29.png",
+                        "proapp@2x" : "static/img/logo-Startup/iOS/img/167X167.png",
+                        "app" : "static/img/logo-Startup/iOS/img/76X76.png",
+                        "app@2x" : "static/img/logo-Startup/iOS/img/152X152.png"
                     }
                 }
             }

@@ -11,7 +11,7 @@
       </view>
       <view class="table_list">
         <t-table>
-          <t-tr color="#000" fontSize="15">
+          <t-tr color="#000" fontSize="14">
             <t-th widthStyle="51%" textAlign="center">公司名称</t-th>
             <t-th widthStyle="29%" paddingLeft="0 0 0 10upx">审批日期</t-th>
             <t-th widthStyle="20%" textAlign="center">操作</t-th>
