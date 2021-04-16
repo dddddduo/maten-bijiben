@@ -6,7 +6,7 @@
     <view class="input-list">
       <view class="input-row border">
         <image class="input-img" src="../../static/img/login/user.png" mode=""></image>
-      	<lyd-input class="m-input" type="text" clearable focus v-model="username" placeholder="请输入用户名"></lyd-input>
+      	<lyd-input class="m-input" type="text" autocapitalize="on" clearable focus v-model="username" placeholder="请输入用户名"></lyd-input>
       </view>
       <view class="input-row border">
         <image class="input-img" src="../../static/img/login/pwd.png" mode=""></image>
@@ -15,7 +15,7 @@
       <view class="last-input">
         <view class="input-row border">
           <image class="input-img" src="../../static/img/login/code.png" mode=""></image>
-        	<lyd-input class="m-input" type="text" clearable focus v-model="code" placeholder="请输入验证码"></lyd-input>
+        	<lyd-input class="m-input" type="text" autocapitalize="on" clearable focus v-model="code" placeholder="请输入验证码"></lyd-input>
         </view>
         <view class="right-code">
           <image :src="imgUrl" class="avator" @tap="init" mode="">
