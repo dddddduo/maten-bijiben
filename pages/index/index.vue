@@ -42,13 +42,14 @@
       <view class="box">
         <t-table @change="change">
           <t-tr color="#333333" :lineShow="true">
-            <t-th widthStyle="23%" bgColor="#f6f6f6" paddingLeft="0px" textAlign="center">名次</t-th>
-            <t-th widthStyle="24%" bgColor="#f6f6f6" textAlign="center">姓名</t-th>
+            <t-th :widthStyle="RankingIndex === 0 ? '12%' : '23%'" bgColor="#f6f6f6" paddingLeft="0px" textAlign="center">名次</t-th>
+            <t-th :widthStyle="RankingIndex === 0 ? '20%' : '24%'" bgColor="#f6f6f6" textAlign="center">姓名</t-th>
             <t-th widthStyle="24%" bgColor="#f6f6f6" textAlign="center">年度业绩</t-th>
-            <t-th widthStyle="28%" bgColor="#f6f6f6" textAlign="center">本月业绩</t-th>
+            <t-th :widthStyle="RankingIndex === 0 ? '24%' : '28%'" bgColor="#f6f6f6" textAlign="center">本月业绩</t-th>
+            <t-th widthStyle="20%" bgColor="#f6f6f6" textAlign="center" v-if="RankingIndex === 0">拜访数量</t-th>
           </t-tr>
           <t-tr v-for="(item, i) in tableList" :key="item.id" trBg="trBg">
-            <t-td widthStyle="23%" paddingStyle="0px" fontSizes="28upx" colors="#333333">
+            <t-td :widthStyle="RankingIndex === 0 ? '12%' : '23%'" paddingStyle="0px" fontSizes="28upx" colors="#333333">
               <view class="tds">
                 <view v-if="i === 0"><image class="Ranking" src="../../static/img/login/1.png" mode=""></image></view>
                 <view v-else-if="i === 1"><image class="Ranking" src="../../static/img/login/2.png" mode=""></image></view>
@@ -56,7 +57,7 @@
                 <view v-else>{{ i + 1 }}</view>
               </view>
             </t-td>
-            <t-td widthStyle="24%" fontSizes="28upx" colors="#333333">
+            <t-td :widthStyle="RankingIndex === 0 ? '20%' : '24%'" fontSizes="28upx" colors="#333333">
               <view class="tds">
                 {{ item.username }}
               </view>
@@ -66,9 +67,14 @@
                 {{ item.year_total }}
               </view>
             </t-td>
-            <t-td widthStyle="28%" fontSizes="28upx" colors="#333333">
+            <t-td :widthStyle="RankingIndex === 0 ? '24%' : '28%'" fontSizes="28upx" colors="#333333">
               <view class="tds">
                 {{ item.month_total ? item.month_total : '' }}
+              </view>
+            </t-td>
+            <t-td widthStyle="20%" fontSizes="28upx" colors="#333333" v-if="RankingIndex === 0">
+              <view class="tds">
+                {{ item.visit ? item.visit : '' }}
               </view>
             </t-td>
           </t-tr>
@@ -173,7 +179,7 @@
       const that = this
       that.current = -1
       that.Authorization = uni.getStorageSync('Authorization');
-      that.VersionData = '202104081';
+      that.VersionData = '202104191';
       console.log(that.Authorization)
       if(that.Authorization){
         that.init()
