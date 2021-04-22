@@ -162,7 +162,8 @@
           "item": this.list[index],
           "select": index
         });
-        uni.switchTab({
+        console.log(23)
+        uni.redirectTo({
           url: this.list[index].pagePath
         })
       }

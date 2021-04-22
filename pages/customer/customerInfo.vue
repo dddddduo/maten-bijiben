@@ -416,6 +416,12 @@
                 </view>
                 整理
               </view>
+              <view class="radios">
+                <view class="circle" @tap="btypeTap(8)">
+                  <text class="i" v-if="formData.btype === 8"></text>
+                </view>
+                拜访
+              </view>
             </view>
           </view>
         </view>
@@ -853,6 +859,12 @@
                 </view>
                 整理
               </view>
+              <view class="radios">
+                <view class="circle" @tap="btypeTap(8)">
+                  <text class="i" v-if="formData.btype === 8"></text>
+                </view>
+                拜访
+              </view>
             </view>
           </view>
         </view>
@@ -1285,6 +1297,12 @@
                   <text class="i" v-if="formData.btype === 7"></text>
                 </view>
                 整理
+              </view>
+              <view class="radios">
+                <view class="circle" @tap="btypeTap(8)">
+                  <text class="i" v-if="formData.btype === 8"></text>
+                </view>
+                拜访
               </view>
             </view>
           </view>

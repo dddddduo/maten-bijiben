@@ -171,9 +171,13 @@
         })
       }
     },
-    onLoad(options) {
-      console.log(options)
-      // this._getList();
+    onLoad() {
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList, 'onLoad')
+      if (tabList[2] === 0) {
+        tabList[2] = 1
+        uni.setStorageSync('tabList', tabList)
+      }
     },
     onShow() {
       const that = this
@@ -183,7 +187,13 @@
           that.regionList = res.data.data
         }
       })
-      // this._searchData();
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList)
+      if (tabList[2] === 0) {
+        this.clear()
+        tabList[2] = 1
+        uni.setStorageSync('tabList', tabList)
+      }
     },
     // 原生导航栏返回按钮监听
     onBackPress(options) {
@@ -192,6 +202,10 @@
       }
       this.back();
       return true;
+    },
+    onTabItemTap(e) {
+      console.log(123456)
+      // this.clear()
     },
     mounted() {
       // window.addEventListener('scroll', this.handleScroll)
@@ -202,6 +216,10 @@
       this.scrollTop = res.scrollTop
     },
     methods: {
+      clear () {
+        this.key = ''
+        this.searchSubmit()
+      },
       // 监听滚动条位置
       handleScroll () {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop

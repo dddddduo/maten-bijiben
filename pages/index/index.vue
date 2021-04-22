@@ -160,9 +160,7 @@
     onNavigationBarButtonTap(options) {
       console.log(options)
       if (options.index === 0) {
-        uni.removeStorage({
-          key: 'Authorization'
-        })
+        uni.clearStorage()
         uni.navigateTo({
           url: '../login/login'
         })

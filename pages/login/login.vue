@@ -278,6 +278,7 @@
               uni.setStorageSync('Authorization', res.data.data.token);
               uni.setStorageSync('dpLimit', res.data.data.user.dp_limit);
               uni.setStorageSync('uid', res.data.data.user.uid);
+              uni.setStorageSync('tabList', [0, 0, 0, 0, 0]);
               let list = [
                 {
                   "pagePath": "/pages/capital/capital",

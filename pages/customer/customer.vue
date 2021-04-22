@@ -151,6 +151,10 @@
           {
             id: 14,
             name: '意向'
+          },
+          {
+            id: 15,
+            name: '拜访'
           }
         ],
         btnIndex: 0,
@@ -185,10 +189,21 @@
     onShow() {
       const that = this
       that.init()
-      // this._searchData();
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList)
+      if (tabList[1] === 0) {
+        this.clear()
+        tabList[1] = 1
+        uni.setStorageSync('tabList', tabList)
+      }
     },
-    onLoad(option) {
-      console.log(option)
+    onLoad() {
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList, 'onLoad')
+      if (tabList[1] === 0) {
+        tabList[1] = 1
+        uni.setStorageSync('tabList', tabList)
+      }
     },
     // 原生导航栏返回按钮监听
     onBackPress(options) {
@@ -199,8 +214,8 @@
       return true;
     },
     onTabItemTap(e) {
-      console.log(e)
-      this.clear()
+      console.log(e, 123456)
+      // this.clear()
     },
     mounted() {
       // window.addEventListener('scroll', this.handleScroll)

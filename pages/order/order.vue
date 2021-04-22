@@ -75,9 +75,23 @@
         })
       }
     },
+    onLoad() {
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList, 'onLoad')
+      if (tabList[4] === 0) {
+        tabList[4] = 1
+        uni.setStorageSync('tabList', tabList)
+      }
+    },
     onShow() {
       const that = this
-      // that.init()
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList, 'onShow')
+      if (tabList[4] === 0) {
+        this.clear()
+        tabList[4] = 1
+        uni.setStorageSync('tabList', tabList)
+      }
     },
     // 原生导航栏返回按钮监听
     onBackPress (options) {
@@ -89,7 +103,7 @@
     },
     onTabItemTap(e) {
       console.log(e)
-      this.clear()
+      // this.clear()
     },
     methods: {
       tabbarChange (e) {

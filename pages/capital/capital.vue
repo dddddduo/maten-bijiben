@@ -122,15 +122,31 @@
       return true;  
     },
     onTabItemTap(e) {
-      this.clear()
+      console.log(666666)
+      // this.clear()
+    },
+    onLoad() {
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList, 'onLoad')
+      if (tabList[0] === 0) {
+        tabList[0] = 1
+        uni.setStorageSync('tabList', tabList)
+      }
     },
     onShow() {
-      // this._searchData();
+      let tabList = uni.getStorageSync('tabList');
+      console.log(tabList)
+      if (tabList[0] === 0) {
+        this.clear()
+        tabList[0] = 1
+        // tabList = [1,0,0,0,0]
+        uni.setStorageSync('tabList', tabList)
+      }
     },
     methods: {
       tabbarChange (e) {
         const that = this
-        console.log(e, this.customerJurisdictionTrues)
+        console.log(e, 999999999999999999999999999)
         if (that.customerJurisdictionTrues === false) {
           if (Number(e) === 1) {
             uni.showToast({
