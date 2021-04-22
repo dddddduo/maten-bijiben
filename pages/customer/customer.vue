@@ -256,7 +256,12 @@
         }
       },
       clear() {
+        const that = this
         this.key = ''
+        that.btnIndex = 0
+        that.userArea = 0
+        that.index = 0
+        that.sts = 0
         this.searchSubmit()
       },
       clickNav(data) {

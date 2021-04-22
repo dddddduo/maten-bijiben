@@ -217,7 +217,10 @@
     },
     methods: {
       clear () {
+        const that = this
         this.key = ''
+        that.btnIndex = 0
+        that.sts = 0
         this.searchSubmit()
       },
       // 监听滚动条位置
