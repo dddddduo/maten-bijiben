@@ -26,11 +26,11 @@
       <view class="bottom-btn">
         <view class="btn" style="border-radius:30upx 0 0;" @tap="RankingTap(0)">
           <view class="title" :class="RankingIndex === 0 ? 'active' : ''">
-            国内排行榜
+            拜访排行榜
           </view>
           <view class="square" v-if="RankingIndex === 0"></view>
         </view>
-        <view class="btn" style="border-radius: 0 30upx 0 0;" @tap="RankingTap(1)">
+        <view class="btn" style="border-radius: 0 30upx 0 0;">
           <view class="title" :class="RankingIndex === 1 ? 'active' : ''">
             国外排行榜
           </view>
@@ -42,14 +42,15 @@
       <view class="box">
         <t-table @change="change">
           <t-tr color="#333333" :lineShow="true">
-            <t-th :widthStyle="RankingIndex === 0 ? '12%' : '23%'" bgColor="#f6f6f6" paddingLeft="0px" textAlign="center">名次</t-th>
-            <t-th :widthStyle="RankingIndex === 0 ? '20%' : '24%'" bgColor="#f6f6f6" textAlign="center">姓名</t-th>
-            <t-th widthStyle="24%" bgColor="#f6f6f6" textAlign="center">年度业绩</t-th>
-            <t-th :widthStyle="RankingIndex === 0 ? '24%' : '28%'" bgColor="#f6f6f6" textAlign="center">本月业绩</t-th>
-            <t-th widthStyle="20%" bgColor="#f6f6f6" textAlign="center" v-if="RankingIndex === 0">拜访数量</t-th>
+            <t-th :widthStyle="RankingIndex === 0 ? '15%' : '23%'" bgColor="#f6f6f6" paddingLeft="0px" textAlign="center">名次</t-th>
+            <t-th :widthStyle="RankingIndex === 0 ? '30%' : '24%'" bgColor="#f6f6f6" textAlign="center">姓名</t-th>
+            <!-- <t-th widthStyle="24%" bgColor="#f6f6f6" textAlign="center">年度业绩</t-th>
+            <t-th :widthStyle="RankingIndex === 0 ? '24%' : '28%'" bgColor="#f6f6f6" textAlign="center">本月业绩</t-th> -->
+            <t-th widthStyle="30%" bgColor="#f6f6f6" textAlign="center" v-if="RankingIndex === 0">拜访数量</t-th>
+            <t-th widthStyle="25%" bgColor="#f6f6f6" textAlign="center" v-if="RankingIndex === 0">总拜访量</t-th>
           </t-tr>
           <t-tr v-for="(item, i) in tableList" :key="item.id" trBg="trBg">
-            <t-td :widthStyle="RankingIndex === 0 ? '12%' : '23%'" paddingStyle="0px" fontSizes="28upx" colors="#333333">
+            <t-td :widthStyle="RankingIndex === 0 ? '15%' : '23%'" paddingStyle="0px" fontSizes="28upx" colors="#333333">
               <view class="tds">
                 <view v-if="i === 0"><image class="Ranking" src="../../static/img/login/1.png" mode=""></image></view>
                 <view v-else-if="i === 1"><image class="Ranking" src="../../static/img/login/2.png" mode=""></image></view>
@@ -57,12 +58,12 @@
                 <view v-else>{{ i + 1 }}</view>
               </view>
             </t-td>
-            <t-td :widthStyle="RankingIndex === 0 ? '20%' : '24%'" fontSizes="28upx" colors="#333333">
+            <t-td :widthStyle="RankingIndex === 0 ? '30%' : '24%'" fontSizes="28upx" colors="#333333">
               <view class="tds">
                 {{ item.username }}
               </view>
             </t-td>
-            <t-td widthStyle="24%" fontSizes="28upx" colors="#333333">
+            <!-- <t-td widthStyle="24%" fontSizes="28upx" colors="#333333">
               <view class="tds">
                 {{ item.year_total }}
               </view>
@@ -71,10 +72,15 @@
               <view class="tds">
                 {{ item.month_total ? item.month_total : '' }}
               </view>
-            </t-td>
-            <t-td widthStyle="20%" fontSizes="28upx" colors="#333333" v-if="RankingIndex === 0">
+            </t-td> -->
+            <t-td widthStyle="30%" fontSizes="28upx" colors="#333333" v-if="RankingIndex === 0">
               <view class="tds">
                 {{ item.visit ? item.visit : '' }}
+              </view>
+            </t-td>
+            <t-td widthStyle="25%" fontSizes="28upx" colors="#333333" v-if="RankingIndex === 0">
+              <view class="tds">
+                {{ item.visit_all ? item.visit_all : '' }}
               </view>
             </t-td>
           </t-tr>
@@ -177,7 +183,7 @@
       const that = this
       that.current = -1
       that.Authorization = uni.getStorageSync('Authorization');
-      that.VersionData = '202104223';
+      that.VersionData = '202105241';
       console.log(that.Authorization)
       if(that.Authorization){
         that.init()

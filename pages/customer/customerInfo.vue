@@ -342,6 +342,9 @@
                       style="width: 32upx; height: 34upx; margin-right: 10upx"
                       mode=""
                     ></image>
+                    <view class="name" style="color: #D9233B;padding: 4upx 4upx 0;">
+                      {{Number(item.btype) === 6 ? '管理意见' : Number(item.btype) === 7  ? '业务整理' : Number(item.btype) === 8 ? ' 约见拜访' : ''}}
+                    </view>
                     <view class="name"
                       >{{ item.username }}&nbsp;{{
                         addTimeTsp(item.addtime)
@@ -785,6 +788,9 @@
                       style="width: 32upx; height: 34upx; margin-right: 10upx"
                       mode=""
                     ></image>
+                    <view class="name" style="color: #D9233B;padding: 4upx 4upx 0;">
+                      {{Number(item.btype) === 6 ? '管理意见' : Number(item.btype) === 7  ? '业务整理' : Number(item.btype) === 8 ? ' 约见拜访' : ''}}
+                    </view>
                     <view class="name"
                       >{{ item.username }}&nbsp;{{
                         addTimeTsp(item.addtime)
@@ -1224,6 +1230,9 @@
                       style="width: 32upx; height: 34upx; margin-right: 10upx"
                       mode=""
                     ></image>
+                    <view class="name" style="color: #D9233B;padding: 4upx 4upx 0;">
+                      {{Number(item.btype) === 6 ? '管理意见' : Number(item.btype) === 7  ? '业务整理' : Number(item.btype) === 8 ? ' 约见拜访' : ''}}
+                    </view>
                     <view class="name"
                       >{{ item.username }}&nbsp;{{
                         addTimeTsp(item.addtime)
