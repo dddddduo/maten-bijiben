@@ -48,7 +48,10 @@ export function financeAddApi(params){
 export function replySetApi(params){
 	return fly.post('/admin.php?m=app&a=replySet&c=Finance', params).then(res => res)
 }
-
+// 资金申请---支付
+export function financePayApi(params){
+	return fly.post('/admin.php?m=app&c=Finance&a=financePay', params).then(res => res)
+}
 // 资金申请---详情
 export function financeInfoApi(params){
 	return fly.post('/admin.php?m=app&c=Finance&a=financeInfo', params).then(res => res)

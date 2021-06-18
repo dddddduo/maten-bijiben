@@ -117,8 +117,9 @@
       </view>
     </view>
     <view class="add-cancel-style">
-      <view class="cancel-btn-style" @tap="back">取消</view>
-      <view class="add-btn-style" v-if="!formData.approval" style="margin-right: 20upx;" @tap="replySet">审批</view>
+      <view class="cancel-btn-style" v-if="!paymeatShow || !replySetShow || Number(formData.is_pay) === 1 || Number(formData.approval) === 1" @tap="back">取消</view>
+      <view class="add-btn-style" style="margin-right: 20upx;" v-if="paymeatShow && Number(formData.is_pay) !== 1" @tap="paymeatTap">支付</view>
+      <view class="add-btn-style" v-if="replySetShow && Number(formData.approval) !== 1" style="margin-right: 20upx;" @tap="replySet">审批</view>
       <view class="add-btn-style" @tap="add">提交</view>
     </view>
   </view>
@@ -150,9 +151,12 @@
           remark: '',
           approval: '',
           pay_type: 1,
-          pay_type_remark: ''
+          pay_type_remark: '',
+          is_pay: ''
         },
-        infoId: ''
+        infoId: '',
+        replySetShow: false,
+        paymeatShow: false
       }
     },
     onNavigationBarButtonTap(options) {
@@ -206,6 +210,24 @@
           }
         })
       },
+      // 支付
+      paymeatTap () {
+        const that = this
+        that.$api.financePayApi({id: that.infoId}).then(res => {
+          if (res.data.status === 200) {
+            uni.showToast({
+              title: '支付成功',
+              duration: 2000,
+              icon: 'none'
+            });
+            setTimeout(() => {
+              uni.switchTab({
+                url: "./capital"
+              })
+            }, 1000)
+          }
+        })
+      },
       info () {
         const that = this
         that.$api.financeInfoApi({id: that.infoId}).then(res => {
@@ -224,8 +246,26 @@
             that.formData.approval = res.data.data.approval
             that.formData.pay_type = Number(res.data.data.pay_type)
             that.formData.pay_type_remark = res.data.data.pay_type_remark
+            that.formData.is_pay = res.data.data.is_pay
           }
         })
+        let dpLimit = uni.getStorageSync('dpLimit');
+        let uid = uni.getStorageSync('uid');
+        console.log(dpLimit)
+        if (dpLimit.length > 0) {
+          dpLimit.filter(item => {
+            if (Number(item) === 81) {
+              that.replySetShow = true
+            }
+            if (Number(item) === 80) {
+              that.paymeatShow = true
+            }
+          })
+        }
+        if (Number(uid) === 1) {
+          that.replySetShow = true
+          that.paymeatShow = true
+        }
       },
       back () {
         uni.switchTab({
