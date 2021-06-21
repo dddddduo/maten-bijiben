@@ -13,7 +13,7 @@
             </view>
           </view>
           <view class="content-noticeData">
-            <textarea @focus="textareaFocus" v-model="noticeData" @blur="blurnotice" class="textarea-style" />
+            <textarea maxlength="1000" @focus="textareaFocus" v-model="noticeData" @blur="blurnotice" class="textarea-style" />
             <!-- <view class="btn-content btn-content1" @tap="blurnotice" v-if="FocusShow">
               取消
             </view> -->
@@ -183,7 +183,7 @@
       const that = this
       that.current = -1
       that.Authorization = uni.getStorageSync('Authorization');
-      that.VersionData = '202106181';
+      that.VersionData = '202106211';
       console.log(that.Authorization)
       if(that.Authorization){
         that.init()
