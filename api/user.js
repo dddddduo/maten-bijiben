@@ -28,6 +28,7 @@ export function noticeInfoApi(params){
 	return fly.get('/admin.php?m=app&c=index&a=noticeInfo', params).then(res => res)
 }
 
+
 // 排行榜数据
 export function LeaderboardDataApi(params){
 	return fly.get('/admin.php?m=app&a=index&c=index', params).then(res => res)
@@ -86,6 +87,10 @@ export function areaListApi(params){
 // 设置提醒
 export function cusSetRemindApi(params){
 	return fly.post('/admin.php?m=app&c=Cus&a=cusSetRemind', params).then(res => res)
+}
+// 客户名称
+export function SearchGetListApi(params){
+	return fly.get('/admin.php?m=App&c=cus&a=cusSearchGetList', params).then(res => res)
 }
 
 // 添加客户

@@ -45,11 +45,17 @@
         </view>
       </view>
       <view class="from-content">
-        <view class="left">
+        <view class="left" @tap="cancelDiadig">
           客户名称<text class="text"></text>
         </view>
-        <view class="right">
+        <!-- <view class="right">
           <input type="text" class="input-style" @input="changeInput($event, 1)" />
+        </view> -->
+        <view class="right name-right">
+          <input type="text" class="input-style" v-model="formData.cusName" @input="changeInput($event, 1)" />
+          <view class="ul shangpin" v-if="nameShow && nameList.length > 0">
+            <view class="li" v-for="(val, j) in nameList" :key='j' @tap='selectNameCus(val, j)'>{{val.cus_name}}</view>
+          </view>
         </view>
         <!-- <view class="select-btn" @tap="selectName">
           查重复
@@ -60,7 +66,7 @@
           联系人<text class="text"></text>
         </view>
         <view class="right">
-          <input type="text" class="input-style" @input="changeInput($event, 2)" />
+          <input type="text" class="input-style" v-model="formData.cusLinkman" />
         </view>
       </view>
       <view class="from-content">
@@ -68,7 +74,7 @@
           联系电话<text class="text"></text>
         </view>
         <view class="right">
-          <input type="text" class="input-style" @input="changeInput($event, 3)" />
+          <input type="text" class="input-style" v-model="formData.cusTel" />
         </view>
       </view>
       <!-- <view class="from-content">
@@ -85,7 +91,7 @@
         </view>
         <view class="right right-choice">
           <view class="one">
-            <input type="text" class="input-style" @input="changeInput($event, 4)" />
+            <input type="text" class="input-style" v-model="wenshu" />
             <view class="select-btn" @tap="addSendOut">添加</view>
             <view class="select-btn" @tap="open">选择</view>
           </view>
@@ -109,7 +115,7 @@
           业务记录<text class="text"></text>
         </view>
         <view class="right">
-          <textarea  class="textarea-style" maxlength="5000"  @input="changeInput($event, 5)" />
+          <textarea  class="textarea-style" maxlength="5000" v-model="formData.content" />
         </view>
       </view>
     </view>
@@ -213,7 +219,9 @@
         count: '',
         keyFile: '',
         fileName: '',
-        fileUrl: ''
+        fileUrl: '',
+        nameShow: false,
+        nameList: []
       }
     },
     onNavigationBarButtonTap(options) {
@@ -248,11 +256,32 @@
       that.init()
     },
     methods: {
+      // 选中名称
+      selectNameCus (val, i) {
+        const that = this
+        console.log(val)
+        that.nameShow = false
+        that.formData.cusName = val.cus_name
+        that.$forceUpdate()
+      },
+      // 取消选中
+      cancelDiadig () {
+        const that = this
+        that.nameShow = false
+        that.$forceUpdate()
+      },
       changeInput (val, i) {
         const that = this
         console.log(val)
         if (i === 1) {
           that.formData.cusName = val.detail.value
+          that.$api.SearchGetListApi({
+            keyword: val.detail.value
+          }).then(res => {
+            console.log(res)
+            that.nameShow = true
+            that.nameList = res.data
+          })
         } else if (i === 2) {
           that.formData.cusLinkman = val.detail.value
         } else if (i === 3) {
@@ -610,6 +639,34 @@
   .fundApplication {
     width: 100%;
     height: 100%;
+    .name-right {
+      position: relative;
+      .shangpin {
+        z-index: 999;
+      }
+      .xinghao {
+        z-index: 888;
+      }
+      .ul {
+        position: absolute;
+        height: auto;
+        max-height: 500upx;
+        overflow:hidden;
+        overflow-y: auto;
+        top: 80upx;
+        left: 10upx;
+        right: 0;
+        background: #fff;
+        filter: drop-shadow(0px -2upx 3upx rgba(178,178,178,0.46));
+        border: 1px solid #EEEEEE;
+        .li {
+          font-size: 30upx;
+          color: #333333;
+          font-family: "Source Han Sans CN";
+          padding: 10upx 20upx;
+        }
+      }
+    }
     .from {
       width: 100%;
       box-sizing: border-box;
