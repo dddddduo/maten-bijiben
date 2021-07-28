@@ -1282,7 +1282,7 @@ export default {
     if (option.id) {
       that.infoId = option.id;
       that.infoName = option.name;
-      that.sta = option.sta;
+      that.sta = option.sts;
       that.regionId = option.regionId;
       that.infoTop = option.top;
       that.limitMethods();
@@ -1311,6 +1311,7 @@ export default {
     },
     chanelTap2(i) {
       const that = this;
+      console.log(this.sta, 99999999999)
       this.$api
         .ditchListApi({
           page: that.pages, //页码，整数大于0，必填
@@ -1382,6 +1383,9 @@ export default {
         .ditchListApi({
           page: that.pages, //页码，整数大于0，必填
           pageSize: 10,
+          sta: this.sta,
+          cusArea: this.regionId,
+          key: this.infoName,
         })
         .then((res) => {
           if (res.data.status === 200) {
@@ -2149,7 +2153,6 @@ export default {
     },
     // 下一条
     nextTap(i) {
-      console.log(i);
       const that = this;
       uni.showLoading({
         title: "加载中",
@@ -2166,15 +2169,18 @@ export default {
       } else {
         console.log(66666);
         that.leftRight = 2;
-        let infoId = 0;
+        let infoId = null;
         that.tableList.filter((item, i) => {
+          console.log(item.id, that.infoId)
           if (item.id === that.infoId) {
+            console.log(that.tableList[i + 1].id)
             if (i !== that.tableList.length - 1) {
               infoId = that.tableList[i + 1].id;
             }
           }
         });
         that.infoId = infoId;
+        console.log(i);
         console.log(that.infoId);
         that.init();
         that.$forceUpdate();
@@ -2193,6 +2199,9 @@ export default {
         .ditchListApi({
           page: that.pages, //页码，整数大于0，必填
           pageSize: 10,
+          sta: this.sta,
+          cusArea: this.regionId,
+          key: this.infoName,
         })
         .then((res) => {
           if (res.data.status === 200) {

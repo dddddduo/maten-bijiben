@@ -20,9 +20,9 @@
                 区域
               </view>
               <view class="select-content">
-                <picker class="picker" mode="selector" @change="bindPickerChange" :value="index" :range="regionList" range-key="areaname">
+                <picker class="picker" v-if="regionList.length > 0" mode="selector" @change="bindPickerChange" :value="index" :range="regionList" range-key="areaname">
                   <view class="uni-input" v-if="index < 0" style="color: #adadad;">所在区域</view>
-                  <view class="uni-input" v-if="regionList.length > 0">{{regionList[index] ? regionList[index].areaname : ''}}</view>
+                  <view class="uni-input">{{regionList[index] ? regionList[index].areaname : ''}}</view>
                   <i class="iconfont icon-leftArrows"></i>
                 </picker>
               </view>
@@ -30,27 +30,6 @@
           </view>
         </view>
       </view>
-      <!-- <view class="from-content">
-        <view class="left">
-          来源<text class="text"></text>
-        </view>
-        <view class="right">
-          <view class="radio-list">
-            <view class="radios">
-              <view class="circle" @tap="formData.cusSource = 1">
-                <text class="i" v-if="formData.cusSource === 1"></text>
-              </view>
-              被动来电
-            </view>
-            <view class="radios">
-              <view class="circle" @tap="formData.cusSource = 2">
-                <text class="i" v-if="formData.cusSource === 2"></text>
-              </view>
-              主动拓展
-            </view>
-          </view>
-        </view>
-      </view> -->
       <view class="from-content">
         <view class="left">
           分配至<text class="text"></text>
@@ -70,7 +49,7 @@
           客户名称<text class="text"></text>
         </view>
         <view class="right">
-          <input type="text" class="input-style" v-model="formData.cusName" />
+          <input type="text" class="input-style" @input="changeInput($event, 1)" />
         </view>
         <!-- <view class="select-btn" @tap="selectName">
           查重复
@@ -81,7 +60,7 @@
           联系人<text class="text"></text>
         </view>
         <view class="right">
-          <input type="text" class="input-style" v-model="formData.cusLinkman" />
+          <input type="text" class="input-style" @input="changeInput($event, 2)" />
         </view>
       </view>
       <view class="from-content">
@@ -89,7 +68,7 @@
           联系电话<text class="text"></text>
         </view>
         <view class="right">
-          <input type="text" class="input-style" v-model="formData.cusTel" />
+          <input type="text" class="input-style" @input="changeInput($event, 3)" />
         </view>
       </view>
       <!-- <view class="from-content">
@@ -106,7 +85,7 @@
         </view>
         <view class="right right-choice">
           <view class="one">
-            <input type="text" class="input-style" v-model="wenshu" />
+            <input type="text" class="input-style" @input="changeInput($event, 4)" />
             <view class="select-btn" @tap="addSendOut">添加</view>
             <view class="select-btn" @tap="open">选择</view>
           </view>
@@ -130,7 +109,7 @@
           业务记录<text class="text"></text>
         </view>
         <view class="right">
-          <textarea  class="textarea-style" maxlength="5000" v-model="formData.content" />
+          <textarea  class="textarea-style" maxlength="5000"  @input="changeInput($event, 5)" />
         </view>
       </view>
     </view>
@@ -269,6 +248,21 @@
       that.init()
     },
     methods: {
+      changeInput (val, i) {
+        const that = this
+        console.log(val)
+        if (i === 1) {
+          that.formData.cusName = val.detail.value
+        } else if (i === 2) {
+          that.formData.cusLinkman = val.detail.value
+        } else if (i === 3) {
+          that.formData.cusTel = val.detail.value
+        } else if (i === 4) {
+          that.wenshu = val.detail.value
+        } else if (i === 5) {
+          that.formData.content = val.detail.value
+        }
+      },
       // 分享到微信
       shareWeixin (val) {
         const that = this
@@ -584,7 +578,7 @@
           })
           that.formData.wenshu = arr.join(',');
         }
-        console.log(that.formData.wenshu)
+        console.log(that.formData)
         that.$api.userCustomerAddApi({
           ...that.formData
         }).then(res => {

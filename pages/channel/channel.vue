@@ -269,8 +269,8 @@
          })
          that.list[i].vageClass = true
          uni.navigateTo({
-           url: "./channelInfo?id=" + val.id + '&page=' + val.pages + '&key=' + this.key
-        + '&userArea=' + this.userArea + '&sts=' + this.sts + '&top=' + this.scrollTop
+           url: "./channelInfo?id=" + val.id + '&page=' + val.pages + '&name=' + this.key
+        + '&userArea=' + this.userArea + '&sts=' + this.sts + '&top=' + this.scrollTop + '&regionId=' + this.regionId
          })
          that.$forceUpdate()
       },
@@ -336,6 +336,7 @@
           "key": this.key
         }).then(res => {
           if (res.data.status === 200) {
+            console.log('sssssss')
             let self = this;
             this.tableList = res.data.data.list
             this.total = res.data.data.count

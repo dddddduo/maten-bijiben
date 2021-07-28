@@ -1986,6 +1986,9 @@ export default {
         .customerApi({
           page: that.pages, //页码，整数大于0，必填
           pageSize: 10,
+          key: this.key,
+          userArea: this.userArea,
+          sts: this.sts,
         })
         .then((res) => {
           if (res.data.status === 200) {
