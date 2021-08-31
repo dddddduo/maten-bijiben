@@ -79,10 +79,10 @@
                   isDot: true
                 },
                 {
-                  "pagePath": "/pages/channel/channel",
-                  "iconPath": "/static/img/banner/channel.png",
-                  "selectedIconPath": "/static/img/banner/channel-check.png",
-                  "text": "渠道",
+                  "pagePath": "/pages/means/means",
+                  "iconPath": "/static/img/banner/means.png",
+                  "selectedIconPath": "/static/img/banner/means-check.png",
+                  "text": "资料",
                   isDot: false
                 },
                 {
@@ -123,10 +123,10 @@
               isDot: true
             },
             {
-              "pagePath": "/pages/channel/channel",
-              "iconPath": "/static/img/banner/channel.png",
-              "selectedIconPath": "/static/img/banner/channel-check.png",
-              "text": "渠道",
+              "pagePath": "/pages/means/means",
+              "iconPath": "/static/img/banner/means.png",
+              "selectedIconPath": "/static/img/banner/means-check.png",
+              "text": "资料",
               isDot: false
             },
             {
@@ -351,6 +351,13 @@
   uni-page-head .uni-page-head__title {
     letter-spacing: 3upx;
     font-family: "Source Han Sans CN";
+  }
+  uni-page-head .uni-btn-icon {
+    overflow: hidden;
+    min-width: 1.5em;
+    text-align: center;
+    height: auto;
+    padding-bottom: 1px;
   }
 
   uni-checkbox:not([disabled]) .uni-checkbox-input:hover {

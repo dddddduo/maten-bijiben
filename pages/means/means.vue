@@ -16,23 +16,16 @@
       <view class="table_list">
         <t-table>
           <t-tr color="#000" fontSize="14">
-            <t-th widthStyle="55%" textAlign="center">用途</t-th>
-            <t-th widthStyle="18%" paddingLeft="0 0 0 20upx">金额</t-th>
-            <t-th widthStyle="16%" paddingLeft="0 0 0 5upx">业务人</t-th>
-            <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
+            <t-th widthStyle="58%" textAlign="center">产品名称</t-th>
+            <t-th widthStyle="31%" paddingLeft="0 0 0 20upx">品牌</t-th>
+            <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx"></t-th>
           </t-tr>
           <t-tr v-for="(item, i) in list" :key="i">
-            <t-td widthStyle="55%"><view class="span">
-              {{ item.purpose }}
-            </view></t-td>
-            <t-td widthStyle="18%">{{ item.money }}</t-td>
-            <t-td widthStyle="16%" textAlign="center">{{ item.username }}</t-td>
+            <t-td widthStyle="58%"><i class="diandian" :class="Number(item.mark_tiny) === 1 ? 'red-dian' : ''"></i>{{ item.goodsnames }}</t-td>
+            <t-td widthStyle="31%" textAlign="center">{{ item.goodsbrand }}</t-td>
             <t-td widthStyle="11%">
               <view class="img-list" @tap="selectInfo(item)">
-                <i class="iconfont icon-sangedian" :class="item.approval ? '' : 'color'"></i>
-                <!-- <image src="../../static/img/select-check.png" @tap="selectInfo(item)" class="select img" mode=""></image>
-                <image v-if="item.approval" src="../../static/img/copy-check.png" class="copy img" mode=""></image>
-                <image v-else src="../../static/img/copy.png" class="copy img" mode=""></image> -->
+                <i class="iconfont icon-jiantou"></i>
               </view>
             </t-td>
           </t-tr>
@@ -76,10 +69,10 @@
           	"src": "../../static/img/banner/customer.png",
           	"srcSelect": "../../static/img/banner/customer-check.png"
           }, {
-            "pagePath": "/pages/means/means",
-            "src": "/static/img/banner/means.png",
-            "srcSelect": "/static/img/banner/means-check.png",
-            "text": "资料"
+          	"pagePath": "../../pages/channel/channel",
+          	"text": "渠道",
+          	"src": "../../static/img/banner/channel.png",
+          	"srcSelect": "../../static/img/banner/channel-check.png"
           }, {                              
           	"pagePath": "../../pages/price/price",
           	"text": "价格",                 
@@ -108,9 +101,9 @@
       if (options.index === 0) {
         this.back();
       } else if (options.index === 1) {
-        uni.navigateTo({
-          url: "./fundApplication"
-        })
+        // uni.navigateTo({
+        //   url: "./fundApplication"
+        // })
       }
     },
     // 原生导航栏返回按钮监听
@@ -182,7 +175,7 @@
       // 查询详情
       selectInfo (val) {
         uni.navigateTo({
-          url: "./capitalInfo?id=" + val.id
+          url: "./meansInfo?id=" + val.id
         })
       },
       // 返回首页
@@ -198,16 +191,16 @@
       },
       // 数据请求(没错就是这么少的代码)
       async _getList() {
-        this.$api.fundManagementApi({
+        this.$api.ProDataApi({
           "page": this.page,    //页码，整数大于0，必填
           "pageSize": 15, //每页显示条数，整数大于0必填
           "key": this.keyword
         }).then(res => {
           if (res.data.status === 200) {
             let self = this;
-            this.tableList = res.data.data.list
+            this.tableList = res.data.data
             this.total = res.data.data.count
-            res.data.data.list.map(item => {
+            res.data.data.map(item => {
               self.list.push(item);
             });
             if (this.total === this.list.length) {
@@ -221,13 +214,13 @@
       },
       init () {
         const that = this
-        that.$api.fundManagementApi({
+        that.$api.ProDataApi({
           "page": 1,    //页码，整数大于0，必填
           "pageSize":10 //每页显示条数，整数大于0必填
         }).then(res => {
           if (res.data.status === 200) {
-            that.tableList = res.data.data.list
-            this.list = res.data.data.list
+            that.tableList = res.data.data
+            this.list = res.data.data
             this.total = res.data.data.count
           }
         })
@@ -295,6 +288,23 @@
       margin-bottom: 130upx;
       .span {
         overflow: hidden;
+      }
+      .diandian {
+        width: 10rpx;
+        height: 10rpx;
+        border-radius: 50%;
+        background: #fff;
+        display: inline-block;
+        margin-right: 20rpx;
+        margin-bottom: 5rpx;
+      }
+      .red-dian {
+        background: #d9233b;
+      }
+      .t-td {
+        // display: flex;
+        // flex-direction: row;
+        // align-items: center;
       }
       .img-list {
         width: 100%;

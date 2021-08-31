@@ -299,6 +299,15 @@
                 "fontSrc":"/static/iconfont/iconfont.ttf",
                 "fontSize":"18px",
                 "width": "40px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue618",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px",
+                "width": "40px"
               }
             ]
           }
@@ -828,6 +837,82 @@
           }
         }
       }
+    },
+    {
+    	"path": "pages/means/means",
+    	"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+    		"navigationBarTitleText": "资料",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue60e",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+    	}
+    },
+    {
+    	"path": "pages/means/meansInfo",
+    	"style": {
+        "enablePullDownRefresh": true,
+        "backgroundTextStyle": "dark",
+    		"navigationBarTitleText": "产品资料详情",
+        "navigationBarBackgroundColor": "#d9233b",
+        "navigationBarTextStyle": "white",
+        "fontFamily": "Ping Fang",
+        "fontSize":"17px",
+        "fontWeight": "bolder",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "autoBackButton": "false",
+            "buttons": [
+              {
+                "float": "left",
+                "color":"#fff",
+                "text":"\ue604",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px"
+              },
+              {
+                "float": "right",
+                "color":"#fff",
+                "text":"\ue629",
+                "fontWeight": "bold",
+                "fontSrc":"/static/iconfont/iconfont.ttf",
+                "fontSize":"18px",
+                "width": "40px"
+              }
+            ]
+          }
+        }
+    	}
     }
 	],
 	"globalStyle": {
@@ -863,10 +948,10 @@
         "text": "客户"
       },
       {
-        "pagePath": "pages/channel/channel",
-        "iconPath": "static/img/banner/channel.png",
-        "selectedIconPath": "static/img/banner/channel-check.png",
-        "text": "渠道"
+        "pagePath": "pages/means/means",
+        "iconPath": "static/img/banner/means.png",
+        "selectedIconPath": "static/img/banner/means-check.png",
+        "text": "资料"
       },
       {
         "pagePath": "pages/price/price",

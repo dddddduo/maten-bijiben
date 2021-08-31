@@ -20,11 +20,18 @@ const store = new Vuex.Store({
           count: 0,
           isDot: true
         },
+        // {
+        //   "pagePath": "/pages/channel/channel",
+        //   "iconPath": "/static/img/banner/channel.png",
+        //   "selectedIconPath": "/static/img/banner/channel-check.png",
+        //   "text": "渠道",
+        //   isDot: false
+        // },
         {
-          "pagePath": "/pages/channel/channel",
-          "iconPath": "/static/img/banner/channel.png",
-          "selectedIconPath": "/static/img/banner/channel-check.png",
-          "text": "渠道",
+          "pagePath": "/pages/means/means",
+          "iconPath": "/static/img/banner/means.png",
+          "selectedIconPath": "/static/img/banner/means-check.png",
+          "text": "资料",
           isDot: false
         },
         {

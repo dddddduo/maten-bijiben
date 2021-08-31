@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "15207595",
+      "name": "箭头",
+      "font_class": "jiantou",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "2582143",
+      "name": "产品渠道管理",
+      "font_class": "qudao",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
       "icon_id": "2082146",
       "name": "退出 (1)",
       "font_class": "tuichu1",

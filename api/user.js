@@ -302,3 +302,12 @@ export function ApplicantAddApi(params){
 export function ApplicantEditApi(params){
 	return fly.post('/admin.php?m=app&c=Ads&a=ApplicantEdit', params).then(res => res)
 }
+
+// 资料列表
+export function ProDataApi(params){
+	return fly.post('/admin.php?m=App&c=Pro&a=ProData', params).then(res => res)
+}
+// 资料详情
+export function ProInfoApi(params){
+	return fly.post('/admin.php?m=App&c=Pro&a=ProInfo', params).then(res => res)
+}

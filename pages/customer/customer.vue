@@ -184,6 +184,10 @@
         uni.navigateTo({
           url: "./customerData"
         })
+      } else if (options.index === 2) {
+        uni.navigateTo({
+          url: "../channel/channel"
+        })
       }
     },
     onShow() {

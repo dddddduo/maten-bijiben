@@ -1,11 +1,8 @@
 @font-face {
-  font-family: 'iconfont';  /* project id 2031360 */
-  src: url('https://at.alicdn.com/t/font_2031360_5ykhaim1lsh.eot');
-  src: url('https://at.alicdn.com/t/font_2031360_5ykhaim1lsh.eot?#iefix') format('embedded-opentype'),
-  url('https://at.alicdn.com/t/font_2031360_5ykhaim1lsh.woff2') format('woff2'),
-  url('https://at.alicdn.com/t/font_2031360_5ykhaim1lsh.woff') format('woff'),
-  url('https://at.alicdn.com/t/font_2031360_5ykhaim1lsh.ttf') format('truetype'),
-  url('https://at.alicdn.com/t/font_2031360_5ykhaim1lsh.svg#iconfont') format('svg');
+  font-family: 'iconfont';  /* Project id 2031360 */
+  src: url('https://at.alicdn.com/t/font_2031360_9g6u91xq69u.woff2?t=1628574731192') format('woff2'),
+       url('https://at.alicdn.com/t/font_2031360_9g6u91xq69u.woff?t=1628574731192') format('woff'),
+       url('https://at.alicdn.com/t/font_2031360_9g6u91xq69u.ttf?t=1628574731192') format('truetype');
 }
 
 .iconfont {
@@ -14,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jiantou:before {
+  content: "\e65a";
+}
+
+.icon-qudao:before {
+  content: "\e618";
 }
 
 .icon-tuichu1:before {
