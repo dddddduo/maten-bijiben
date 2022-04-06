@@ -28,7 +28,7 @@
       </view>
       <view class="from-content">
         <view class="left">
-          商务来源<text class="text"></text>
+          信息源<text class="text"></text>
         </view>
         <view class="right">
           <view class="radio-list">
@@ -125,7 +125,7 @@
                 名称<text class="text"></text>
               </view>
               <view class="right">
-                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id !== -1">
+                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id === 21">
                   <picker class="picker" mode="selector" @change="namePickerChange($event, i)" :value="item.nameIndex" :range="item.nameList" range-key="title">
                     <view class="uni-input" v-if="item.nameIndex < 0" style="color: #adadad;">请选择</view>
                     <view class="uni-input" v-if="item.nameList.length > 0">{{item.nameList[item.nameIndex] ? item.nameList[item.nameIndex].title : ''}}</view>
@@ -142,7 +142,7 @@
                 型号<text class="text"></text>
               </view>
               <view class="right">
-                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id !== -1">
+                <view class="select-content" v-if="selectList[item.selectIndex] && selectList[item.selectIndex].id === 21">
                   <picker class="picker" mode="selector" @change="modelPickerChange($event, i)" :value="item.modelIndex" :range="item.modelList" range-key="title">
                     <view class="uni-input" v-if="item.modelIndex < 0" style="color: #adadad;">请选择</view>
                     <view class="uni-input" v-if="item.modelList.length > 0">{{item.modelList[item.modelIndex] ? item.modelList[item.modelIndex].title : ''}}</view>
@@ -250,10 +250,10 @@
         wenshu: '',
         businessSourceList: [
           {id: 1, name: '贴牌'},
-          {id: 2, name: '渠道'},
-          {id: 3, name: '万网'},
-          {id: 4, name: '网店'},
-          {id: 5, name: '其他'}
+          {id: 2, name: '拓展'},
+          {id: 3, name: '分配'},
+          {id: 4, name: '维护'}
+            // 2 拓展  3分配  1贴牌  4维护
         ],
         index: -1,
         regionList: [],
@@ -284,21 +284,18 @@
             "title":"国内自主"
           },
           {
-            "id":22,
+            "id":-3,
             "title":"出口商品"
           },
           {
-            "id":23,
+            "id":-2,
             "title":"相关配件"
           },
           {
-            "id":2435,
-            "title":"进口商品"
-          },
-          {
             "id":-1,
-            "title":"其他产品"
+            "title":"贸易产品"
           }
+          // 21国内自主   -3 出口商品  -2 相关配件  -1 贸易产品
         ],
         selectIndex: -1,
         nameList: [],

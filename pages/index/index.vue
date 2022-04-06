@@ -183,7 +183,7 @@
       const that = this
       that.current = -1
       that.Authorization = uni.getStorageSync('Authorization');
-      that.VersionData = '202202111';
+      that.VersionData = '202204061';
       console.log(that.Authorization)
       if(that.Authorization){
         that.init()
@@ -719,11 +719,12 @@
         margin-top: 22upx;
       }
       .tds {
-        width: 100%;
-        flex: 1;
+        // flex: 1;
         display: flex;
         justify-content: center;
         text-align: center;
+        height: 100%;
+        margin: 0 auto;
       }
     }
   }

@@ -18,7 +18,7 @@
       </view>
       <view class="from-content">
         <view class="left">
-          商务来源<text class="text"></text>
+          信息源<text class="text"></text>
         </view>
         <view class="right">
           <view class="radio-list">
@@ -231,20 +231,17 @@
           },
           {
             id: 2,
-            name: '渠道'
+            name: '拓展'
           },
           {
             id: 3,
-            name: '万网'
+            name: '分配'
           },
           {
             id: 4,
-            name: '网店'
+            name: '维护'
           },
-          {
-            id: 5,
-            name: '其他'
-          }
+          // 2 拓展  3分配  1贴牌  4维护
         ],
         index: -1,
         regionList: [],
@@ -274,28 +271,26 @@
             "title": "国内自主"
           },
           {
-            "id": 22,
+            "id": -3,
             "title": "出口商品"
           },
           {
-            "id": 23,
+            "id": -2,
             "title": "相关配件"
           },
           {
-            "id": 2435,
-            "title": "进口商品"
-          },
-          {
             "id": -1,
-            "title": "其他产品"
-          }
+            "title": "贸易产品"
+          },
+          // 21国内自主   -3 出口商品  -2 相关配件  -1 贸易产品
         ],
         selectIndex: -1,
         nameList: [],
         nameIndex: -1,
         modelList: [],
         modelIndex: -1,
-        totalNum: null
+        totalNum: null,
+        infoTop: null
       }
     },
     onNavigationBarButtonTap(options) {
@@ -323,6 +318,7 @@
       const that = this
       if (option.id) {
         that.infoId = option.id
+        that.infoTop = option.top
         that.init()
       }
     },
@@ -530,8 +526,17 @@
         })
       },
       back() {
+        this.$store.commit("checkoutIdKey", this.infoId);
+        let value = {}
+        value.id = this.infoId
+        value.top = this.infoTop
+        uni.setStorageSync('checkoutIdKey', value);
+        this.$store.commit("checkoutTopScrollKey", 1);
         uni.switchTab({
           url: "./order"
+        })
+        uni.removeStorage({
+          key: 'orderInfo'
         })
       },
       // 提交

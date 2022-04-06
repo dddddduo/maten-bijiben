@@ -57,7 +57,7 @@
     },
     onShow() {
       const that = this
-      that.VersionData = '202202111';
+      that.VersionData = '202204061';
       // 版本号检测
       uni.getSystemInfo({
         success:(res) => {

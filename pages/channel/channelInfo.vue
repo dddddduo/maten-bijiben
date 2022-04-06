@@ -2421,7 +2421,8 @@ export default {
       uni.setStorageSync("channelIdKey", value);
       this.$store.commit("channelDelListKey", this.delList);
       this.$store.commit("channelTopScrollKey", 1);
-      uni.switchTab({
+      console.log(111)
+      uni.reLaunch({
         url: "./channel",
       });
       // uni.reLaunch({

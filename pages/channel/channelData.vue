@@ -249,7 +249,7 @@
       if (options.index === 0) {
         this.back()
       } else if (options.index === 1) {
-        uni.switchTab({
+        uni.reLaunch({
           url: "./channel"
         })
       }
@@ -530,7 +530,7 @@
         that.formData.weight = that.weightList[that.weightIndex].id
       },
       back () {
-        uni.switchTab({
+        uni.reLaunch({
           url: "./channel"
         })
       },
@@ -556,7 +556,7 @@
             });
             uni.removeStorageSync('channelData')
             setTimeout(() => {
-              uni.switchTab({
+              uni.reLaunch({
                 url: "./channel"
               })
             }, 1000)

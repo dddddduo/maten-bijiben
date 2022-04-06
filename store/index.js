@@ -63,6 +63,8 @@ const store = new Vuex.Store({
       priceTopScroll: 0,
       orderId: null,
       orderTopScroll: 0,
+      checkoutId: null,
+      checkoutTopScroll: 0,
     },
     mutations: {
       vuexTabbar(state,data){
@@ -113,6 +115,12 @@ const store = new Vuex.Store({
       },
       orderTopScrollKey(state,data){
         state.orderTopScroll = data;
+      },
+      checkoutIdKey(state,data){
+        state.checkoutId = data;
+      },
+      checkoutTopScrollKey(state,data){
+        state.checkoutTopScroll = data;
       }
     },
     actions: {}

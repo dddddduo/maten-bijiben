@@ -12,15 +12,22 @@
         <t-tr color="#000" fontSize="14">
           <t-th widthStyle="50%" textAlign="center">客户名称</t-th>
           <t-th widthStyle="20%" paddingLeft="0 0 0 10upx">时间</t-th>
-          <t-th widthStyle="19%" paddingLeft="0 0 0 5upx">业务人</t-th>
+          <t-th widthStyle="19%" paddingLeft="0 0 0 5upx">产品型号</t-th>
           <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx">操作</t-th>
         </t-tr>
         <t-tr v-for="(item, i) in list" :key="i">
-          <t-td widthStyle="50%">{{ item.cli_name }}</t-td>
-          <t-td widthStyle="20%">{{ addTimeTsp(item.cli_strtime) }}</t-td>
-          <t-td widthStyle="19%">{{ item.username }}</t-td>
+          <t-td widthStyle="50%">
+            <view :class="item.vageClass === true ? 'vageClass' : ''"></view>
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.cli_name }}</view>
+          </t-td>
+          <t-td widthStyle="20%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ addTimeTsp(item.cli_strtime) }}</view>
+          </t-td>
+          <t-td widthStyle="19%">
+            <view :class="item.vageClass1 === true ? 'vageClass1' : ''">{{ item.goodsmodel }}</view>
+          </t-td>
           <t-td widthStyle="11%">
-            <view class="img-list" @tap="infoSelect(item)">
+            <view class="img-list" @tap="infoSelect(item, i)">
               <i class="iconfont icon-sangedian"></i>
             </view>
           </t-td>
@@ -45,7 +52,29 @@
   import {mapState} from 'vuex'
   export default {
     computed: {
-      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues'])
+      ...mapState(['vuex_tabbar', 'customerJurisdictionTrues', 'checkoutId', 'checkoutTopScroll'])
+    },
+    watch: {
+      checkoutId: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          that.list.filter((item, i) => {
+            item.vageClass = false
+            if (Number(item.id) === Number(newValue)) {
+              item.vageClass = true
+              item.vageClass1 = true
+            }
+          })
+          that.$forceUpdate()
+        }
+      },
+      checkoutTopScroll: {
+        handler(newValue, oldValue) { //当词条改变时执行事件
+          const that = this
+          that.infoIdTo = uni.getStorageSync('checkoutIdKey');
+          that.goToAnchor()
+        }
+      }
     },
     data () {
       return {
@@ -53,7 +82,9 @@
         list: [],
         finished: false,
         keyword: '',
-        current: 4
+        current: 4,
+        scrollTop: 0,
+        infoIdTo: null
       }
     },
     mixins: [listMixin],
@@ -83,6 +114,11 @@
         uni.setStorageSync('tabList', tabList)
       }
     },
+    onPageScroll (res) {
+      console.log(res)
+      // this.handleScroll()
+      this.scrollTop = res.scrollTop
+    },
     onShow() {
       const that = this
       let tabList = uni.getStorageSync('tabList');
@@ -106,6 +142,17 @@
       // this.clear()
     },
     methods: {
+      //根据页面hash值，定位到指定列表项
+      goToAnchor() {
+        console.log(123)
+        if (this.infoIdTo.id && this.list.length > 0) {
+          this.$nextTick(() => {
+            document.documentElement.scrollTop = this.infoIdTo.top
+            this.scrollTop = this.infoIdTo.top
+            this.$store.commit("checkoutTopScrollKey", 0);
+          })
+        }
+      },
       tabbarChange (e) {
         const that = this
         console.log(e, this.customerJurisdictionTrues)
@@ -124,9 +171,16 @@
         this.searchSubmit()
       },
       // 详情
-      infoSelect (val) {
+      infoSelect (val, i) {
+        const that = this
+        uni.setStorageSync('checkoutInfo', val);
+        that.list[i].vageClass1 = true
+        that.list.filter((item) => {
+          item.vageClass = false
+        })
+        that.list[i].vageClass = true
         uni.navigateTo({
-          url: "./orderInfo?id=" + val.id
+          url: "./orderInfo?id=" + val.id + '&top=' + this.scrollTop
         })
       },
       clickNav (data) {
@@ -164,8 +218,6 @@
           }
         })
       },
-      // 查询详情
-      selectInfo (val) {},
       // 返回首页
       back () {
         uni.navigateTo({
@@ -286,6 +338,18 @@
           color: #b0b0b0;
           font-size: 38upx;
         }
+      }
+      .vageClass {
+        width: 10upx;
+        height: 10upx;
+        background: rgb(217, 35, 59);
+        border-radius: 50%;
+        position: absolute;
+        top: 43upx;
+        left: 5upx;
+      }
+      .vageClass1 {
+        color: #999;
       }
       image.select {
         width: 35upx;
