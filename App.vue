@@ -282,7 +282,7 @@
         if (plus.audio == undefined) {
           return;
         }
-        p = plus.audio.createPlayer("https://mkmngsys.mitech-ndt.com/Upload/test/aigei.mp3");
+        p = plus.audio.createPlayer("https://mitechsys.mitech-ndt.com/Upload/test/aigei.mp3");
         console.log(p);
         p.play(function() {
           console.log("Audio play success!");

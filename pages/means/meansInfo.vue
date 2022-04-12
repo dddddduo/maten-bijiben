@@ -141,7 +141,7 @@ import uniPopupDialog from "@/components/uni-popup/uni-popup-dialog.vue";
       openFile(val, val1, val2) {
         console.log(val.pdf, val1, val2, 666666);
         if (val.pdf === 1) {
-          let config = "https://mkmngsys.mitech-ndt.com/";
+          let config = "https://mitechsys.mitech-ndt.com/";
           uni.downloadFile({
             // 下面一行时拼接预览PDF的地址！！！
             url: config + val1,
@@ -171,7 +171,7 @@ import uniPopupDialog from "@/components/uni-popup/uni-popup-dialog.vue";
           that.file_path = val1;
           const FileShare = uni.requireNativePlugin("life-FileShare");
         
-          that.fileUrl = "https://mkmngsys.mitech-ndt.com/" + that.file_path;
+          that.fileUrl = "https://mitechsys.mitech-ndt.com/" + that.file_path;
           if (that.fileName) {
             plus.io.resolveLocalFileSystemURL(
               "_doc/pdf/" + that.fileName,

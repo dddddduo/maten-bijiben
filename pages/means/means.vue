@@ -16,13 +16,15 @@
       <view class="table_list">
         <t-table>
           <t-tr color="#000" fontSize="14">
-            <t-th widthStyle="58%" textAlign="center">产品名称</t-th>
-            <t-th widthStyle="31%" paddingLeft="0 0 0 20upx">品牌</t-th>
+            <t-th widthStyle="50%" textAlign="center">产品名称</t-th>
+            <t-th widthStyle="20%" paddingLeft="0 0 0 20upx">型号</t-th>
+            <t-th widthStyle="19%" paddingLeft="0 0 0 20upx">品牌</t-th>
             <t-th widthStyle="11%" textAlign="center" paddingLeft="0 0 0 2upx"></t-th>
           </t-tr>
           <t-tr v-for="(item, i) in list" :key="i">
-            <t-td widthStyle="58%"><i class="diandian" :class="Number(item.mark_tiny) === 1 ? 'red-dian' : ''"></i>{{ item.goodsnames }}</t-td>
-            <t-td widthStyle="31%" textAlign="center">{{ item.goodsbrand }}</t-td>
+            <t-td widthStyle="50%"><i class="diandian" :class="Number(item.mark_tiny) === 1 ? 'red-dian' : ''"></i>{{ item.goodsnames }}</t-td>
+            <t-td widthStyle="20%" textAlign="center">{{ item.goodsmodels }}</t-td>
+            <t-td widthStyle="19%" textAlign="center">{{ item.goodsbrand }}</t-td>
             <t-td widthStyle="11%">
               <view class="img-list" @tap="selectInfo(item)">
                 <i class="iconfont icon-jiantou"></i>

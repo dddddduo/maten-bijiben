@@ -57,7 +57,7 @@
     },
     onShow() {
       const that = this
-      that.VersionData = '202204061';
+      that.VersionData = '202204121';
       // 版本号检测
       uni.getSystemInfo({
         success:(res) => {
@@ -104,7 +104,7 @@
                   if (res.confirm) {
                     //设置 最新版本apk的下载链接
                     console.log(url)
-                    var downloadApkUrl = "https://mkmngsys.mitech-ndt.com/" + url;
+                    var downloadApkUrl = "https://mitechsys.mitech-ndt.com/" + url;
                     var dtask = plus.downloader.createDownload( downloadApkUrl, {}, function ( d, status ) {
                     console.log(d, status)
                     // 下载完成  
@@ -182,7 +182,7 @@
                   if (res.confirm) {
                     //设置 最新版本apk的下载链接
                     console.log(url)
-                    var downloadApkUrl = "https://mkmngsys.mitech-ndt.com/" + url;
+                    var downloadApkUrl = "https://mitechsys.mitech-ndt.com/" + url;
                     var dtask = plus.downloader.createDownload( downloadApkUrl, {}, function ( d, status ) {
                     console.log(d, status)
                     // 下载完成  

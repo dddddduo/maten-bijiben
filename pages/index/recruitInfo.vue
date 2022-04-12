@@ -111,7 +111,7 @@
       // 打开文件
       openFile (val) {
         console.log(val)
-        let config = "https://mkmngsys.mitech-ndt.com/"
+        let config = "https://mitechsys.mitech-ndt.com/"
         uni.downloadFile({
           // 下面一行时拼接预览PDF的地址！！！
           url: config + val,

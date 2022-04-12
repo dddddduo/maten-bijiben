@@ -219,7 +219,7 @@
       // 查询详情
       selectInfo (val, i) {
         const that = this
-        let config = "https://mkmngsys.mitech-ndt.com/"
+        let config = "https://mitechsys.mitech-ndt.com/"
         uni.showLoading({
           title: '加载中'
         });

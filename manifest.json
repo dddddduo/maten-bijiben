@@ -182,7 +182,7 @@
             "https" : false
         },
         "title" : "美泰科仪",
-        "domain" : "https://mkmngsys.mitech-ndt.com/",
+        "domain" : "https://mitechsys.mitech-ndt.com/",
         "publicPath" : "./",
         "router" : {
             "mode" : "hash"
