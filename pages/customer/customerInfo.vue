@@ -2726,6 +2726,7 @@ export default {
       const that = this;
       that.weightIndex = $event.detail.value;
       that.formData.weight = that.weightList[that.weightIndex].id;
+      that.install(0)
     },
     // 分配至
     bindPickerChangePersonnel ($event) {

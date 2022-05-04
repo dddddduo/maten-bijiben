@@ -2408,6 +2408,7 @@ export default {
       const that = this;
       that.weightIndex = $event.detail.value;
       that.formData.weight = that.weightList[that.weightIndex].id;
+      that.add(3)
     },
     back() {
       let data = {};
